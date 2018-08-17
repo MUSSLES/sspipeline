@@ -18,7 +18,7 @@ before_install:
 install:
   - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION
   - source activate test
-  - python setup.py install
+  - pip install -e .
 
 script:
   - pipeline --help
