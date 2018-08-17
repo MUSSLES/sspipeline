@@ -7,7 +7,7 @@ TODO
 
 pipeline runs on both Python 2.7+ and 3.6.
 
-<a href="https://travis-ci.org/mussles/pipeline"><img alt="Travis CI Build Status" src="https://img.shields.io/travis/mussles/pipeline/master.svg?style=flat-square&label=Travis+CI"></a>
+<a href="https://travis-ci.org/MUSSLES/pipeline"><img alt="Travis CI Build Status" src="https://img.shields.io/travis/MUSSLES/pipeline/master.svg?style=flat-square&label=Travis+CI"></a>
 
 Check out the [documentation](https://mussles.github.io/pipeline/) for a more in-depth explanation about the code!
 
