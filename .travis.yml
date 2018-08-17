@@ -27,12 +27,13 @@ before_install:
 install:
   - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION
   - source activate test
-  - conda install -c conda-forge --yes pytest
   - python setup.py install
 
 script:
-  - mkdir -p $TEST_DIR
-  - cd $TEST_DIR && python -m pytest --pyargs pipeline --doctest-modules
+  - pipeline --help
+  - pipeline --version
+  - bash pipeline/tests/test_pipeline.sh
+  - cat pipeline/tests/pipeline.log
 
 notifications:
   slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis
