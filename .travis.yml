@@ -1,0 +1,39 @@
+language: python
+
+python:
+  - 2.7
+  - 3.5
+  - 3.6
+
+env:
+  global:
+    - TEST_DIR=/tmp/_pipeline/
+
+cache: pip
+
+addons:
+  apt:
+    packages:
+    - libeigen3-dev
+
+before_install:
+  - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b
+  - export PATH=/home/travis/miniconda2/bin:$PATH
+  - conda update --yes conda
+  - pip install pip --upgrade
+
+install:
+  - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION
+  - source activate test
+  - conda install -c conda-forge --yes pytest
+  - python setup.py install
+
+script:
+  - mkdir -p $TEST_DIR
+  - cd $TEST_DIR && python -m pytest --pyargs pipeline --doctest-modules
+
+notifications:
+  slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis
+  email: false
