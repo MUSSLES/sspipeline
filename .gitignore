@@ -1,7 +1,7 @@
 *__pycache__/
 *htmlcov
 *.coverage
-approxposterior.egg-info/*
+pipeline.egg-info/*
 build/*
 dist/*
 *.ipynb_checkpoints
@@ -10,3 +10,4 @@ dist/*
 *.png
 *.pdf
 *.cache
+*.pyc
