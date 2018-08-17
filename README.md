@@ -23,7 +23,7 @@ python setup.py install
 Or, you can develop by running:
 
 ```sh
-python setup.py debug
+python setup.py develop
 ```
 
 A simple example
@@ -36,4 +36,3 @@ Contribution
 
 If you would like to contribute to this code, please feel free to fork the repository and open a pull request.
 If you find a bug, have a suggestion, etc, please open up an issue!
-
