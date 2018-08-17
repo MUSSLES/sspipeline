@@ -2,4 +2,4 @@
 include LICENSE
 include Makefile
 include *.md
-recursive-include approxposterior *.py
+recursive-include pipeline *.py

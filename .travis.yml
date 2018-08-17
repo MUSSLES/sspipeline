@@ -5,16 +5,7 @@ python:
   - 3.5
   - 3.6
 
-env:
-  global:
-    - TEST_DIR=/tmp/_pipeline/
-
 cache: pip
-
-addons:
-  apt:
-    packages:
-    - libeigen3-dev
 
 before_install:
   - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
