@@ -37,9 +37,10 @@ from pipeline.core import diagnostic_plots
 from pipeline.core import final_params_pool
 from pipeline.core import GR_result
 from pipeline.core import history_plots
-from pipeline.core import logpost
 from pipeline.core import max_ls_parameters
 from pipeline.core import runner
+
+from pipeline.distributions import gev_logpost
 
 from pipeline.utils import check_params
 from pipeline.utils import read_and_clean
@@ -104,7 +105,7 @@ def main(ctx, config):
         n_iter=config_data["iterations"],
         t=config_data["adaption"],
         d=3,
-        logpost=logpost,
+        logpost=gev_logpost,
         data_meas=data_meas,
         stepsize=config_data["transition"],
     )

@@ -22,8 +22,6 @@ Step 1: Creating a new issue
 - If you don't already have a `GitHub <http://www.github.com>`_ account, create one
 - Go to the `Pipeline GitHub page <https://github.com/mussles/pipeline>`_ and create a new issue by clicking on the "Issues" tab and then the "New issue" button
 
-.. image:: _static/open-new-issue.png
-
 .. image:: _static/new-issue-button.png
 
 

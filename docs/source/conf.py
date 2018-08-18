@@ -55,7 +55,7 @@ numpydoc_show_inherited_class_members = False
 # see https://github.com/numpy/numpydoc/issues/69
 numpydoc_class_members_toctree = False
 
-# autosummary_generate = ['api.rst']
+autosummary_generate = ['api.rst']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

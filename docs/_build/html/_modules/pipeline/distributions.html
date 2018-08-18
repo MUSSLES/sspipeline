@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pipeline.distributions &mdash; pipeline  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> pipeline
+          
+
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">Pipeline API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Release Notes</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Useful links</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/mussles/pipeline">Pipeline &#64; GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/mussles/pipeline/issues">Issue Tracker</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">pipeline</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pipeline.distributions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pipeline.distributions</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">All of the implemented distribution functions</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="p">(</span><span class="n">print_function</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span>
+                        <span class="n">unicode_literals</span><span class="p">)</span>
+
+<span class="c1"># Tell module what it&#39;s allowed to import</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;normal_logpost&quot;</span><span class="p">,</span> <span class="s2">&quot;gev_logpost&quot;</span><span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># ===============================================================================</span>
+<span class="c1">#         Normal Distribution</span>
+<span class="c1"># ===============================================================================</span>
+
+<span class="k">def</span> <span class="nf">normal_loglikelihood</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the log-likelihood of a Normal distribution</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parameters : array_like</span>
+<span class="sd">        :math:`\mu` and :math:`\sigma` parameters for a Normal distribution</span>
+<span class="sd">    data : array_like</span>
+<span class="sd">        the data your fitting</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">parameters</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+        <span class="n">logpdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">logpdf</span> <span class="o">==</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">logpdf</span>
+    <span class="k">return</span> <span class="n">s</span>
+<span class="c1"># end function</span>
+
+<span class="k">def</span> <span class="nf">normal_logprior</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the log-prior of a Normal distribution</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parameters : array_like</span>
+<span class="sd">        :math:`\mu` and :math:`\sigma` parameters for a Normal distribution</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="n">parameters</span>
+
+    <span class="n">mu_logpdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">sigma</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">sigma</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="k">return</span> <span class="n">mu_logpdf</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># end function</span>
+
+<div class="viewcode-block" id="normal_logpost"><a class="viewcode-back" href="../../api.html#pipeline.distributions.normal_logpost">[docs]</a><span class="k">def</span> <span class="nf">normal_logpost</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the log-posterior (log-prior + log-likelihood) of a Normal</span>
+<span class="sd">    distribution</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parameters : array_like</span>
+<span class="sd">        :math:`\mu` and :math:`\sigma` parameters for a Normal distribution</span>
+<span class="sd">    data : array_like</span>
+<span class="sd">        the data your fitting</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : float</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from pipeline.distributions import normal_logpost</span>
+<span class="sd">    &gt;&gt;&gt; import scipy.stats as stats</span>
+<span class="sd">    &gt;&gt;&gt; params = [8, 1]</span>
+<span class="sd">    &gt;&gt;&gt; real_params = [10, 2]</span>
+<span class="sd">    &gt;&gt;&gt; data = stats.norm.rvs(loc=real_params[0], scale=real_params[1], size=10)</span>
+<span class="sd">    &gt;&gt;&gt; normal_logpost(params, data)</span>
+<span class="sd">    -87.09445386092345</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="n">normal_logprior</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pi</span> <span class="o">==</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">LL</span> <span class="o">=</span> <span class="n">normal_loglikelihood</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">LL</span> <span class="o">+</span> <span class="n">pi</span></div>
+<span class="c1"># end function</span>
+
+<span class="c1"># ===============================================================================</span>
+<span class="c1">#         GEV Distribution</span>
+<span class="c1"># ===============================================================================</span>
+
+<span class="k">def</span> <span class="nf">gev_loglikelihood</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the log-likelihood of a GEV distribution</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parameters : array_like</span>
+<span class="sd">        :math:`\mu`, :math:`\sigma`, and :math:`\\xi` parameters for a GEV distribution</span>
+<span class="sd">    data : array_like</span>
+<span class="sd">        the data your fitting</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">parameters</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+        <span class="n">logpdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">genextreme</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">logpdf</span> <span class="o">==</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">logpdf</span>
+    <span class="k">return</span> <span class="n">s</span>
+<span class="c1"># end function</span>
+
+<span class="k">def</span> <span class="nf">gev_logprior</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the log-prior of a GEV distribution</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parameters : array_like</span>
+<span class="sd">        :math:`\mu`, :math:`\sigma`, and :math:`\\xi` parameters for a GEV distribution</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">parameters</span>
+    <span class="n">mu_logpdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">shape_logpdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sigma</span> <span class="o">&gt;=</span> <span class="mi">10000</span> <span class="ow">or</span> <span class="n">sigma</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mu_logpdf</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">+</span> <span class="n">shape_logpdf</span>
+<span class="c1"># end function</span>
+
+<div class="viewcode-block" id="gev_logpost"><a class="viewcode-back" href="../../api.html#pipeline.distributions.gev_logpost">[docs]</a><span class="k">def</span> <span class="nf">gev_logpost</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the log-posterior (log-prior + log-likelihood) of a GEV</span>
+<span class="sd">    distribution</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parameters : array_like</span>
+<span class="sd">        :math:`\mu`, :math:`\sigma`, and :math:`\\xi` parameters for a GEV distribution</span>
+<span class="sd">    data : array_like</span>
+<span class="sd">        the data your fitting</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    result : float</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from pipeline.distributions import gev_logpost</span>
+<span class="sd">    &gt;&gt;&gt; import scipy.stats as stats</span>
+<span class="sd">    &gt;&gt;&gt; params = [410, 100, -1]</span>
+<span class="sd">    &gt;&gt;&gt; real_params = [400, 100, -0.4]</span>
+<span class="sd">    &gt;&gt;&gt; data = stats.genextreme.rvs(loc=real_params[0], scale=real_params[1], c=real_params[2], size=10)</span>
+<span class="sd">    &gt;&gt;&gt; gev_logpost(params, data)</span>
+<span class="sd">    -inf</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="n">gev_logprior</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pi</span> <span class="o">==</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">LL</span> <span class="o">=</span> <span class="n">gev_loglikelihood</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">LL</span> <span class="o">+</span> <span class="n">pi</span></div>
+<span class="c1"># end function</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, MUSSES.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
