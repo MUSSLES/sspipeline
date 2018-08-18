@@ -15,7 +15,6 @@ any later version.
 
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 import scipy.stats as stats
 
 from pipeline.utils import log
@@ -119,9 +118,7 @@ def adaptivemcmc(problem, n_iter):
             problem.current.value = nextValue
         else:
             p_accept = delta_obj
-            accept = np.random.choice(
-                [True, False], p=[p_accept, 1 - p_accept]
-            )
+            accept = np.random.choice([True, False], p=[p_accept, 1 - p_accept])
             if accept:
                 n_accept += 1
                 for i in range(problem.d):
@@ -377,7 +374,6 @@ def max_ls_parameters(ls, mcmc_chains, logger, verbose):
         max_params.append(mcmc_chains[seqi][i][iterj])
     logger = log(
         logger,
-        "info",
         "The parameters with max log-posterior score are: " + str(max_params),
         verbose,
     )

@@ -1,7 +1,5 @@
 .. _api:
 
-:github_url: https://github.com/mussles/pipeline
-
 ************
 Pipeline API
 ************

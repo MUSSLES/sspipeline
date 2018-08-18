@@ -32,7 +32,24 @@ import matplotlib.pyplot as plt
 # ===============================================================================
 
 
-def check_params(params, logger):
+def check_params(params, logger=None):
+    """
+    Fixes & cleans up the config file parameters
+
+    Parameters
+    ----------
+    params : dictionary
+        list of parameters in dictionary form from config file
+    logger : logging.RootLogger
+        logger that the command line tool uses
+
+    Returns
+    -------
+    new_params : dictionary
+        fixed and cleaned up config file parameters
+    logger : logging.RootLogger
+        updated logger for the command line
+    """
     new_params = {}
     # Check for the verbose parameter
     if "verbose" in params:
@@ -43,6 +60,7 @@ def check_params(params, logger):
     if "data" in params:
         new_params["data"] = params["data"]
     else:
+        # TODO: switch to command line error
         logger.error("You need a data parameter")
     # Check for the output parameter
     if "output" in params:
@@ -76,7 +94,8 @@ def check_params(params, logger):
     if "transition" in params:
         new_params["transition"] = params["transition"]
     else:
-        logger.error("You need a transition convariance matrix")
+        # TODO: switch to command line error
+        logger.error("You need a transition covariance matrix")
     # Check to see if the user wants to plot
     if "plot" in params:
         new_params["plot"] = bool(params["plot"])
@@ -91,7 +110,39 @@ def check_params(params, logger):
 # ===============================================================================
 
 
-def read_and_clean(datafile, percentage, output_dir, logger, verbose, plot):
+def read_and_clean(
+    datafile,
+    percentage,
+    output_dir="output/",
+    logger=None,
+    verbose=False,
+    plot=False,
+):
+    """
+    Reads & cleans the dataset
+
+    Parameters
+    ----------
+    datafile : string
+        where the dataset file is located
+    percentage : float
+        how much data to use in good years
+    output_dir : string
+        where to put the output from the function
+    logger : logging.RootLogger
+        logger that the command line uses
+    verbose : bool
+        whether or not to be verbose
+    verbose : bool
+        whether or not to plot
+
+    Returns
+    -------
+    data : array_like
+        cleaned data
+    logger : logging.RootLogger
+        updated logger for the command line
+    """
     dfSL = pd.read_csv(datafile, header=None)
     dfSL.rename(
         columns={0: "year", 1: "month", 2: "day", 3: "hour", 4: "sealevel"},
@@ -108,10 +159,7 @@ def read_and_clean(datafile, percentage, output_dir, logger, verbose, plot):
 
     fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()
     logger = log(
-        logger,
-        "info",
-        "The fill in value is {0}".format(float(fill_in)),
-        verbose,
+        logger, "The fill in value is {0}".format(float(fill_in)), verbose
     )
 
     dfSL["sealevel"].replace(fill_in, np.nan, inplace=True)
@@ -147,7 +195,6 @@ def read_and_clean(datafile, percentage, output_dir, logger, verbose, plot):
 
     logger = log(
         logger,
-        "info",
         "The percentage of years that had enough data to use is {}%".format(
             100 * len(data) / num_years
         ),
@@ -162,12 +209,25 @@ def read_and_clean(datafile, percentage, output_dir, logger, verbose, plot):
 # ===============================================================================
 
 
-def log(logger, log_type, message, verbose):
-    # Log
-    if log_type == "info":
-        logger.info(message)
-    # Print if verbose
+def log(logger, message, verbose):
+    """
+    A logging function (only to be used by the command line tool)
+
+    Parameters
+    ----------
+    logger : logging.RootLogger
+        logger that the command line uses
+    message : string
+        your message you want to log
+    verbose : bool
+        whether or not to be verbose
+
+    Returns
+    -------
+    logger : logging.RootLogger
+        updated logger for the command line
+    """
+    logger.info(message)
     if verbose:
-        print(log_type.upper() + ":", message)
-    # Return
+        print("INFO :", message)
     return logger
