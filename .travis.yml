@@ -22,7 +22,7 @@ jobs:
       os: osx
 
 install:
-    - source ci/install.sh;
+    - source .ci/install.sh;
 
 script:
     - pipeline --help
@@ -30,7 +30,7 @@ script:
     - bash pipeline/tests/test_pipeline.sh
     - cat pipeline/tests/pipeline.log
     - flake8 pipeline
-    - if [[ $DOCS == 'true' ]]; then source ci/build_docs.sh; fi
+    - if [[ $DOCS == 'true' ]]; then source .ci/build_docs.sh; fi
 
 deploy:
     provider: pages
@@ -42,3 +42,7 @@ deploy:
     on:
         branch: master
         condition: $DOCS = 'true'
+        
+notifications:
+   slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis
+   email: false
