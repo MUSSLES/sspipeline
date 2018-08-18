@@ -3,6 +3,7 @@
 *.coverage
 pipeline.egg-info/*
 build/*
+_build/*
 dist/*
 *.ipynb_checkpoints
 *.egg_info

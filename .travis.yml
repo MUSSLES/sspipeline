@@ -1,31 +1,44 @@
-language: python
+language: generic
+os: linux
 
-python:
-  - 2.7
-  - 3.5
-  - 3.6
-
-cache: pip
-
-before_install:
-  - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
-  - chmod +x miniconda.sh
-  - ./miniconda.sh -b
-  - export PATH=/home/travis/miniconda2/bin:$PATH
-  - conda update --yes conda
-  - pip install pip --upgrade
+jobs:
+  fast_finish: true
+  include:
+    - env:
+      - PYTHON=2.7
+      - DOCS='false'
+    - env:
+      - PYTHON=3.4
+      - DOCS='false'
+    - env:
+      - PYTHON=3.5
+      - DOCS='false'
+    - env:
+      - PYTHON=3.6
+      - DOCS='true'
+    - env:
+      - PYTHON=3.6
+      - DOCS='false'
+      os: osx
 
 install:
-  - conda create --yes -n test python=$TRAVIS_PYTHON_VERSION
-  - source activate test
-  - pip install -e .
+    - source ci/install.sh;
 
 script:
-  - pipeline --help
-  - pipeline --version
-  - bash pipeline/tests/test_pipeline.sh
-  - cat pipeline/tests/pipeline.log
+    - pipeline --help
+    - pipeline --version
+    - bash pipeline/tests/test_pipeline.sh
+    - cat pipeline/tests/pipeline.log
+    - flake8 pipeline
+    - if [[ $DOCS == 'true' ]]; then source ci/build_docs.sh; fi
 
-notifications:
-  slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis
-  email: false
+deploy:
+    provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: docs/_build/html
+    target_branch: gh-pages
+    email: "github-pages-deploy@travis-ci.org"
+    on:
+        branch: master
+        condition: $DOCS = 'true'
