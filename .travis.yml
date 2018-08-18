@@ -16,10 +16,6 @@ jobs:
     - env:
       - PYTHON=3.6
       - DOCS='true'
-    - env:
-      - PYTHON=3.6
-      - DOCS='false'
-      os: osx
 
 install:
     - source .ci/install.sh;
@@ -42,7 +38,7 @@ deploy:
     on:
         branch: master
         condition: $DOCS = 'true'
-        
+
 notifications:
    slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis
    email: false
