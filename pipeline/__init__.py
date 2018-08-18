@@ -13,10 +13,15 @@ any later version.
 
 """
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import (
+    absolute_import,
+    division,
+    print_function,
+    unicode_literals,
+)
 
 from .__version__ import __version__
+
 __author__ = "John Letey (john.letey@colorado.edu)"
 __copyright__ = "Copyright 2018 MUSSLES"
 
@@ -50,7 +55,11 @@ ALPHAS = [1.0, 1.0, 0.45]
 @click.option(
     "--config",
     type=click.Path(
-        exists=False, file_okay=True, dir_okay=False, readable=True, allow_dash=False
+        exists=False,
+        file_okay=True,
+        dir_okay=False,
+        readable=True,
+        allow_dash=False,
     ),
     default="config.json",
     show_default=1,
@@ -102,7 +111,9 @@ def main(ctx, config):
     # Plot the history plots for the chains
     if config_data["plot"]:
         history_plots(
-            mcmc_chains, config_data["output"], [r"$\mu$", r"$\sigma$", r"$\xi$"]
+            mcmc_chains,
+            config_data["output"],
+            [r"$\mu$", r"$\sigma$", r"$\xi$"],
         )
     # Log the acceptance rates
     logger = log(
@@ -137,9 +148,16 @@ def main(ctx, config):
         config_data["plot"],
     )
     # Find the maximum parameters
-    max_params = max_ls_parameters(ls, mcmc_chains, logger, config_data["verbose"])
+    max_params = max_ls_parameters(
+        ls, mcmc_chains, logger, config_data["verbose"]
+    )
     # Diagnostic Plots
-    percentile_05, percentile_5, percentile_95, percentile_995 = diagnostic_plots(
+    (
+        percentile_05,
+        percentile_5,
+        percentile_95,
+        percentile_995
+    ) = diagnostic_plots(
         data_meas,
         max_params,
         params_analysis,

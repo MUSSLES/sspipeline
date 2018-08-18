@@ -13,18 +13,25 @@ any later version.
 
 """
 
-from __future__ import (print_function, division, absolute_import,
-                        unicode_literals)
+from __future__ import (
+    print_function,
+    division,
+    absolute_import,
+    unicode_literals,
+)
 
 # Tell module what it's allowed to import
 __all__ = ["read_and_clean", "log"]
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 # ===============================================================================
 #         Config Functions
 # ===============================================================================
+
+
 def check_params(params, logger):
     new_params = {}
     # Check for the verbose parameter
@@ -82,6 +89,8 @@ def check_params(params, logger):
 # ===============================================================================
 #         Data Functions
 # ===============================================================================
+
+
 def read_and_clean(datafile, percentage, output_dir, logger, verbose, plot):
     dfSL = pd.read_csv(datafile, header=None)
     dfSL.rename(
@@ -99,7 +108,10 @@ def read_and_clean(datafile, percentage, output_dir, logger, verbose, plot):
 
     fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()
     logger = log(
-        logger, "info", "The fill in value is {0}".format(float(fill_in)), verbose
+        logger,
+        "info",
+        "The fill in value is {0}".format(float(fill_in)),
+        verbose,
     )
 
     dfSL["sealevel"].replace(fill_in, np.nan, inplace=True)
@@ -148,6 +160,8 @@ def read_and_clean(datafile, percentage, output_dir, logger, verbose, plot):
 # ===============================================================================
 #         Logging Functions
 # ===============================================================================
+
+
 def log(logger, log_type, message, verbose):
     # Log
     if log_type == "info":

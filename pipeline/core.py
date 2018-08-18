@@ -45,7 +45,10 @@ def read_and_clean(datafile, percentage, output_dir, logger, verbose, plot):
 
     fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()
     logger = log(
-        logger, "info", "The fill in value is {0}".format(float(fill_in)), verbose
+        logger,
+        "info",
+        "The fill in value is {0}".format(float(fill_in)),
+        verbose,
     )
 
     dfSL["sealevel"].replace(fill_in, np.nan, inplace=True)
@@ -96,7 +99,9 @@ def loglikelihood(parameters, data_meas):
     mu, sigma, shape = parameters
     s = 0
     for i in range(len(data_meas)):
-        logpdf = stats.genextreme.logpdf(x=data_meas[i], loc=mu, scale=sigma, c=shape)
+        logpdf = stats.genextreme.logpdf(
+            x=data_meas[i], loc=mu, scale=sigma, c=shape
+        )
         if logpdf == -np.inf:
             return -np.inf
         s += logpdf
@@ -165,8 +170,15 @@ class ProblemMCMC:
 
     def random_move(self, t, X, m, Ct):
         if t <= self.t:
-            next_move = stats.multivariate_normal.rvs(self.current.state, self.stepsize)
-            return next_move, self.logpost(next_move, self.data_meas), m, self.stepsize
+            next_move = stats.multivariate_normal.rvs(
+                self.current.state, self.stepsize
+            )
+            return (
+                next_move,
+                self.logpost(next_move, self.data_meas),
+                m,
+                self.stepsize,
+            )
         elif t == self.t + 1:
             n = []
             for i in range(len(X)):
@@ -206,7 +218,9 @@ def adaptivemcmc(problem, n_iter):
             problem.current.value = nextValue
         else:
             p_accept = delta_obj
-            accept = np.random.choice([True, False], p=[p_accept, 1 - p_accept])
+            accept = np.random.choice(
+                [True, False], p=[p_accept, 1 - p_accept]
+            )
             if accept:
                 n_accept += 1
                 for i in range(problem.d):
@@ -225,7 +239,9 @@ def adaptivemcmc(problem, n_iter):
 def runner(m, n_iter, data_meas, logpost, d, stepsize, t=1000):
     np.seterr(divide="ignore", invalid="ignore")
     loc_est = np.median(data_meas)
-    scale_est = (np.percentile(data_meas, 75) - np.percentile(data_meas, 25)) / 2
+    scale_est = (
+        np.percentile(data_meas, 75) - np.percentile(data_meas, 25)
+    ) / 2
     shape_est = 0
     gevfit = stats.genextreme.fit(data_meas, loc=loc_est, scale=scale_est)
 
@@ -292,7 +308,9 @@ def psrf(sequences):
     return np.sqrt(Var / W)
 
 
-def GR_result(mcmc_chains, output_dir, params, t, plot, start=100, interval=100):
+def GR_result(
+    mcmc_chains, output_dir, params, t, plot, start=100, interval=100
+):
     m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
     params_raw, GR_params, burnin_params = [], [], []
     start, interval, end = start, interval, n
@@ -341,7 +359,9 @@ def ACF(X, end=200):
             lag = i
             break
     if lag == -1:
-        print("Please increase the value of the end parameter for this function")
+        print(
+            "Please increase the value of the end parameter for this function"
+        )
     return lag, acf
 
 
@@ -376,7 +396,9 @@ def acf_result(mcmc_chains, output_dir, params, burnin, plot):
                     facecolor="skyblue",
                 )
             ax[i].plot(
-                [lags[i], lags[i]], ax[i].get_ylim(), label="lag = {0}".format(lags[i])
+                [lags[i], lags[i]],
+                ax[i].get_ylim(),
+                label="lag = {0}".format(lags[i]),
             )
             ax[i].set_xlabel("Lag")
             ax[i].set_ylabel("ACF")
@@ -442,7 +464,9 @@ def max_ls_parameters(ls, mcmc_chains, logger, verbose):
     max_indices = []
     maxs = []
     for i in range(len(mcmc_chains)):
-        max_indices.append(np.where(np.array(ls[i]) == np.array(ls[i]).max())[0][0])
+        max_indices.append(
+            np.where(np.array(ls[i]) == np.array(ls[i]).max())[0][0]
+        )
         maxs.append(np.array(ls[i]).max())
     seqi = np.where(np.array(maxs) == np.array(maxs).max())[0][0]
     iterj = max_indices[seqi]
@@ -527,11 +551,15 @@ def diagnostic_plots(data_meas, max_params, params_analysis, output_dir, plot):
             [(i + 1) / (len(data_meas) + 1) for i in range(len(data_meas))],
             color="black",
         )
-        ax[0, 0].plot(np.arange(0, 1, 0.01), np.arange(0, 1, 0.01), color="steelblue")
+        ax[0, 0].plot(
+            np.arange(0, 1, 0.01), np.arange(0, 1, 0.01), color="steelblue"
+        )
         ax[0, 0].set_title("Probability Plot", fontsize=14)
         ax[0, 0].set_xlabel("Model", fontsize=14)
         ax[0, 0].set_ylabel("Empirical", fontsize=14)
-        ax[0, 0].annotate("A", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
+        ax[0, 0].annotate(
+            "A", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
+        )
 
         ax[0, 1].scatter(empirical, np.sort(data_meas), color="black")
         ax[0, 1].plot(
@@ -542,10 +570,15 @@ def diagnostic_plots(data_meas, max_params, params_analysis, output_dir, plot):
         ax[0, 1].set_title("Quantile Plot", fontsize=14)
         ax[0, 1].set_xlabel("Model (in MM)", fontsize=14)
         ax[0, 1].set_ylabel("Empirical (in MM)", fontsize=14)
-        ax[0, 1].annotate("B", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
+        ax[0, 1].annotate(
+            "B", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
+        )
 
         ax[1, 0].plot(
-            np.log10(RP), RL_max, color="r", label="max posterior score parameter sets"
+            np.log10(RP),
+            RL_max,
+            color="r",
+            label="max posterior score parameter sets",
         )
         ax[1, 0].scatter(
             np.log10(
@@ -581,7 +614,9 @@ def diagnostic_plots(data_meas, max_params, params_analysis, output_dir, plot):
         ax[1, 0].set_title("Return Level Plot", fontsize=14)
         ax[1, 0].set_xlabel("Return Period (in year)", fontsize=14)
         ax[1, 0].set_ylabel("Return Level (in MM)", fontsize=14)
-        ax[1, 0].annotate("C", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
+        ax[1, 0].annotate(
+            "C", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
+        )
 
         ax[1, 1].hist(
             data_meas,
@@ -606,7 +641,9 @@ def diagnostic_plots(data_meas, max_params, params_analysis, output_dir, plot):
         ax[1, 1].set_title("Density Plot", fontsize=14)
         ax[1, 1].set_xlabel("Annual Max Sea Level (in MM)", fontsize=14)
         ax[1, 1].set_ylabel("Density", fontsize=14)
-        ax[1, 1].annotate("D", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
+        ax[1, 1].annotate(
+            "D", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
+        )
 
         fig.savefig(output_dir + "/plots/diagnostic_plots.png")
 
