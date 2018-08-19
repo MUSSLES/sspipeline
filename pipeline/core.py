@@ -57,7 +57,7 @@ class State:
         self.value = value
 
 
-class ProblemMCMC:
+class MCMC_Chain:
     def __init__(self, initial, logposterior, stepsize, data_meas, t, d):
         self.current = initial
         self.logpost = logposterior
@@ -92,42 +92,42 @@ class ProblemMCMC:
             return next_move, self.logpost(next_move, self.data_meas), m1, cov
 
 
-def adaptivemcmc(problem, n_iter):
+def adaptivemcmc(chain, n_iter):
     parameters = []
-    for i in range(problem.d):
+    for i in range(chain.d):
         parameters.append([])
-        parameters[i].append(problem.current.state[i])
-    lpost = [problem.current.value]
+        parameters[i].append(chain.current.state[i])
+    lpost = [chain.current.value]
     n_accept = 0
     S = 0
     np.seterr(over="ignore")
-    cov = problem.stepsize
+    cov = chain.stepsize
     m = []
     for t in range(n_iter):
         S += 1
-        nextMove, nextValue, m, cov = problem.random_move(
+        nextMove, nextValue, m, cov = chain.random_move(
             t, np.array(parameters), m, cov
         )
         delta_obj = np.exp(nextValue - lpost[-1])
         if delta_obj > 1:
             n_accept += 1
-            for i in range(problem.d):
+            for i in range(chain.d):
                 parameters[i].append(nextMove[i])
             lpost.append(nextValue)
-            problem.current.state = nextMove
-            problem.current.value = nextValue
+            chain.current.state = nextMove
+            chain.current.value = nextValue
         else:
             p_accept = delta_obj
             accept = np.random.choice([True, False], p=[p_accept, 1 - p_accept])
             if accept:
                 n_accept += 1
-                for i in range(problem.d):
+                for i in range(chain.d):
                     parameters[i].append(nextMove[i])
                 lpost.append(nextValue)
-                problem.current.state = nextMove
-                problem.current.value = nextValue
+                chain.current.state = nextMove
+                chain.current.value = nextValue
             else:
-                for i in range(problem.d):
+                for i in range(chain.d):
                     parameters[i].append(parameters[i][-1])
                 lpost.append(lpost[-1])
 
@@ -155,17 +155,17 @@ def runner(m, n_iter, data_meas, logpost, d, stepsize, t=1000):
     else:
         loc_est, scale_est, shape_est = loc_est, scale_est, 0
 
-    problems = []
+    chains = []
     for i in range(m):
         ui = np.random.randint(low=loc_est, high=loc_est + 100)
         si = np.random.randint(low=scale_est, high=scale_est + 100)
         shapei = shape_est
         theta = [ui, si, shapei]
         state = State(theta, logpost(theta, data_meas))
-        problems.append(ProblemMCMC(state, logpost, stepsize, data_meas, t, d))
+        chains.append(MCMC_Chain(state, logpost, stepsize, data_meas, t, d))
     ar, mcmc_chains, ls = [], [], []
     for i in range(m):
-        parameters, l, r = adaptivemcmc(problems[i], n_iter)
+        parameters, l, r = adaptivemcmc(chains[i], n_iter)
         mcmc_chains.append(parameters)
         ar.append(r)
         ls.append(l)

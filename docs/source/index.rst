@@ -12,8 +12,9 @@ TODO
     :maxdepth: 1
     :caption: User Guide
 
-    api
-    changelog
+    api.rst
+    contributing.md
+    changelog.rst
 
 .. toctree::
    :maxdepth: 1

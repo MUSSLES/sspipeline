@@ -44,7 +44,9 @@ from pipeline.utils import check_params
 from pipeline.utils import read_and_clean
 from pipeline.utils import log
 
-from .__version__ import __version__
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions
 
 plt.style.use("fivethirtyeight")
 COLORS = ["skyblue", "steelblue", "gray"]

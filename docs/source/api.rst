@@ -4,6 +4,12 @@
 Pipeline API
 ************
 
+MCMC
+-------------------
+
+.. autoclass:: pipeline.core.MCMC_Chain
+    :members:
+
 Distributions
 -------------------
 

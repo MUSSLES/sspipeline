@@ -21,11 +21,6 @@ from __future__ import (
 )
 
 # ===============================================================================
-#         Version
-# ===============================================================================
-from .__version__ import __version__
-
-# ===============================================================================
 #         Author + Copyright
 # ===============================================================================
 __author__ = "John Letey (john.letey@colorado.edu)"
@@ -40,3 +35,9 @@ from pipeline.cli import cli_main
 # ===============================================================================
 from pipeline.distributions import normal_logpost
 from pipeline.distributions import gev_logpost
+# ===============================================================================
+#         Version
+# ===============================================================================
+from ._version import get_versions
+__version__ = get_versions()['version']
+del get_versions

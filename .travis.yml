@@ -1,24 +1,40 @@
-language: generic
+# After changing this file, check it on:
+#   http://lint.travis-ci.org/
+language: python
 os: linux
 
-jobs:
-  fast_finish: true
+# Run jobs on container-based infrastructure, can be overridden per job
+sudo: false
+
+matrix:
   include:
-    - env:
-      - PYTHON=2.7
-      - DOCS='false'
-    - env:
-      - PYTHON=3.4
-      - DOCS='false'
-    - env:
-      - PYTHON=3.5
-      - DOCS='false'
-    - env:
-      - PYTHON=3.6
-      - DOCS='true'
+    - python: 2.7
+    - python: 3.5
+    - python: 3.6
+    - python: 3.7
+
+  allow_failures:
+    - python: 3.7
+
+before_install:
+  # Additional info about the build
+  - uname -a
+  - free -m
+  - df -h
+  - ulimit -a
+  - python -V
+
+  # Setup python environment
+  - source devtools/travis-ci/before_install.sh
+  - python -V
 
 install:
-    - source .ci/install.sh;
+    # Install from environment
+  - conda env create -n test python=$PYTHON_VER -f devtools/conda-envs/full_test.yaml
+  - source activate test
+
+    # Build and install package
+  - python setup.py develop --no-deps
 
 script:
     - pipeline --help
@@ -32,7 +48,7 @@ deploy:
     provider: pages
     skip_cleanup: true
     github_token: $GITHUB_TOKEN
-    local_dir: docs/_build/html
+    local_dir: docs/build/html
     target_branch: gh-pages
     email: "github-pages-deploy@travis-ci.org"
     on:
@@ -40,5 +56,5 @@ deploy:
         condition: $DOCS = 'true'
 
 notifications:
-   slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis
-   email: false
+    slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis
+    email: false

@@ -21,7 +21,7 @@ from __future__ import (
 )
 
 # Tell module what it's allowed to import
-__all__ = ["read_and_clean", "log"]
+__all__ = ["check_params", "read_and_clean", "log"]
 
 import pandas as pd
 import numpy as np

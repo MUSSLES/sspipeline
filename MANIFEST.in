@@ -1,5 +1,9 @@
-# Include the license file
-include LICENSE
-include Makefile
-include *.md
 recursive-include pipeline *.py
+
+include setup.py
+include README.md
+include LICENSE
+include MANIFEST.in
+
+include versioneer.py
+include pipeline/_version.py

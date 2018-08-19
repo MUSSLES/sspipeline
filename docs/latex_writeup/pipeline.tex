@@ -112,131 +112,25 @@
 ~\clearpage
 
 \noindent
-% \emph{Note: If you want to get started immediately with the \this\ package,
-%   start at \app{install} on
-%   page~\pageref{sect:install} or visit the online documentation at
-%   \url{http://dan.iel.fm/emcee}. If you are sampling with \this\ and having
-%   low-acceptance-rate or other issues, there is some advice in
-%   \sect{advice} starting on page~\pageref{sect:advice}.}
+\emph{Note: If you want to get started immediately with the \this\ package,
+  start at \app{install} on
+  page~\pageref{sect:install} or visit the online documentation at
+  \url{https://mussles.github.io/pipeline}. If you are sampling with \this\ and having
+  low-acceptance-rate or other issues, there is some advice in
+  \sect{advice} starting on page~\pageref{sect:advice}.}
 
 \section{Introduction}
 
-% Probabilistic data analysis---including Bayesian inference---has
-% transformed scientific research in the past decade. Many of the most
-% significant gains have come from numerical methods for approximate
-% inference, especially Markov chain Monte Carlo (MCMC).  For example,
-% many problems in cosmology and astrophysics\footnote{The methods and
-%   discussion in this \paper\ have general applicability, but we will
-%   mostly present examples from astrophysics and cosmology, the fields
-%   in which we have most experience} have directly benefited from MCMC
-% because the models are often expensive to compute, there are many free
-% parameters, and the observations are usually low in signal-to-noise.
-
-% Probabilistic data analysis procedures involve computing and using
-% either the posterior probability density function (PDF) for the
-% parameters of the model or the likelihood function. In some cases it
-% is sufficient to find the maximum of one of these, but it is often
-% necessary to understand the posterior PDF in detail.  MCMC methods are
-% designed to sample from---and thereby provide sampling approximations
-% to---the posterior PDF efficiently even in parameter spaces with large
-% numbers of dimensions. This has proven useful in too many research
-% applications to list here but the results from the NASA Wilkinson
-% Microwave Anisotropy Probe (WMAP) cosmology mission provide a dramatic
-% example \citep[for example,][]{Dunkley:2005}.
-
-% Arguably the most important advantage of Bayesian data analysis is
-% that it is possible to \emph{marginalize} over nuisance parameters. A
-% nuisance parameter is one that is required in order to model the
-% process that generates the data, but is otherwise of little interest.
-% Marginalization is the process of integrating over all possible values of
-% the  parameter and hence propagating the effects of uncertainty about
-% its value into the final result.  Often we wish to marginalize over all
-% nuisance parameters in a model.  The exact result of marginalization
-% is the marginalized probability function \pr{\model | \data}
-% of the set (list or vector) of model parameters
-% \model\ given the set of observations \data
-% \begin{equation}
-%     \eqlabel{marginalization}
-%     \pr{\model | \data} = \int
-%         \pr{ \model, \nuisance | \data} \,
-%         \dd  \nuisance \quad,
-% \end{equation}
-% where \nuisance\ is the set (list or vector) of nuisance
-% parameters. Because the nuisance parameter set \nuisance\ can be very large, this
-% integral is often extremely daunting.  However, a
-% MCMC-generated sampling of values $(\model_t,\nuisance_t)$ of the
-% model and nuisance parameters from the joint distribution $\pr{\model,
-%   \nuisance | \data}$ automatically provides a sampling of values
-% $\model_t$ from the marginalized PDF $\pr{\model | \data}$.
-
-% In addition to the problem of marginalization, in many problems of
-% interest the likelihood or the prior is the result of an expensive
-% simulation or computation. In this regime, MCMC sampling is very
-% valuable, but it is even \emph{more} valuable if the MCMC algorithm is
-% efficient, in the sense that it does not require many function
-% evaluations to generate a statistically independent sample from the
-% posterior PDF.  The methods presented here are designed for efficiency.
-
-% Most uses of MCMC in the astrophysics literature are based on slight
-% modifications to the Metropolis-Hastings (M--H) method (introduced
-% below in \sect{algo}).  Each step in a M--H chain is proposed using a
-% compact proposal distribution centered on the current position of the
-% chain (normally a multivariate Gaussian or something similar). Since
-% each term in the covariance matrix of this proposal distribution is an
-% unspecified parameter, this method has $N\,[N+1]/2$ tuning parameters
-% (where $N$ is the dimension of the parameter space).  To make matters
-% worse, the performance of this sampler is very sensitive to these
-% tuning parameters and there is no fool-proof method for choosing the
-% values correctly. As a result, many heuristic methods have been
-% developed to attempt to determine the optimal parameters in a
-% data-driven way \citep[for
-%   example,][]{Gregory:2005,Dunkley:2005,Widrow:2008}. Unfortunately,
-% these methods all require a lengthy ``burn-in'' phase where shorter
-% Markov chains are sampled and the results are used to tune the
-% hyperparameters. This extra cost is unacceptable when the likelihood
-% calls are computationally expensive.
-
-% The problem with traditional sampling methods can be visualized by looking
-% at the simple but highly anisotropic density
-% \begin{equation}
-%     \eqlabel{anisotropic}
-%     p(\mathbf{x}) \propto f \left (-\frac{(x_1-x_2)^2}{2\,\epsilon}
-%                                         - \frac{(x_1+x_2)^2}{2} \right )
-% \end{equation}
-% which would be considered difficult (in the small-$\epsilon$ regime) for
-% standard MCMC algorithms. In principle, it is possible to tune the
-% hyperparameters of a M--H sampler to make this sampling converge quickly,
-% but if the dimension is large and calculating the density
-% is computationally expensive the tuning procedure becomes intractable.
-% Also, since the number of parameters scales as $\sim N^2$, this problem gets
-% much worse in higher dimensions.
-% \Eq{anisotropic} can, however, be transformed into the much easier problem of
-% sampling an isotropic density by an \emph{affine transformation} of the form
-% \begin{equation}
-%     y_1 = \frac{x_1-x_2}{\sqrt{\epsilon}} \, ,
-%         \hspace{1cm} y_2 = x_1 + x_2 \quad .
-% \end{equation}
-% This motivates affine invariance: an algorithm that is \emph{affine invariant}
-% performs equally well under all linear transformations; it will therefore be
-% insensitive to
-% covariances among parameters.
-
-% Extending earlier work by \citet{Christen:2007},
-% \citet[][hereafter \citetalias{Goodman:2010}]{Goodman:2010} proposed an
-% affine invariant sampling
-% algorithm (\sect{algo}) with only two hyperparameters to be tuned for
-% performance. \citet{Hou:2011} were the first group to implement this
-% algorithm in astrophysics. The implementation presented here is
-% an independent effort that has already proved effective in several projects
-% \citep{sanders2013,reis2013,weisz2013,cieza2013,akeret2012,huppenkothen2012,
-% monnier2012,morton2012,crossfield2012,roskar2012,bovy2012b,brown2012,
-% brammer2012,bussmann2012,bovy2012a,lang2012,bovy2012,olofsson2012,dorman2012}.
-% In what follows, we summarize the
-% algorithm from \citetalias{Goodman:2010} and the implementation
-% decisions made in \this. We also describe the small changes
-% that must be made to the algorithm to parallelize it. Finally, in the
-% Appendices, we outline the installation, usage and troubleshooting of
-% the package.
+Probabilistic data analysis---including Bayesian inference---has
+transformed scientific research in the past decade. Many of the most
+significant gains have come from numerical methods for approximate
+inference, especially Markov chain Monte Carlo (MCMC).  For example,
+many problems in cosmology and astrophysics\footnote{The methods and
+  discussion in this \paper\ have general applicability, but we will
+  mostly present examples from astrophysics and cosmology, the fields
+  in which we have most experience} have directly benefited from MCMC
+because the models are often expensive to compute, there are many free
+parameters, and the observations are usually low in signal-to-noise.
 
 \section{The Algorithm}\sectlabel{algo}
 
@@ -244,96 +138,96 @@
 % Instead, the interested reader is directed to a classic reference like
 % \citet{MacKay:2003} and we will summarize some key concepts below.
 
-% The general goal of MCMC algorithms is to draw $M$ samples
-% $\{ \model_i \}$ from
-% the posterior probability density
-% \begin{equation}
-%     \pr{\model, \nuisance | \data} = \frac{1}{Z}\,\pr{\model, \nuisance}
-%             \, \pr{\data | \model, \nuisance} \quad,
-% \end{equation}
-% where the prior distribution $\pr{\model, \nuisance}$ and the likelihood
-% function $\pr{\data|\model,\nuisance}$ can be relatively easily (but not
-% necessarily quickly) computed for any particular value of
-% $(\model_i, \nuisance_i)$.  The normalization $Z=\pr{\data}$ is
-% independent of $\model$ and $\nuisance$ once we have chosen the form of the
-% generative model. This means that it is possible
-% to sample from \pr{\model, \nuisance | \data} without computing $Z$ ---
-% unless one would like to compare the validity of two different generative
-% models. This is important because $Z$ is generally very expensive to
-% compute.
+The general goal of MCMC algorithms is to draw $M$ samples
+$\{ \model_i \}$ from
+the posterior probability density
+\begin{equation}
+    \pr{\model, \nuisance | \data} = \frac{1}{Z}\,\pr{\model, \nuisance}
+            \, \pr{\data | \model, \nuisance} \quad,
+\end{equation}
+where the prior distribution $\pr{\model, \nuisance}$ and the likelihood
+function $\pr{\data|\model,\nuisance}$ can be relatively easily (but not
+necessarily quickly) computed for any particular value of
+$(\model_i, \nuisance_i)$.  The normalization $Z=\pr{\data}$ is
+independent of $\model$ and $\nuisance$ once we have chosen the form of the
+generative model. This means that it is possible
+to sample from \pr{\model, \nuisance | \data} without computing $Z$ ---
+unless one would like to compare the validity of two different generative
+models. This is important because $Z$ is generally very expensive to
+compute.
 
-% Once the samples
-% produced by MCMC are available, the marginalized constraints on $\model$
-% can be approximated by
-% the histogram of the samples projected into the parameter subspace spanned
-% by $\model$. In particular, this implies that the
-% expectation value of a function of the model parameters $f(\model)$ is
-% \begin{equation}
-%     \expect{f(\model)} = \int
-%     \pr{\model|\data}
-%     \, f(\model) \, \dd\model
-%     \,\approx\, \frac{1}{M} \sum_{i=1} ^M f(\model_i) \quad.
-% \end{equation}
-% Generating the samples $\model_i$ is a non-trivial process unless
-% $\pr{\model, \nuisance, \data}$ is a very specific analytic distribution
-% (for example, a Gaussian). MCMC is a procedure for generating a random walk
-% in the parameter space that, over time, draws a representative set
-% of samples from the distribution. Each point in a Markov chain
-% $\link (t_i) = [\model_i, \nuisance_i]$
-% depends only on the position of the previous step $\link (t_{i-1})$.
+Once the samples
+produced by MCMC are available, the marginalized constraints on $\model$
+can be approximated by
+the histogram of the samples projected into the parameter subspace spanned
+by $\model$. In particular, this implies that the
+expectation value of a function of the model parameters $f(\model)$ is
+\begin{equation}
+    \expect{f(\model)} = \int
+    \pr{\model|\data}
+    \, f(\model) \, \dd\model
+    \,\approx\, \frac{1}{M} \sum_{i=1} ^M f(\model_i) \quad.
+\end{equation}
+Generating the samples $\model_i$ is a non-trivial process unless
+$\pr{\model, \nuisance, \data}$ is a very specific analytic distribution
+(for example, a Gaussian). MCMC is a procedure for generating a random walk
+in the parameter space that, over time, draws a representative set
+of samples from the distribution. Each point in a Markov chain
+$\link (t_i) = [\model_i, \nuisance_i]$
+depends only on the position of the previous step $\link (t_{i-1})$.
 
-% \paragraph{The Metropolis-Hastings (M--H) Algorithm}
+\paragraph{The Metropolis-Hastings (M--H) Algorithm}
 
-% The simplest and most commonly used MCMC algorithm is the M--H method
-% \citep[\algo{mh};][]{MacKay:2003,Gregory:2005,Press:2007,Hogg:2010}.
-% The iterative procedure is as follows: (1) given a position
-% $X(t)$ sample a proposal position $Y$ from the transition distribution
-% $Q(Y; X(t))$, (2) accept this proposal with probability
-% \begin{equation}
-%     \mathrm{min} \left( 1,\,
-%             \frac{\pr{\vector{Y} | \data}}{\pr{\vector{X}(t) | \data}} \,
-%             \frac{Q(X(t); Y)}{ Q(Y;X(t))}  \right) \quad.
-% \end{equation}
-% The transition distribution $Q(Y; X(t))$ is an
-% easy-to-sample probability distribution for the proposal $Y$ given
-% a position $X(t)$.
-% A common parameterization of $Q(Y; X(t))$ is a multivariate Gaussian
-% distribution centered on $X(t)$ with a general covariance tensor that has
-% been tuned for performance.
-% It is worth emphasizing that if this step is accepted $X(t+1) = Y$; Otherwise,
-% the new position is set to the previous one $X(t+1) = X(t)$ (in other
-% words, the position $X(t)$ is \emph{repeated in the chain}).
+The simplest and most commonly used MCMC algorithm is the M--H method
+\citep[\algo{mh};][]{MacKay:2003,Gregory:2005,Press:2007,Hogg:2010}.
+The iterative procedure is as follows: (1) given a position
+$X(t)$ sample a proposal position $Y$ from the transition distribution
+$Q(Y; X(t))$, (2) accept this proposal with probability
+\begin{equation}
+    \mathrm{min} \left( 1,\,
+            \frac{\pr{\vector{Y} | \data}}{\pr{\vector{X}(t) | \data}} \,
+            \frac{Q(X(t); Y)}{ Q(Y;X(t))}  \right) \quad.
+\end{equation}
+The transition distribution $Q(Y; X(t))$ is an
+easy-to-sample probability distribution for the proposal $Y$ given
+a position $X(t)$.
+A common parameterization of $Q(Y; X(t))$ is a multivariate Gaussian
+distribution centered on $X(t)$ with a general covariance tensor that has
+been tuned for performance.
+It is worth emphasizing that if this step is accepted $X(t+1) = Y$; Otherwise,
+the new position is set to the previous one $X(t+1) = X(t)$ (in other
+words, the position $X(t)$ is \emph{repeated in the chain}).
 
-% The M--H algorithm converges (as $t \to \infty$) to a stationary set of
-% samples from the distribution but there are many algorithms with faster
-% convergence and varying levels of implementation difficulty.
-% Faster convergence is preferred because of the reduction of computational
-% cost due to the smaller number of likelihood computations necessary to obtain
-% the equivalent level of accuracy. The inverse convergence rate can be
-% measured by the autocorrelation function and more specifically, the integrated
-% autocorrelation time (see \sect{tests}). This quantity is an estimate of the
-% number of steps needed in the chain in order to draw independent samples from
-% the target density. A more efficient chain has a shorter
-% autocorrelation time.
+The M--H algorithm converges (as $t \to \infty$) to a stationary set of
+samples from the distribution but there are many algorithms with faster
+convergence and varying levels of implementation difficulty.
+Faster convergence is preferred because of the reduction of computational
+cost due to the smaller number of likelihood computations necessary to obtain
+the equivalent level of accuracy. The inverse convergence rate can be
+measured by the autocorrelation function and more specifically, the integrated
+autocorrelation time (see \sect{tests}). This quantity is an estimate of the
+number of steps needed in the chain in order to draw independent samples from
+the target density. A more efficient chain has a shorter
+autocorrelation time.
 
-% \begin{algorithm}
-% \caption{The procedure for a single Metropolis-Hastings MCMC step.
-%     \algolabel{mh}}
-% \begin{algorithmic}[1]
+\begin{algorithm}
+\caption{The procedure for a single Metropolis-Hastings MCMC step.
+    \algolabel{mh}}
+\begin{algorithmic}[1]
 
-% \STATE Draw a proposal $Y \sim Q (Y; X(t))$
-% \STATE $q \gets [\pr{\vector{Y}} \, Q(X(t); Y)]
-%         / [\pr{\vector{X}(t)} \, Q(Y;X(t))]$%
-%             \hspace{1cm}{\footnotesize\it // This line is generally expensive}
-% \STATE $r \gets R \sim [0, 1]$
-% \IF{$r \le q$}
-%     \STATE $\vector{X}(t+1) \gets \vector{Y}$
-% \ELSE
-%     \STATE $\vector{X}(t+1) \gets \vector{X}(t)$
-% \ENDIF
+\STATE Draw a proposal $Y \sim Q (Y; X(t))$
+\STATE $q \gets [\pr{\vector{Y}} \, Q(X(t); Y)]
+        / [\pr{\vector{X}(t)} \, Q(Y;X(t))]$%
+            \hspace{1cm}{\footnotesize\it // This line is generally expensive}
+\STATE $r \gets R \sim [0, 1]$
+\IF{$r \le q$}
+    \STATE $\vector{X}(t+1) \gets \vector{Y}$
+\ELSE
+    \STATE $\vector{X}(t+1) \gets \vector{X}(t)$
+\ENDIF
 
-% \end{algorithmic}
-% \end{algorithm}
+\end{algorithmic}
+\end{algorithm}
 
 % \paragraph{The stretch move}
 
@@ -704,14 +598,31 @@
 % \this\ makes use of the open-source Python \numpy\ package.
 
 \begin{thebibliography}{}\raggedright
-\bibitem[Gelman \& Rubin(1992)]{gelman1992}
-    Gelman, Andrew; Rubin, Donald B. Inference from Iterative Simulation Using Multiple Sequences. Statist. Sci. 7 (1992), no. 4, 457--472. doi:10.1214/ss/1177011136. \url{https://projecteuclid.org/euclid.ss/1177011136}
-\bibitem[Haario et al.(2001)]{haario2001}
-    Haario, Heikki; Saksman, Eero; Tamminen, Johanna. An adaptive Metropolis algorithm. Bernoulli 7 (2001), no. 2, 223--242. \url{https://projecteuclid.org/euclid.bj/1080222083}
-\bibitem[Rosenthal(2010)]{rosenthal2010}
-    Rosenthal, J. S. 2010. Optimal Proposal Distributions and Adaptive MCMC. Handbook of Markov chain Monte Carlo. Eds., Brooks, S., Gelman, A., Jones, G. L., and Meng, X.-L. Chapman \& Hall/CRC Press. Available online at \url{https://pdfs.semanticscholar.org/3576/ee874e983908f9214318abb8ca425316c9ed.pdf}
-\bibitem[Roberts(1997)]{roberts1997}
-    Roberts, G. O., Gelman, A., and Gilks W. R. 1997. Weak convergence and optimal scaling of random walk Metropolis algorithms. Ann. Appl. Prob. 7, 110–120. Available online at \url{http://projecteuclid.org/download/pdf_1/euclid.aoap/1034625254}
+\bibitem[MacKay(2003))]{MacKay:2003}
+{MacKay}, D., \emph{Information Theory, Inference, and Learning Algorithms},
+Cambridge University Press, 2003
+\bibitem[Gregory(2005))]{Gregory:2005}
+{Gregory}, P.~C.,
+\emph{Bayesian Logical Data Analysis for the Physical Sciences},
+Cambridge University Press, 2005
+% http://adsabs.harvard.edu/abs/2005blda.book.....G
+\bibitem[Press \etal(2007)]{Press:2007}
+{Press}, W.~H., {Teukolsky}, S.~A., {Vetterling}, W.~T., \& {Flannery}, B.~P.,
+\emph{Numerical Recipes: The Art of Scientific Computing},
+Cambridge University Press, 2007
+\bibitem[Hogg, Bovy \& Lang(2010))]{Hogg:2010}
+{Hogg}, D.~W., {Bovy}, J., \& {Lang}, D.,
+2010, \arxiv{1008.4686} [astro-ph.IM]
+% http://adsabs.harvard.edu/abs/2010arXiv1008.4686H
+
+% \bibitem[Gelman \& Rubin(1992)]{gelman1992}
+%     Gelman, Andrew; Rubin, Donald B. Inference from Iterative Simulation Using Multiple Sequences. Statist. Sci. 7 (1992), no. 4, 457--472. doi:10.1214/ss/1177011136. \url{https://projecteuclid.org/euclid.ss/1177011136}
+% \bibitem[Haario et al.(2001)]{haario2001}
+%     Haario, Heikki; Saksman, Eero; Tamminen, Johanna. An adaptive Metropolis algorithm. Bernoulli 7 (2001), no. 2, 223--242. \url{https://projecteuclid.org/euclid.bj/1080222083}
+% \bibitem[Rosenthal(2010)]{rosenthal2010}
+%     Rosenthal, J. S. 2010. Optimal Proposal Distributions and Adaptive MCMC. Handbook of Markov chain Monte Carlo. Eds., Brooks, S., Gelman, A., Jones, G. L., and Meng, X.-L. Chapman \& Hall/CRC Press. Available online at \url{https://pdfs.semanticscholar.org/3576/ee874e983908f9214318abb8ca425316c9ed.pdf}
+% \bibitem[Roberts(1997)]{roberts1997}
+%     Roberts, G. O., Gelman, A., and Gilks W. R. 1997. Weak convergence and optimal scaling of random walk Metropolis algorithms. Ann. Appl. Prob. 7, 110–120. Available online at \url{http://projecteuclid.org/download/pdf_1/euclid.aoap/1034625254}
 
 \end{thebibliography}
 
@@ -719,21 +630,7 @@
 \appendix
 \section{Installation}\sectlabel{install}
 
-% The easiest way to install \this\ is using
-% \pip\footnote{\url{http://pypi.python.org/pypi/pip}}. Running the command
-% \begin{lstlisting}
-% % pip install emcee
-% \end{lstlisting}
-% at the command line of a UNIX-based system will install the package in your
-% \Python\ path.
-% If you would like to install for all users, you might
-% need to run the above command with superuser permissions.
-% In order to use \this, you must also have
-% \numpy\footnote{\url{http://numpy.scipy.org}} installed (this can also be
-% achieved using \pip\ on most systems).
-% \this\ has been
-% tested with \Python\ 2.7 and \numpy\ 1.6
-% but it is likely to work with earlier versions of both of these as well.
+TODO
 
 % An alternative installation method is to download the source code from
 % \url{http://dan.iel.fm/emcee} and run
@@ -753,8 +650,8 @@ contributing a patch.
 
 \section{Online Documentation}
 
-% To learn more about how to use \this\ in practice, it is best to check out the
-% documentation on the website \url{http://dan.iel.fm/emcee}. This page includes
-% the API documentation and many examples of possible work flows.
+To learn more about how to use \this\ in practice, it is best to check out the
+documentation on the website \url{https://mussles.github.io/pipeline}. This page includes
+the API documentation and many examples of possible work flows.
 
 \end{document}
