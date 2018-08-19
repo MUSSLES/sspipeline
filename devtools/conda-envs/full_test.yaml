@@ -3,9 +3,9 @@ channels:
   - conda-forge
 dependencies:
     # Base depends
-  - click,
-  - numpy,
-  - pandas,
+  - click
+  - numpy
+  - pandas
   - scipy
 
     # Testing
