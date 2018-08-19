@@ -22,7 +22,8 @@ if __name__ == "__main__":
             'click',
             'numpy',
             'pandas',
-            'scipy'
+            'scipy',
+            'matplotlib'
         ],
         extras_require={
             'docs': [
