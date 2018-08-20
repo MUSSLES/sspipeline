@@ -5,12 +5,6 @@ cd $HOME
 # Install Miniconda
 MINICONDA=Miniconda3-latest-Linux-x86_64.sh
 export PYTHON_VER=$TRAVIS_PYTHON_VERSION
-echo $PYTHON_VER
-if [[ $PYTHON_VER == 3.7 ]]; then
-    export DOCS='true'
-else
-    export DOCS='false'
-fi
 MINICONDA_HOME=$HOME/miniconda
 MINICONDA_MD5=$(curl -s https://repo.continuum.io/miniconda/ | grep -A3 $MINICONDA | sed -n '4p' | sed -n 's/ *<td>\(.*\)<\/td> */\1/p')
 wget -q https://repo.continuum.io/miniconda/$MINICONDA
