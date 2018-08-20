@@ -47,7 +47,6 @@ extensions = [
     'sphinx.ext.githubpages',
     'sphinx.ext.autosummary',
     'numpydoc',
-    'nbsphinx',
     'sphinx.ext.mathjax',
 ]
 

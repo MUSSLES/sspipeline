@@ -130,8 +130,32 @@ Throughout previous years of development, Markov chain Monte Carlo (MCMC) has ev
 One of the most commonly used MCMC algorithms is the Adaptive Metropolis-Hastings Algorithm (AM), first proposed by Haario, et al. in their \emph{An Adaptive Metropolis Algorithm} \cite{haario2001}. In their paper, they propose an algorithm that streamlines the task of setting the step-size, comparing to the arduous process outlined in the original algorithm. The original algorithm was introduced by Metropolis and Hastings, respectively, in their separate papers \cite{metropolis1953} and \cite{hastings1970}.
 
 \begin{algorithm}
+\caption{The Metropolis-Hastings algorithm}
+\label{alg:mh}
+\begin{algorithmic}[1]
+
+  \STATE Draw $X^0\sim\mu$ where $\mu$ is the initial condition.
+  \STATE Set $t\leftarrow0$.
+  \REPEAT
+    \STATE Draw $Y^t\sim q(y^t|x^t)$.
+    \STATE Compute $\alpha = \min\left\{
+      \frac{\pi(y^t)}{\pi(x^t)}\frac{q(x^t|y^t)}{q(y^t|x^t)}, 1\right\}$
+    \STATE Draw $U\sim\mathcal{U}[0,1]$.
+    \IF{$U\le\alpha$}
+      \STATE Set $X^{t+1}\leftarrow Y^t$.
+    \ELSE
+      \STATE Set $X^{t+1}\leftarrow X^t$.
+    \ENDIF
+    \STATE Set $t\leftarrow t+1$.
+  \UNTIL{Sufficiently many samples have been produced.}
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Adaptive Metropolis-Hastings algorithm}
+\label{alg:adaptive_mh}
 \begin{algorithmic}
-  \tophrule
   \STATE Draw $X^0\sim\mu$ where $\mu$ is the initial condition.
   \STATE Set $\theta^0$ to an arbitrary valid value.
   \STATE Set $t\leftarrow0$.
@@ -146,10 +170,7 @@ One of the most commonly used MCMC algorithms is the Adaptive Metropolis-Hasting
   \STATE Set $\theta\leftarrow\theta^t$.
   \STATE Perform Algorithm~\ref{alg:mh} with proposal $q(\cdot|x) =
   q(\cdot|x,\theta)$.
-  \bottomhrule
 \end{algorithmic}
-\caption{Adaptive Metropolis-Hastings algorithm}
-\label{alg:adaptive rw}
 \end{algorithm}
 
 \section{Discussion \& Tips}\sectlabel{advice}
