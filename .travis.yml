@@ -11,10 +11,7 @@ matrix:
     - python: 2.7
     - python: 3.5
     - python: 3.6
-    - python: 3.7
-
-  allow_failures:
-    - python: 3.7
+    - python: 3.7-dev
 
 before_install:
   # Additional info about the build

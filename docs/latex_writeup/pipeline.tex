@@ -84,6 +84,10 @@
 % units
 \newcommand{\unit}[1]{\mathrm{#1}}
 
+% quotes!
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+
 % Citation alias
 % TODO - \defcitealias{Letey:2018}{LW18}
 
@@ -119,21 +123,21 @@
 
 \section{Introduction}
 
-
+Throughout previous years of development, Markov chain Monte Carlo (MCMC) has evolved from a foregone algorithm to a more general way to fit real-life data.
 
 \section{The Algorithm}\sectlabel{algo}
+
+One of the most commonly used MCMC algorithms is the Adaptive Metropolis-Hastings Algorithm (AM), first proposed by Haario, et al. in their \emph{An Adaptive Metropolis Algorithm} \cite{haario2001}. In their paper, they propose an algorithm that streamlines the task of setting the step-size, comparing to the arduous process outlined in the original algorithm. The original algorithm was introduced by Metropolis and Hastings, respectively, in their separate papers \cite{metropolis1953} and \cite{hastings1970}.
 
 \section{Discussion \& Tips}\sectlabel{advice}
 
 \begin{thebibliography}{}\raggedright
-\bibitem[Gelman \& Rubin(1992)]{gelman1992}
-    Gelman, Andrew; Rubin, Donald B. Inference from Iterative Simulation Using Multiple Sequences. Statist. Sci. 7 (1992), no. 4, 457--472. doi:10.1214/ss/1177011136. \url{https://projecteuclid.org/euclid.ss/1177011136}
-\bibitem[Haario et al.(2001)]{haario2001}
-    Haario, Heikki; Saksman, Eero; Tamminen, Johanna. An adaptive Metropolis algorithm. Bernoulli 7 (2001), no. 2, 223--242. \url{https://projecteuclid.org/euclid.bj/1080222083}
-\bibitem[Rosenthal(2010)]{rosenthal2010}
-    Rosenthal, J. S. 2010. Optimal Proposal Distributions and Adaptive MCMC. Handbook of Markov chain Monte Carlo. Eds., Brooks, S., Gelman, A., Jones, G. L., and Meng, X.-L. Chapman \& Hall/CRC Press. Available online at \url{https://pdfs.semanticscholar.org/3576/ee874e983908f9214318abb8ca425316c9ed.pdf}
-\bibitem[Roberts(1997)]{roberts1997}
-    Roberts, G. O., Gelman, A., and Gilks W. R. 1997. Weak convergence and optimal scaling of random walk Metropolis algorithms. Ann. Appl. Prob. 7, 110–120. Available online at \url{http://projecteuclid.org/download/pdf_1/euclid.aoap/1034625254}
+\bibitem[Haario, et al.(2001)]{haario2001}
+    Haario, H.; Saksman, E.; Tamminen, J. (2001). "An adaptive Metropolis algorithm." Bernoulli, 7(2): 223–242.
+\bibitem[Metropolis, et al.(1953)]{metropolis1953}
+    Metropolis, N., Rosenbluth, A., Rosenbluth, M., Teller, A., and Teller, E. (1953). "Equations of state calculations by fast computing machines." J. Chem. Phys., 21(6): 1087–1092.
+\bibitem[Hastings(1970)]{hastings1970}
+    Hastings, W. (1970). "Monte Carlo sampling methods using Markov chains and their application." Biometrika, 57: 97–109.
 \end{thebibliography}
 
 \clearpage
