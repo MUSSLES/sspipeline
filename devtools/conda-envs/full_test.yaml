@@ -14,3 +14,9 @@ dependencies:
   - pytest-cov
   - pytest-pep8
   - flake8
+
+    # Docs
+  - sphinx
+  - sphinx-build
+  - sphinx_rtd_theme
+  - numpydoc
