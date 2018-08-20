@@ -5,6 +5,7 @@ cd $HOME
 # Install Miniconda
 MINICONDA=Miniconda3-latest-Linux-x86_64.sh
 export PYTHON_VER=$TRAVIS_PYTHON_VERSION
+echo $PYTHON_VER
 if [[ $PYTHON_VER == 3.6.3 ]]; then
     export DOCS='true'
 else

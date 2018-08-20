@@ -13,7 +13,7 @@ TODO
     :caption: User Guide
 
     api.rst
-    contributing.md
+    dists/index.rst
     changelog.rst
 
 .. toctree::

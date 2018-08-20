@@ -60,3 +60,5 @@ target/
 \.pytest_cache/
 
 docs/source/autosummary/
+
+*.tar.gz
