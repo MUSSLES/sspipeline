@@ -17,6 +17,5 @@ dependencies:
 
     # Docs
   - sphinx
-  - sphinx-build
   - sphinx_rtd_theme
   - numpydoc
