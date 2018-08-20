@@ -13,9 +13,6 @@ jobs:
       - PYTHON=2.7
       - DOCS='false'
     - env:
-      - PYTHON=3.4
-      - DOCS='false'
-    - env:
       - PYTHON=3.5
       - DOCS='false'
     - env:
@@ -39,7 +36,7 @@ before_install:
 
 install:
     # Install from environment
-  - conda env create -n test python=$PYTHON_VER -f devtools/conda-envs/full_test.yaml
+  - conda env create -n test python=$PYTHON -f devtools/conda-envs/full_test.yaml
   - source activate test
 
     # Build and install package
@@ -51,7 +48,7 @@ script:
     - bash pipeline/tests/test_pipeline.sh
     - cat pipeline/tests/pipeline.log
     - flake8 pipeline
-    - if [[ $DOCS == 'true' ]]; then source .ci/build_docs.sh; fi
+    - if [[ $DOCS == 'true' ]]; then source devtools/travis-ci/build_docs.sh; fi
 
 deploy:
     provider: pages
