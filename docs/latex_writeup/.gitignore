@@ -2,4 +2,3 @@
 *.brf
 *.log
 *.out
-plots/*.h5
