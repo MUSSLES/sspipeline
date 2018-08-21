@@ -4,16 +4,16 @@ Pipeline
 
 .. image:: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat
     :target: https://github.com/MUSSLES/pipeline/pulls
-.. image:: https://badges.frapsoft.com/os/v2/open-source.png?v=103
+.. image:: https://badges.frapsoft.com/os/v2/open-source.svg?v=103
     :target: https://github.com/ellerbrock/open-source-badge/
 .. image:: https://img.shields.io/badge/Made%20with-Python-1f425f.svg
-      :target: https://www.python.org/
+    :target: https://www.python.org/
 .. image:: https://img.shields.io/badge/license-GPL%20v3.0-blue.svg
-      :target: https://github.com/MUSSLES/pipeline/blob/master/LICENSE
+    :target: https://github.com/MUSSLES/pipeline/blob/master/LICENSE
 .. image:: https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg
-      :target: https://github.com/MUSSLES/pipeline/graphs/contributors
+    :target: https://github.com/MUSSLES/pipeline/graphs/contributors
 .. image:: https://img.shields.io/travis/MUSSLES/pipeline/master.svg?style=flat&label=Travis+CI
-      :target: https://travis-ci.org/MUSSLES/pipeline
+    :target: https://travis-ci.org/MUSSLES/pipeline
 
 
 
