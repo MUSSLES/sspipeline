@@ -38,6 +38,7 @@ from pipeline.core import history_plots
 from pipeline.core import max_ls_parameters
 from pipeline.core import runner
 
+from pipeline.distributions import normal_logpost
 from pipeline.distributions import gev_logpost
 
 from pipeline.utils import check_params
@@ -87,8 +88,8 @@ def cli_main(ctx, config):
     )
     # Put the config file into the log file
     logger.info("==> CONFIG PARAMETERS")
-    for key in config_data.keys():
-        logger.info("==> \t {:>10} : ".format(key) + str(config_data[key]))
+    for key, value in sorted(config_data.items()):
+        logger.info("==> \t {:>10} : ".format(key) + str(value))
     # Clean up the data
     data_meas, logger = read_and_clean(
         config_data["data"],
@@ -99,15 +100,26 @@ def cli_main(ctx, config):
         config_data["plot"],
     )
     # Run the Adaptive Metropolis-Hastings Algorithm on the chains
-    mcmc_chains, ar, ls = runner(
-        m=config_data["sequences"],
-        n_iter=config_data["iterations"],
-        t=config_data["adaption"],
-        d=3,
-        logpost=gev_logpost,
-        data_meas=data_meas,
-        stepsize=config_data["transition"],
-    )
+    if config_data["dist"] == "Normal":
+        mcmc_chains, ar, ls = runner(
+            m=config_data["sequences"],
+            n_iter=config_data["iterations"],
+            t=config_data["adaption"],
+            d=3,
+            logpost=normal_logpost,
+            data_meas=data_meas,
+            stepsize=config_data["transition"],
+        )
+    if config_data["dist"] == "GEV":
+        mcmc_chains, ar, ls = runner(
+            m=config_data["sequences"],
+            n_iter=config_data["iterations"],
+            t=config_data["adaption"],
+            d=3,
+            logpost=gev_logpost,
+            data_meas=data_meas,
+            stepsize=config_data["transition"],
+        )
     # Plot the history plots for the chains
     if config_data["plot"]:
         history_plots(

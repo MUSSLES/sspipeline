@@ -101,6 +101,14 @@ def check_params(params, logger=None):
         new_params["plot"] = bool(params["plot"])
     else:
         new_params["plot"] = True
+    # Check for the distribution parameter
+    if "dist" in params:
+        if params["dist"] == "Normal" or params["dist"] == "GEV":
+            new_params["dist"] = params["dist"]
+        else:
+            new_params["dist"] = "GEV"
+    else:
+        new_params["dist"] = "GEV"
     # Return
     return new_params
 
@@ -195,7 +203,7 @@ def read_and_clean(
 
     logger = log(
         logger,
-        "The percentage of years that had enough data to use is {}%".format(
+        "The percentage of years that have enough data to use is {}%".format(
             100 * len(data) / num_years
         ),
         verbose,
