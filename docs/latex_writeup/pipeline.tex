@@ -127,7 +127,7 @@ Throughout previous years of development, Markov chain Monte Carlo (MCMC) has ev
 
 \section{The Algorithm}\sectlabel{algo}
 
-One of the most commonly used MCMC algorithms is the Adaptive Metropolis-Hastings Algorithm, proposed by Haario, et al. in their \emph{An Adaptive Metropolis Algorithm} \cite{haario2001}. In their paper, they propose an algorithm that streamlines the task of setting the step-size, compared to the arduous process outlined in the original algorithm. The original algorithm was introduced by Metropolis and Hastings, respectively, in their separate papers \cite{metropolis1953} and \cite{hastings1970}. The algorithm that does TODO, was originally proposed by Metropolis, and was further refined by Hastings to include TODO. Contained in the following algorithms, is rough pseudo-code for both the Metropolis-Hastings algorithm and also the Adaptive Metropolis-Hastings Algorithm:
+One of the most commonly used MCMC algorithms is the Metropolis-Hastings algorithm, proposed by Metropolis and Hastings, respectively, in their separate papers \cite{metropolis1953} and \cite{hastings1970}. This algorithm that does TODO, was originally proposed by Metropolis, and was further refined by Hastings to include TODO. Contained in the following algorithm, is rough pseudo-code for this algorithm:
 
 \begin{algorithm}
 \caption{The Metropolis-Hastings algorithm}
@@ -151,6 +151,10 @@ One of the most commonly used MCMC algorithms is the Adaptive Metropolis-Hasting
 
 \end{algorithmic}
 \end{algorithm}
+
+Summing up Algorithm \ref{alg:mh}: Given a probability density $\pi$, called the target, defined on a state space $X$, and computable up to a multiplying constant, $\pi(x) \propto \pi^{}(x)$, the Metropolis-Hastings algorithm proposes a generic way to construct a Markov chain on $X$ that is ergodic and stationary with respect to $\pi$ -- meaning that, if $X(t) \sim \pi(x)$, then $X(t+1) \sim \pi(x)$ -- and that therefore converges in distribution to $\pi$. While there are other generic ways of delivering Markov chains associated with an arbitrary stationary distribution, see, e.g., \cite{barker1965}, the Metropolis-Hastings algorithm is the workhorse of MCMC methods, both for its simplicity and its versatility, and hence the first solution to consider in intractable situations.
+
+However, the Metropolis-Hastings algorithm has a problem: You have to find a correct step-size so that your acceptance rate is low enough. Fortunately, there exists another algorithm: the Adaptive Metropolis-Hastings Algorithm, proposed by Haario, et al. in their \emph{An Adaptive Metropolis Algorithm} \cite{haario2001}. In their paper, they propose an algorithm that streamlines the task of setting the step-size, compared to the arduous process outlined in the original algorithm. Contained in the following algorithm, is rough pseudo-code for the Adaptive Metropolis-Hastings Algorithm:
 
 \begin{algorithm}
 \caption{Adaptive Metropolis-Hastings algorithm}
@@ -176,12 +180,14 @@ One of the most commonly used MCMC algorithms is the Adaptive Metropolis-Hasting
 \section{Discussion \& Tips}\sectlabel{advice}
 
 \begin{thebibliography}{}\raggedright
-\bibitem[Haario, et al.(2001)]{haario2001}
-    Haario, H.; Saksman, E.; Tamminen, J. (2001). "An adaptive Metropolis algorithm." Bernoulli, 7(2): 223–242.
 \bibitem[Metropolis, et al.(1953)]{metropolis1953}
     Metropolis, N., Rosenbluth, A., Rosenbluth, M., Teller, A., and Teller, E. (1953). "Equations of state calculations by fast computing machines." J. Chem. Phys., 21(6): 1087–1092.
 \bibitem[Hastings(1970)]{hastings1970}
     Hastings, W. (1970). "Monte Carlo sampling methods using Markov chains and their application." Biometrika, 57: 97–109.
+\bibitem[Barker(1965)]{barker1965}
+    Barker, A. (1965). "Monte Carlo calculations of the radial distribution functions for a proton electron plasma." Aust. J. Physics, 18: 119–133.
+\bibitem[Haario, et al.(2001)]{haario2001}
+    Haario, H.; Saksman, E.; Tamminen, J. (2001). "An adaptive Metropolis algorithm." Bernoulli, 7(2): 223–242.
 \end{thebibliography}
 
 \clearpage
