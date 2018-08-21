@@ -1,5 +1,5 @@
 ###################################################
-Deep Learning World
+Pipeline
 ###################################################
 
 .. image:: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat
@@ -8,7 +8,7 @@ Deep Learning World
     :target: https://github.com/ellerbrock/open-source-badge/
 .. image:: https://img.shields.io/badge/Made%20with-Python-1f425f.svg
       :target: https://www.python.org/
-.. image:: https://img.shields.io/pypi/l/ansicolortags.svg
+.. image:: https://img.shields.io/badge/license-GPL%20v3.0-blue.svg
       :target: https://github.com/MUSSLES/pipeline/blob/master/LICENSE
 .. image:: https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg
       :target: https://github.com/MUSSLES/pipeline/graphs/contributors
