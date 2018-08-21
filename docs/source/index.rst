@@ -13,7 +13,6 @@ TODO
     :caption: User Guide
 
     api.rst
-    dists/index.rst
     changelog.rst
 
 .. toctree::
@@ -21,6 +20,7 @@ TODO
    :caption: Useful links
 
    Pipeline @ GitHub <https://github.com/mussles/pipeline>
+   Latest Source Code <https://github.com/MUSSLES/pipeline/raw/gh-pages/_static/dists/pipeline-0.1.dev0.tar.gz>
    Issue Tracker <https://github.com/mussles/pipeline/issues>
 
 
