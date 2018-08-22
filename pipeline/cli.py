@@ -33,10 +33,11 @@ import pandas as pd
 from pipeline.core import acf_result
 from pipeline.core import diagnostic_plots
 from pipeline.core import final_params_pool
-from pipeline.core import GR_result
 from pipeline.core import history_plots
 from pipeline.core import max_ls_parameters
 from pipeline.core import runner
+
+from pipeline.gelman_rubin import GR_result
 
 from pipeline.distributions import normal_logpost
 from pipeline.distributions import gev_logpost
