@@ -7,8 +7,7 @@ Pipeline API
 MCMC
 -------------------
 
-.. autoclass:: pipeline.core.MCMC_Chain
-    :members:
+.. autofunction:: pipeline.core.psrf
 
 Distributions
 -------------------

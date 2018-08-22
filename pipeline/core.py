@@ -191,6 +191,36 @@ def GR_diag(parameter, interval=100, start=100):
 
 
 def psrf(sequences):
+    """
+    Function to calculate the Potential Scale Reduction Factor (PSRF) for MCMC
+    chains
+
+    Parameters
+    ----------
+    sequences : array_like
+        MCMC chains that you want to calculate the PSRF of
+
+    Returns
+    -------
+    psrf : float
+        .. math:: \hat{R} = \sqrt{\\frac{\hat{V}}{\sigma^2} \cdot \\frac{
+                  \\text{df}}{\\text{df}-2}}
+
+        where:
+
+        .. math:: \hat{V} = \hat{\sigma}^2 + \\frac{B}{mn} \quad\\text{and}
+                  \quad \hat{\sigma}^2 = \\frac{n-1}{n}W + \\frac{1}{n}B
+
+        and also:
+
+        .. math:: m = \\text{number of sequences} \\\ n = \\text{length of each
+                  chain} \\\ B = \\frac{n}{(m - 1)}.\sum{(\mu_i - \\bar{\mu})^2
+                  }, ~~ \\text{where $\mu_i$ is the average of each chain and $
+                  \\bar{\mu}$ is the global} \\\ \\text{mean of all estimated
+                  variables} \\\ W = \\frac{1}{m}.\sum{\\textrm{Var}_i}, ~~
+                  \\text{where }\\textrm{Var}_i\\text{ is the variance of
+                  sequence $i$}
+    """
     u = [np.mean(sequence) for sequence in sequences]
     s = [np.var(sequence, ddof=1) for sequence in sequences]
     m = len(sequences)

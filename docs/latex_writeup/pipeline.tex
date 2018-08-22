@@ -127,7 +127,9 @@ Throughout previous years of development, Markov chain Monte Carlo (MCMC) has ev
 
 \section{The Algorithm}\sectlabel{algo}
 
-One of the most commonly used MCMC algorithms is the Metropolis-Hastings algorithm, proposed by Metropolis and Hastings, respectively, in their separate papers \cite{metropolis1953} and \cite{hastings1970}. In short: Given a probability density $\pi$, called the target, defined on a state space $X$, and computable up to a multiplying constant, $\pi(x) \propto \pi^{}(x)$, the Metropolis-Hastings algorithm proposes a generic way to construct a Markov chain on $X$ that is ergodic and stationary with respect to $\pi$ -- meaning that, if $X(t) \sim \pi(x)$, then $X(t+1) \sim \pi(x)$ -- and that therefore converges in distribution to $\pi$. While there are other generic ways of delivering Markov chains associated with an arbitrary stationary distribution, see, e.g., \cite{barker1965}, the Metropolis-Hastings algorithm is the workhorse of MCMC methods, both for its simplicity and its versatility, and hence the first solution to consider in intractable situations. Contained in the following algorithm, is rough pseudo-code for this algorithm:
+One of the most commonly used MCMC algorithms is the Metropolis-Hastings algorithm, proposed by Metropolis and Hastings, respectively, in their separate papers \cite{metropolis1953} and \cite{hastings1970}. In short, the algorithm states: Given a probability density $\pi$, called the target, defined on a state space $X$, and computable up to a multiplying constant, $\pi(x) \propto \pi^{}(x)$, the Metropolis-Hastings algorithm proposes a generic way to construct a Markov chain on $X$ that is ergodic and stationary with respect to $\pi$ -- meaning that, if $X(t) \sim \pi(x)$, then $X(t+1) \sim \pi(x)$ -- and that therefore converges in distribution to $\pi$. While there are other generic ways of delivering Markov chains associated with an arbitrary stationary distribution, see, e.g., \cite{barker1965}, the Metropolis-Hastings algorithm is the workhorse of MCMC methods, both for its simplicity and its versatility, and hence the first solution to consider in intractable situations. For a psuedo-code of the algorithm, see Algorithm \ref{alg:mh}.
+
+Although the Metropolis-Hastings algorithm sounds marvelous, it has a problem: you have to make sure to optimize the step-size that you use in the algorithm, so that your acceptance rate is good. Luckily, there exists an algorithm that fixes this complication: the Adaptive Metropolis-Hastings Algorithm, proposed by Haario, et al. in their \emph{An Adaptive Metropolis Algorithm} \cite{haario2001}. In their paper, they propose an algorithm that streamlines the task of setting the step-size, compared to the arduous process outlined in the original algorithm. For a pseudo-code of the algorithm, see Algorithm \ref{alg:adaptive_mh}. Note that not only is the Adaptive Metropolis-Hastings algorithm useful in making sure that the Metropolis-Hastings algorithm has good parameters, in order to have remarkable acceptance rates, it is also useful when you have high-dimensional target distributions or when you have correlated dimensions with different variances.
 
 \begin{algorithm}
 \caption{The Metropolis-Hastings algorithm}
@@ -152,8 +154,6 @@ One of the most commonly used MCMC algorithms is the Metropolis-Hastings algorit
 \end{algorithmic}
 \end{algorithm}
 
-However, the Metropolis-Hastings algorithm has a problem: you have to optimize the step-size that you use in the algorithm, so that your acceptance rate is good. Luckily, there exists an algorithm that fixes this complication: the Adaptive Metropolis-Hastings Algorithm, proposed by Haario, et al. in their \emph{An Adaptive Metropolis Algorithm} \cite{haario2001}. In their paper, they propose an algorithm that streamlines the task of setting the step-size, compared to the arduous process outlined in the original algorithm. Contained in the following algorithm, is rough pseudo-code for the Adaptive Metropolis-Hastings Algorithm:
-
 \begin{algorithm}
 \caption{Adaptive Metropolis-Hastings algorithm}
 \label{alg:adaptive_mh}
@@ -174,8 +174,6 @@ However, the Metropolis-Hastings algorithm has a problem: you have to optimize t
   q(\cdot|x,\theta)$.
 \end{algorithmic}
 \end{algorithm}
-
-Although the Adaptive Metropolis-Hastings algorithm is useful in making sure that the Metropolis-Hastings algorithm has good parameters, in order to have remarkable acceptance rates, it is also useful when you have high-dimensional target distributions or when you have correlated dimensions with different variances.
 
 \section{Discussion \& Tips}\sectlabel{advice}
 
