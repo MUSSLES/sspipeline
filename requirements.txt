@@ -1,0 +1,12 @@
+sphinx
+ipywidgets
+sphinx_bootstrap_theme
+pytest
+pytest-cov
+coveralls
+
+click
+numpy
+pandas
+scipy
+matplotlib

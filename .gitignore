@@ -1,21 +1,21 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*$py.class
 
 # C extensions
 *.so
 
-# Vim scratch files
-.swp
-
 # Distribution / packaging
 .Python
 env/
-build/
+docs/build/
+docs/Makefile
 develop-eggs/
 dist/
 downloads/
 eggs/
+.eggs/
 lib/
 lib64/
 parts/
@@ -39,26 +39,64 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .coverage
+.coverage.*
 .cache
 nosetests.xml
 coverage.xml
+*,cover
+.hypothesis/
+tests/result_images/
 
 # Translations
 *.mo
 *.pot
-*.swp
 
-# PyCharm junk
-.idea
+# Django stuff:
+*.log
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
 
 # Sphinx documentation
-docs/build/
+docs/_build/
 
 # PyBuilder
 target/
 
-\.pytest_cache/
+# IPython Notebook
+.ipynb_checkpoints
+*-test.ipynb
+*.ipynb
 
-docs/source/autosummary/
+# pyenv
+.python-version
 
-*.tar.gz
+# celery beat schedule file
+celerybeat-schedule
+
+# dotenv
+.env
+
+# virtualenv
+.venv/
+venv/
+testenv/
+ENV/
+
+# Spyder project settings
+.spyderproject
+
+# Rope project settings
+.ropeproject
+
+# PyCharm project settings
+.idea/
+
+#auto changing files
+build/
+src/

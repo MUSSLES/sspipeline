@@ -1,58 +1,40 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# Copyright 2018 The MUSSLES developers
+#
+# This file is part of MUSSLES.
+#
+# MUSSLES is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# MUSSLES is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MUSSLES.  If not, see <http://www.gnu.org/licenses/>.
 
-import io
-import os
-import sys
-import setuptools
+from setuptools import setup
 
-NAME = "pipeline"
-DESCRIPTION = "pipeline: TODO"
-MAINTAINER = "John Letey"
-MAINTAINER_EMAIL = "john.letey@colorado.edu"
-URL = "https://github.com/mussles/pipeline"
-LICENSE = "GNU General Public License v3"
+exec(open("pipeline/version.py").read())  # grab version info
 
-here = os.path.abspath(os.path.dirname(__file__))
 
-about = {}
-with io.open(
-    os.path.join(here, "pipeline", "__version__.py"), encoding="utf-8"
-) as f:
-    exec(f.read(), about)
-    VERSION = about["__version__"]
-
-with open("README.rst", "r") as handle:
-    long_description = handle.read()
-
-if __name__ == "__main__":
-    setuptools.setup(
-        name=NAME,
-        version=VERSION,
-        description=DESCRIPTION,
-        author=MAINTAINER,
-        author_email=MAINTAINER_EMAIL,
-        url=URL,
-        license=LICENSE,
-        packages=setuptools.find_packages(),
-        entry_points={"console_scripts": ["pipeline=pipeline:cli_main"]},
-        install_requires=["click", "numpy", "pandas", "scipy", "matplotlib"],
-        extras_require={
-            "docs": [
-                "sphinx==1.2.3",  # autodoc was broken in 1.3.1
-                "sphinxcontrib-napoleon",
-                "sphinx_rtd_theme",
-                "numpydoc",
-            ],
-            "tests": ["pytest", "pytest-cov", "pytest-pep8", "flake8"],
-        },
-        tests_require=["pytest", "pytest-cov", "pytest-pep8", "flake8"],
-        classifiers=[
-            "Development Status :: 4 - Beta",
-            "Intended Audience :: Science/Research",
-            "Programming Language :: Python :: 2.7",
-            "Programming Language :: Python :: 3",
-        ],
-        zip_safe=True,
-        long_description=long_description,
-        long_description_content_type="text/x-rst",
-    )
+setup(
+    name="pipeline",
+    version=__version__,
+    description="TODO",
+    author=__author__,
+    author_email=__email__,
+    license="GPLv3",
+    url="https://github.com/MUSSLES/pipeline",
+    classifiers=["Programming Language :: Python :: 3.6"],
+    packages=["pipeline"],
+    entry_points={"console_scripts": ["pipeline=pipeline:cli_main"]},
+    package_data={
+        "": ["LICENSE", "readme.rst", "requirements.txt"],
+        "pipeline": ["*.py"],
+    },
+)

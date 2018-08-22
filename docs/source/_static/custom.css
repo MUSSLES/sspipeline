@@ -1,24 +1,15 @@
-
-.wy-nav-side p.caption {
-  color: #F5F5F5;
-  font-size: 85%;
+.section {
+    border-bottom: solid lightgrey thin;
 }
 
-.wy-nav-side, div.wy-side-nav-search {
-  background: #343131;
+.class > dd {
+    margin-left: 2em;
 }
 
-/* Sidebar link click color */
-.toctree-l1 > a:active {
-  background-color: #70c162 !important;
-  color: rgb(252, 252, 252) !important;
+.method dd {
+    margin-left: 2em;
 }
 
-.toctree-l1 > a:hover {
-  background-color: #70c162;
-  color: rgb(252, 252, 252);
-}
-
-.wy-side-nav-search input[type="text"] {
-  border: 0px;
+.function dd {
+    margin-left: 2em;
 }

@@ -1,46 +1,31 @@
-###################################################
-Pipeline
-###################################################
-
-.. image:: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat
-    :target: https://github.com/MUSSLES/pipeline/pulls
-.. image:: https://badges.frapsoft.com/os/v2/open-source.svg?v=103
-    :target: https://github.com/ellerbrock/open-source-badge/
-.. image:: https://img.shields.io/badge/Made%20with-Python-1f425f.svg
-    :target: https://www.python.org/
-.. image:: https://img.shields.io/badge/license-GPL%20v3.0-blue.svg
-    :target: https://github.com/MUSSLES/pipeline/blob/master/LICENSE
-.. image:: https://img.shields.io/github/contributors/Naereen/StrapDown.js.svg
-    :target: https://github.com/MUSSLES/pipeline/graphs/contributors
-.. image:: https://img.shields.io/travis/MUSSLES/pipeline/master.svg?style=flat&label=Travis+CI
+.. image:: https://travis-ci.org/MUSSLES/pipeline.svg?branch=master
     :target: https://travis-ci.org/MUSSLES/pipeline
 
+Introduction
+------------
 
+pipeline is an open-source Python library for TODO
 
-##################
-Table of Contents
-##################
-.. contents::
-  :local:
-  :depth: 4
+pipeline is released under the GPL v3 license.
 
-***************
-Overview
-***************
+Install
+-------
 
+pipeline requires python 3 and can be installed by navigating to the directory containing the package and running the following command::
 
-***************
-Installation
-***************
+	$ pip install .
 
+However we suggest using an isolated environment. A good option is to use
+`Miniconda <https://conda.io/miniconda.html>`__  ( make sure to install the
+Python 3 version), which has extensive documentation.
 
-***************
-Example
-***************
+From a clean install the following command will install everything you need. It should be entered into the terminal (located in the pipeline directory)::
 
+	$ pip install . -r requirements.txt
 
-***************
-Contributing
-***************
+NB: This will soon be much simpler once a version of pipeline is uploaded to PyPi, please bear with us in the meantime.
 
-If you would like to contribute to this code, please feel free to fork the repository and open a pull request. If you find a bug, have a suggestion, etc, please open up an issue!
+Citing pipeline
+------------
+
+If pipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. Until a specific publication is written about pipeline please cite the github URL: www.github.com/MUSSLES/pipeline

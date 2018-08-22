@@ -1,65 +1,36 @@
-# After changing this file, check it on:
-#   http://lint.travis-ci.org/
 language: python
-os: linux
+python:
+  - "3.6"
 
-# Run jobs on container-based infrastructure, can be overridden per job
 sudo: false
 
-jobs:
-  fast_finish: true
-  include:
-    - env:
-      - PYTHON=2.7
-      - DOCS='false'
-    - env:
-      - PYTHON=3.5
-      - DOCS='false'
-    - env:
-      - PYTHON=3.6
-      - DOCS='false'
-    - env:
-      - PYTHON=3.7
-      - DOCS='true'
-
-before_install:
-  # Additional info about the build
-  - uname -a
-  - free -m
-  - df -h
-  - ulimit -a
-  - python -V
-
-  # Setup python environment
-  - source devtools/travis-ci/before_install.sh
-  - python -V
-
 install:
-    # Install from environment
-  - conda env create -n test python=$PYTHON -f devtools/conda-envs/full_test.yaml
-  - source activate test
+  - "pip install . -r requirements.txt"
 
-    # Build and install package
-  - python setup.py develop --no-deps
-
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
 script:
-    - pipeline --help
-    - pipeline --version
-    - bash pipeline/tests/test_pipeline.sh
-    - cat pipeline/tests/pipeline.log
-    - flake8 pipeline
-    - if [[ $DOCS == 'true' ]]; then source devtools/travis-ci/build_docs.sh; fi
+  - pipeline --help
+  - pipeline --version
+  - bash pipeline/tests/test_pipeline.sh
+  - cat pipeline/tests/pipeline.log
+  - sphinx-apidoc -fo docs/source pyxem
+  - sphinx-build -b html docs/source docs/build
 
 deploy:
-    provider: pages
-    skip_cleanup: true
-    github_token: $GITHUB_TOKEN
-    local_dir: docs/build/html
-    target_branch: gh-pages
-    email: "github-pages-deploy@travis-ci.org"
-    on:
-        branch: master
-        condition: $DOCS = 'true'
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: docs/build
+  on:
+    branch: master
+
+matrix:
+  allow_failures:
+    - script: sphinx-apidoc -fo docs/source pyxem
+    - script: sphinx-build -b html docs/source docs/build
 
 notifications:
     slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis
