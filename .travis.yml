@@ -16,7 +16,7 @@ script:
   - pipeline --version
   - bash pipeline/tests/test_pipeline.sh
   - cat pipeline/tests/pipeline.log
-  - sphinx-apidoc -fo docs/source pyxem
+  - sphinx-apidoc -fo docs/source pipeline
   - sphinx-build -b html docs/source docs/build
 
 deploy:
@@ -29,7 +29,7 @@ deploy:
 
 matrix:
   allow_failures:
-    - script: sphinx-apidoc -fo docs/source pyxem
+    - script: sphinx-apidoc -fo docs/source pipeline
     - script: sphinx-build -b html docs/source docs/build
 
 notifications:
