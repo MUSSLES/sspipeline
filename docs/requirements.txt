@@ -1,10 +1,14 @@
+# Docs
 sphinx
-ipywidgets
 sphinx_bootstrap_theme
+# Formatting
+black
+pycodestyle
+# Testing
 pytest
 pytest-cov
 coveralls
-
+# Actual Deps
 click
 numpy
 pandas

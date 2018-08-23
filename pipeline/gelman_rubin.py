@@ -54,7 +54,7 @@ def psrf(sequences):
 
     Parameters
     ----------
-    sequences : array_like
+    sequences : :class:`numpy.ndarray`
         MCMC chains that you want to calculate the PSRF of
 
     Returns
@@ -94,10 +94,37 @@ def psrf(sequences):
 
 
 def GR_result(
-    mcmc_chains, output_dir, params, t, plot, start=100, interval=100
+    mcmc_chains,
+    params,
+    t,
+    output_dir="output",
+    plot=False,
+    start=100,
+    interval=100,
 ):
     """
-    TODO!
+    TODO
+
+    Parameters
+    ----------
+    mcmc_chains : :class:`numpy.ndarray`
+        MCMC chains that you want to calculate the burn-in for
+    params : list
+        TODO
+    t : int
+        TODO
+    output_dir : str
+        where to put the output from the function
+    plot : bool
+        whether or not to plot
+    start : int
+        TODO
+    interval : int
+        TODO
+
+    Returns
+    -------
+    TODO
     """
     m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
     params_raw, GR_params, burnin_params = [], [], []

@@ -367,4 +367,5 @@ intersphinx_mapping = {
     'https://docs.python.org/': None,
     'numpy': ('http://docs.scipy.org/doc/numpy/', None),
     'scipy': ('https://docs.scipy.org/doc/scipy/reference/', None),
+    'logging': ('https://docs.python.org/3/library/logging.html', None),
 }

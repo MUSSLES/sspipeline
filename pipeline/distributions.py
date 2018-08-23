@@ -34,9 +34,9 @@ def normal_loglikelihood(parameters, data):
 
     Parameters
     ----------
-    parameters : array_like
+    parameters : tuple
         :math:`\mu` and :math:`\sigma` parameters for a Normal distribution
-    data : array_like
+    data : :class:`numpy.ndarray`
         the data you're fitting
 
     Returns
@@ -62,7 +62,7 @@ def normal_logprior(parameters):
 
     Parameters
     ----------
-    parameters : array_like
+    parameters : tuple
         :math:`\mu` and :math:`\sigma` parameters for a Normal distribution
 
     Returns
@@ -89,9 +89,9 @@ def normal_logpost(parameters, data):
 
     Parameters
     ----------
-    parameters : array_like
+    parameters : tuple
         :math:`\mu` and :math:`\sigma` parameters for a Normal distribution
-    data : array_like
+    data : :class:`numpy.ndarray`
         the data you're fitting
 
     Returns
@@ -102,8 +102,8 @@ def normal_logpost(parameters, data):
     --------
     >>> from pipeline.distributions import normal_logpost
     >>> import scipy.stats as stats
-    >>> params = [8, 1]
-    >>> real_params = [10, 2]
+    >>> params = (8, 1)
+    >>> real_params = (10, 2)
     >>> data = stats.norm.rvs(loc=real_params[0],
     ...                       scale=real_params[1],
     ...                       size=10)
@@ -130,10 +130,10 @@ def gev_loglikelihood(parameters, data):
 
     Parameters
     ----------
-    parameters : array_like
+    parameters : tuple
         :math:`\mu`, :math:`\sigma`, and :math:`\\xi` parameters for a GEV
         distribution
-    data : array_like
+    data : :class:`numpy.ndarray`
         the data you're fitting
 
     Returns
@@ -161,7 +161,7 @@ def gev_logprior(parameters):
 
     Parameters
     ----------
-    parameters : array_like
+    parameters : tuple
         :math:`\mu`, :math:`\sigma`, and :math:`\\xi` parameters for a GEV
         distribution
 
@@ -188,10 +188,10 @@ def gev_logpost(parameters, data):
 
     Parameters
     ----------
-    parameters : array_like
+    parameters : tuple
         :math:`\mu`, :math:`\sigma`, and :math:`\\xi` parameters for a GEV
         distribution
-    data : array_like
+    data : :class:`numpy.ndarray`
         the data you're fitting
 
     Returns
@@ -202,8 +202,8 @@ def gev_logpost(parameters, data):
     --------
     >>> from pipeline.distributions import gev_logpost
     >>> import scipy.stats as stats
-    >>> params = [410, 100, -1]
-    >>> real_params = [400, 100, -0.4]
+    >>> params = (410, 100, -1)
+    >>> real_params = (400, 100, -0.4)
     >>> data = stats.genextreme.rvs(loc=real_params[0],
     ...                             scale=real_params[1],
     ...                             c=real_params[2],

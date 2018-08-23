@@ -35,17 +35,17 @@ def check_params(params, logger=None):
 
     Parameters
     ----------
-    params : dictionary
+    params : dict
         list of parameters in dictionary form from config file
-    logger : logging.RootLogger
-        logger that the command line tool uses
+    logger : :class:`logging.Logger`
+        logger that the command line tool tool uses
 
     Returns
     -------
-    new_params : dictionary
+    new_params : dict
         fixed and cleaned up config file parameters
-    logger : logging.RootLogger
-        updated logger for the command line
+    logger : :class:`logging.Logger`
+        updated logger for the command line tool
     """
     new_params = {}
     # Check for the verbose parameter
@@ -57,7 +57,7 @@ def check_params(params, logger=None):
     if "data" in params:
         new_params["data"] = params["data"]
     else:
-        # TODO: switch to command line error
+        # TODO: switch to command line tool error
         logger.error("You need a data parameter")
     # Check for the output parameter
     if "output" in params:
@@ -91,7 +91,7 @@ def check_params(params, logger=None):
     if "transition" in params:
         new_params["transition"] = params["transition"]
     else:
-        # TODO: switch to command line error
+        # TODO: switch to command line tool error
         logger.error("You need a transition covariance matrix")
     # Check to see if the user wants to plot
     if "plot" in params:
@@ -128,25 +128,25 @@ def read_and_clean(
 
     Parameters
     ----------
-    datafile : string
+    datafile : str
         where the dataset file is located
     percentage : float
         how much data to use in good years
-    output_dir : string
+    output_dir : str
         where to put the output from the function
-    logger : logging.RootLogger
-        logger that the command line uses
+    logger : :class:`logging.Logger`
+        logger that the command line tool uses
     verbose : bool
         whether or not to be verbose
-    verbose : bool
+    plot : bool
         whether or not to plot
 
     Returns
     -------
-    data : array_like
+    data : :class:`numpy.ndarray`
         cleaned data
-    logger : logging.RootLogger
-        updated logger for the command line
+    logger : :class:`logging.Logger`
+        updated logger for the command line tool
     """
     dfSL = pd.read_csv(datafile, header=None)
     dfSL.rename(
@@ -216,21 +216,21 @@ def read_and_clean(
 
 def log(logger, message, verbose):
     """
-    A logging function (only to be used by the command line tool)
+    A logging function (only to be used by the command line tool tool)
 
     Parameters
     ----------
-    logger : logging.RootLogger
-        logger that the command line uses
-    message : string
+    logger : :class:`logging.Logger`
+        logger that the command line tool uses
+    message : str
         your message you want to log
     verbose : bool
         whether or not to be verbose
 
     Returns
     -------
-    logger : logging.RootLogger
-        updated logger for the command line
+    logger : :class:`logging.Logger`
+        updated logger for the command line tool
     """
     logger.info(message)
     if verbose:

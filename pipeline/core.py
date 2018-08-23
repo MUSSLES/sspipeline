@@ -122,7 +122,9 @@ def adaptivemcmc(chain, n_iter):
             chain.current.value = nextValue
         else:
             p_accept = delta_obj
-            accept = np.random.choice([True, False], p=[p_accept, 1 - p_accept])
+            accept = np.random.choice(
+                [True, False], p=[p_accept, 1 - p_accept]
+            )
             if accept:
                 n_accept += 1
                 for i in range(chain.d):
