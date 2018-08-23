@@ -8,7 +8,7 @@ potentially little experience with open-source code development. This guide is
 primarily aimed at this audience, helping to reduce the barrier to contribution.
 
 Start using pipeline
------------------
+--------------------
 
 The best way to start understanding how pipeline is to use it.
 
@@ -22,6 +22,7 @@ and going through the "boot camp" to get a feel for the terminology.
 
 In brief, to give you a hint on the terminology to search for, the contribution
 pattern is:
+
     1. Setup git/github if you don't have it.
     2. Fork pipeline on github.
     3. Checkout your fork on your local machine.
