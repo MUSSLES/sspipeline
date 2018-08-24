@@ -101,13 +101,10 @@
 \altaffiltext{\cu}{University of Colorado at Boulder}
 
 \begin{abstract}
-    TODO!!!  The code is available online
-    at \url{http://mussles.github.io/\thisplain/} under the \license.
+    TODO%  The code is available online at \url{http://mussles.github.io/\thisplain/} under the \license.
 \end{abstract}
 
 \keywords{
-    methods: statistical ---
-    methods: Markov chain Monte Carlo ---
     TODO
 }
 
@@ -117,81 +114,79 @@
 \emph{Note: If you want to get started immediately with the \this\ package,
   start at \app{install} on
   page~\pageref{sect:install} or visit the online documentation at
-  \url{https://mussles.github.io/pipeline}. If you are sampling with \this\ and having
-  low-acceptance-rate or other issues, there is some advice in
-  \sect{advice} starting on page~\pageref{sect:advice}.}
+  \url{https://mussles.github.io/pipeline}.}
 
 \section{Introduction}
 
-Throughout previous years of development, Markov chain Monte Carlo (MCMC) has evolved from a foregone algorithm to a more general way to fit real-life data.
+\section{Motivation}\sectlabel{motivation}
 
-\section{The Algorithm}\sectlabel{algo}
+% \section{The Algorithm}\sectlabel{algo}
 
-One of the most commonly used MCMC algorithms is the Metropolis-Hastings algorithm, proposed by Metropolis and Hastings, respectively, in their separate papers \cite{metropolis1953} and \cite{hastings1970}. In short, the algorithm states: Given a probability density $\pi$, called the target, defined on a state space $X$, and computable up to a multiplying constant, $\pi(x) \propto \pi^{}(x)$, the Metropolis-Hastings algorithm proposes a generic way to construct a Markov chain on $X$ that is ergodic and stationary with respect to $\pi$ -- meaning that, if $X(t) \sim \pi(x)$, then $X(t+1) \sim \pi(x)$ -- and that therefore converges in distribution to $\pi$. While there are other generic ways of delivering Markov chains associated with an arbitrary stationary distribution, see, e.g., \cite{barker1965}, the Metropolis-Hastings algorithm is the workhorse of MCMC methods, both for its simplicity and its versatility, and hence the first solution to consider in intractable situations. For a psuedo-code of the algorithm, see Algorithm \ref{alg:mh}.
+% One of the most commonly used MCMC algorithms is the Metropolis-Hastings algorithm, proposed by Metropolis and Hastings, respectively, in their separate papers \cite{metropolis1953} and \cite{hastings1970}. In short, the algorithm states: Given a probability density $\pi$, called the target, defined on a state space $X$, and computable up to a multiplying constant, $\pi(x) \propto \pi^{}(x)$, the Metropolis-Hastings algorithm proposes a generic way to construct a Markov chain on $X$ that is ergodic and stationary with respect to $\pi$ -- meaning that, if $X(t) \sim \pi(x)$, then $X(t+1) \sim \pi(x)$ -- and that therefore converges in distribution to $\pi$. While there are other generic ways of delivering Markov chains associated with an arbitrary stationary distribution, see, e.g., \cite{barker1965}, the Metropolis-Hastings algorithm is the workhorse of MCMC methods, both for its simplicity and its versatility, and hence the first solution to consider in intractable situations. For a psuedo-code of the algorithm, see Algorithm \ref{alg:mh}.
 
-Although the Metropolis-Hastings algorithm sounds marvelous, it has a problem: you have to make sure to optimize the step-size that you use in the algorithm, so that your acceptance rate is good. Luckily, there exists an algorithm that fixes this complication: the Adaptive Metropolis-Hastings Algorithm, proposed by Haario, et al. in their \emph{An Adaptive Metropolis Algorithm} \cite{haario2001}. In their paper, they propose an algorithm that streamlines the task of setting the step-size, compared to the arduous process outlined in the original algorithm. For a pseudo-code of the algorithm, see Algorithm \ref{alg:adaptive_mh}. Note that not only is the Adaptive Metropolis-Hastings algorithm useful in making sure that the Metropolis-Hastings algorithm has good parameters, in order to have remarkable acceptance rates, it is also useful when you have high-dimensional target distributions or when you have correlated dimensions with different variances.
+% Although the Metropolis-Hastings algorithm sounds marvelous, it has a problem: you have to make sure to optimize the step-size that you use in the algorithm, so that your acceptance rate is good. Luckily, there exists an algorithm that fixes this complication: the Adaptive Metropolis-Hastings Algorithm, proposed by Haario, et al. in their \emph{An Adaptive Metropolis Algorithm} \cite{haario2001}. In their paper, they propose an algorithm that streamlines the task of setting the step-size, compared to the arduous process outlined in the original algorithm. For a pseudo-code of the algorithm, see Algorithm \ref{alg:adaptive_mh}. Note that not only is the Adaptive Metropolis-Hastings algorithm useful in making sure that the Metropolis-Hastings algorithm has good parameters, in order to have remarkable acceptance rates, it is also useful when you have high-dimensional target distributions or when you have correlated dimensions with different variances.
 
-\begin{algorithm}
-\caption{The Metropolis-Hastings algorithm}
-\label{alg:mh}
-\begin{algorithmic}[1]
+% \begin{algorithm}
+% \caption{The Metropolis-Hastings algorithm}
+% \label{alg:mh}
+% \begin{algorithmic}[1]
 
-  \STATE Draw $X^0\sim\mu$ where $\mu$ is the initial condition.
-  \STATE Set $t\leftarrow0$.
-  \REPEAT
-    \STATE Draw $Y^t\sim q(y^t|x^t)$.
-    \STATE Compute $\alpha = \min\left\{
-      \frac{\pi(y^t)}{\pi(x^t)}\frac{q(x^t|y^t)}{q(y^t|x^t)}, 1\right\}$
-    \STATE Draw $U\sim\mathcal{U}[0,1]$.
-    \IF{$U\le\alpha$}
-      \STATE Set $X^{t+1}\leftarrow Y^t$.
-    \ELSE
-      \STATE Set $X^{t+1}\leftarrow X^t$.
-    \ENDIF
-    \STATE Set $t\leftarrow t+1$.
-  \UNTIL{Sufficiently many samples have been produced.}
+%   \STATE Draw $X^0\sim\mu$ where $\mu$ is the initial condition.
+%   \STATE Set $t\leftarrow0$.
+%   \REPEAT
+%     \STATE Draw $Y^t\sim q(y^t|x^t)$.
+%     \STATE Compute $\alpha = \min\left\{
+%       \frac{\pi(y^t)}{\pi(x^t)}\frac{q(x^t|y^t)}{q(y^t|x^t)}, 1\right\}$
+%     \STATE Draw $U\sim\mathcal{U}[0,1]$.
+%     \IF{$U\le\alpha$}
+%       \STATE Set $X^{t+1}\leftarrow Y^t$.
+%     \ELSE
+%       \STATE Set $X^{t+1}\leftarrow X^t$.
+%     \ENDIF
+%     \STATE Set $t\leftarrow t+1$.
+%   \UNTIL{Sufficiently many samples have been produced.}
 
-\end{algorithmic}
-\end{algorithm}
+% \end{algorithmic}
+% \end{algorithm}
 
-\begin{algorithm}
-\caption{Adaptive Metropolis-Hastings algorithm}
-\label{alg:adaptive_mh}
-\begin{algorithmic}
-  \STATE Draw $X^0\sim\mu$ where $\mu$ is the initial condition.
-  \STATE Set $\theta^0$ to an arbitrary valid value.
-  \STATE Set $t\leftarrow0$.
-  \REPEAT
-      \STATE Compute $\theta^t = \gamma^t(\theta^0,X^0,\dots,X^{t-1})$ where
-      $\gamma^t$ is a transformation that update the parameters based on past
-      samples.
-      \STATE Draw $X^{t + 1}$ using the proposal $q(\cdot|x^t,\theta^t)$ with
-      the Metropolis-Hastings rule.
-      \STATE Set $t\leftarrow t+1$.
-  \UNTIL{The accept rate of the last $K$ iterations are close to $0.234$.}
-  \STATE Set $\theta\leftarrow\theta^t$.
-  \STATE Perform Algorithm~\ref{alg:mh} with proposal $q(\cdot|x) =
-  q(\cdot|x,\theta)$.
-\end{algorithmic}
-\end{algorithm}
+% \begin{algorithm}
+% \caption{Adaptive Metropolis-Hastings algorithm}
+% \label{alg:adaptive_mh}
+% \begin{algorithmic}
+%   \STATE Draw $X^0\sim\mu$ where $\mu$ is the initial condition.
+%   \STATE Set $\theta^0$ to an arbitrary valid value.
+%   \STATE Set $t\leftarrow0$.
+%   \REPEAT
+%       \STATE Compute $\theta^t = \gamma^t(\theta^0,X^0,\dots,X^{t-1})$ where
+%       $\gamma^t$ is a transformation that update the parameters based on past
+%       samples.
+%       \STATE Draw $X^{t + 1}$ using the proposal $q(\cdot|x^t,\theta^t)$ with
+%       the Metropolis-Hastings rule.
+%       \STATE Set $t\leftarrow t+1$.
+%   \UNTIL{The accept rate of the last $K$ iterations are close to $0.234$.}
+%   \STATE Set $\theta\leftarrow\theta^t$.
+%   \STATE Perform Algorithm~\ref{alg:mh} with proposal $q(\cdot|x) =
+%   q(\cdot|x,\theta)$.
+% \end{algorithmic}
+% \end{algorithm}
 
-\section{Discussion \& Tips}\sectlabel{advice}
+% \section{Discussion \& Tips}\sectlabel{advice}
 
 % \begin{itemize}
 % \item[Q:] When to use the command line tool versus calling the package via a \Python script?
 % \item[A:] If you are solely using the \this\ package to fit data using either a standard Normal or a GEV distribution, we'd suggest using our built in command line tool. However, if you are not using either of these distributions, we suggest that you implement a log posterior function for your distribution, and call the algorithm via a \Python script, and not the command line tool.
 % \end{itemize}
 
-\begin{thebibliography}{}\raggedright
-\bibitem[Metropolis, et al.(1953)]{metropolis1953}
-    Metropolis, N., Rosenbluth, A., Rosenbluth, M., Teller, A., and Teller, E. (1953). "Equations of state calculations by fast computing machines." J. Chem. Phys., 21(6): 1087–1092.
-\bibitem[Hastings(1970)]{hastings1970}
-    Hastings, W. (1970). "Monte Carlo sampling methods using Markov chains and their application." Biometrika, 57: 97–109.
-\bibitem[Barker(1965)]{barker1965}
-    Barker, A. (1965). "Monte Carlo calculations of the radial distribution functions for a proton electron plasma." Aust. J. Physics, 18: 119–133.
-\bibitem[Haario, et al.(2001)]{haario2001}
-    Haario, H.; Saksman, E.; Tamminen, J. (2001). "An adaptive Metropolis algorithm." Bernoulli, 7(2): 223–242.
-\end{thebibliography}
+% \begin{thebibliography}{}\raggedright
+% \bibitem[Metropolis, et al.(1953)]{metropolis1953}
+%     Metropolis, N., Rosenbluth, A., Rosenbluth, M., Teller, A., and Teller, E. (1953). "Equations of state calculations by fast computing machines." J. Chem. Phys., 21(6): 1087–1092.
+% \bibitem[Hastings(1970)]{hastings1970}
+%     Hastings, W. (1970). "Monte Carlo sampling methods using Markov chains and their application." Biometrika, 57: 97–109.
+% \bibitem[Barker(1965)]{barker1965}
+%     Barker, A. (1965). "Monte Carlo calculations of the radial distribution functions for a proton electron plasma." Aust. J. Physics, 18: 119–133.
+% \bibitem[Haario, et al.(2001)]{haario2001}
+%     Haario, H.; Saksman, E.; Tamminen, J. (2001). "An adaptive Metropolis algorithm." Bernoulli, 7(2): 223–242.
+% \end{thebibliography}
 
 \clearpage
 \appendix
