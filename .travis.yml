@@ -15,7 +15,7 @@ script:
   - pipeline --help
   - pipeline --version
   - bash tests/test_pipeline.sh
-  - cat tests/pipeline.log
+  - cat tests/output/pipeline.log
   - black *.py -l 79 --check; black */*.py -l 79 --check
   - pycodestyle *.py --format=pylint --verbose; pycodestyle */*.py --format=pylint --verbose
   - sphinx-apidoc -fo docs/source pipeline
