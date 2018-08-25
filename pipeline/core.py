@@ -227,16 +227,16 @@ def acf_result(mcmc_chains, output_dir, params, burnin, plot):
                     alpha=0.3,
                     facecolor="skyblue",
                 )
-            ax[i].plot(
-                [lags[i], lags[i]],
-                ax[i].get_ylim(),
-                label="lag = {0}".format(lags[i]),
-            )
-            ax[i].set_xlabel("Lag")
-            ax[i].set_ylabel("ACF")
-            ax[i].set_title("Sequence {0}".format(i + 1))
-            ax[i].legend(loc="best")
-            ax[i].grid(alpha=0.5)
+                ax[i].plot(
+                    [lags[i], lags[i]],
+                    ax[i].get_ylim(),
+                    label="lag = {0}".format(lags[i]),
+                )
+                ax[i].set_xlabel("Lag")
+                ax[i].set_ylabel("ACF")
+                ax[i].set_title("Sequence {0}".format(i + 1))
+                ax[i].legend(loc="best")
+                ax[i].grid(alpha=0.5)
         fig.savefig(output_dir + "/plots/ac_function.png")
     return lags
 

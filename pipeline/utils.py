@@ -29,7 +29,7 @@ import matplotlib.pyplot as plt
 # ===============================================================================
 
 
-def check_params(params, logger=None):
+def check_params(params):
     """
     Fixes & cleans up the config file parameters
 
@@ -37,15 +37,11 @@ def check_params(params, logger=None):
     ----------
     params : dict
         list of parameters in dictionary form from config file
-    logger : :class:`logging.Logger`
-        logger that the command line tool tool uses
 
     Returns
     -------
     new_params : dict
         fixed and cleaned up config file parameters
-    logger : :class:`logging.Logger`
-        updated logger for the command line tool
     """
     new_params = {}
     # Check for the verbose parameter
@@ -57,8 +53,7 @@ def check_params(params, logger=None):
     if "data" in params:
         new_params["data"] = params["data"]
     else:
-        # TODO: switch to command line tool error
-        logger.error("You need a data parameter")
+        raise TypeError("You need to pass in a 'data' parameter!")
     # Check for the output parameter
     if "output" in params:
         new_params["output"] = params["output"]
@@ -91,8 +86,7 @@ def check_params(params, logger=None):
     if "transition" in params:
         new_params["transition"] = params["transition"]
     else:
-        # TODO: switch to command line tool error
-        logger.error("You need a transition covariance matrix")
+        raise TypeError("You need to pass in a 'transition' parameter!")
     # Check to see if the user wants to plot
     if "plot" in params:
         new_params["plot"] = bool(params["plot"])
@@ -158,13 +152,14 @@ def read_and_clean(
     if plot:
         fig, ax = plt.subplots(figsize=(14, 8))
         ax.plot(dfSL["sealevel"], color="steelblue")
+        ax.set_title("Original Data Set", fontsize=20)
         ax.set_xlabel("Time (in hours)", fontsize=16)
         ax.set_ylabel("Sea level (in MM)", fontsize=16)
         fig.savefig(output_dir + "/plots/original_data.png")
 
     fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()
     logger = log(
-        logger, "The fill in value is {0}".format(float(fill_in)), verbose
+        logger, "the fill in value is {0}".format(float(fill_in)), verbose
     )
 
     dfSL["sealevel"].replace(fill_in, np.nan, inplace=True)
@@ -173,7 +168,7 @@ def read_and_clean(
     if plot:
         fig, ax = plt.subplots(figsize=(12, 7))
         ax.plot(dfSL["sealevel"], color="steelblue")
-        ax.set_title("Data Set", fontsize=20)
+        ax.set_title("Cleaned Data Set", fontsize=20)
         ax.set_xlabel("Time (in hours)", fontsize=16)
         ax.set_ylabel("Sea Level (in MM)", fontsize=16)
         fig.savefig(output_dir + "/plots/cleaned_data.png")
@@ -200,7 +195,7 @@ def read_and_clean(
 
     logger = log(
         logger,
-        "The percentage of years that have enough data to use is {}%".format(
+        "the percentage of years that have enough data to use is {}%".format(
             100 * len(data) / num_years
         ),
         verbose,

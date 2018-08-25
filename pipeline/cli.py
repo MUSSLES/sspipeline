@@ -69,23 +69,26 @@ ALPHAS = [1.0, 1.0, 0.45]
 def cli_main(ctx, config):
     """A pipeline that takes in data from UHSLC and analyzes it using MCMC."""
 
-    # Start up the logger
-    logging.basicConfig(
-        filename="pipeline.log", format="%(asctime)s %(message)s", filemode="w"
-    )
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
     # Read in the config file
     with open(config) as f:
         config_data = json.load(f)
-    config_data = check_params(config_data, logger)
+    config_data = check_params(config_data)
+    # Start up the logger
+    logging.basicConfig(
+        filename=config_data["output"] + "/pipeline.log",
+        format="%(asctime)s %(message)s",
+        filemode="w",
+    )
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    # Log where the configuration file is at
     logger = log(
         logger,
-        "The config file is located at " + config,
+        "the config file is located at " + config,
         config_data["verbose"],
     )
     # Put the config file into the log file
-    logger.info("==> CONFIG PARAMETERS")
+    logger.info("==> CONFIG FILE PARAMETERS")
     for key, value in sorted(config_data.items()):
         logger.info("==> \t {:>10} : ".format(key) + str(value))
     # Clean up the data
@@ -128,7 +131,7 @@ def cli_main(ctx, config):
     # Log the acceptance rates
     logger = log(
         logger,
-        "The acceptance rates for these Markov chains are: " + str(ar),
+        "the acceptance rates for these Markov chains are: " + str(ar),
         config_data["verbose"],
     )
     # Burnin the chains!

@@ -137,6 +137,7 @@ def GR_result(
         GR, burnin = GR_diag(params_raw[i], interval, start)
         GR_params.append(GR)
         burnin_params.append(burnin)
+    print(burnin_params)
     burnin = max(max(burnin_params), t)
     if plot:
         fig, ax = plt.subplots(figsize=(14, 6))

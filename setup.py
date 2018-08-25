@@ -21,20 +21,14 @@ from setuptools import setup
 
 exec(open("pipeline/version.py").read())  # grab version info
 
-
 setup(
     name="pipeline",
     version=__version__,
-    description="TODO",
+    description="",
     author=__author__,
     author_email=__email__,
     license="GPLv3",
     url="https://github.com/MUSSLES/pipeline",
-    classifiers=["Programming Language :: Python :: 3.6"],
     packages=["pipeline"],
     entry_points={"console_scripts": ["pipeline=pipeline:cli_main"]},
-    package_data={
-        "": ["LICENSE", "readme.rst", "requirements.txt"],
-        "pipeline": ["*.py"],
-    },
 )
