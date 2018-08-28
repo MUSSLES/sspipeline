@@ -29,15 +29,15 @@ deploy:
   on:
     branch: master
 
-deploy:
-  provider: pypi
-  user: "MingxuanZhang"
-  password: "mussles-sspipeline"
-  distributions: "sdist bdist_wheel"
+# deploy:
+#   provider: pypi
+#   user: "MingxuanZhang"
+#   password: "mussles-sspipeline"
+#   distributions: "sdist bdist_wheel"
 
 matrix:
   allow_failures:
-    - script: sphinx-apidoc -fo docs/source pipeline
+    - script: sphinx-apidoc -fo docs/source sspipeline
     - script: sphinx-build -b html docs/source docs/build
 
 notifications:
