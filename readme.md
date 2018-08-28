@@ -1,4 +1,4 @@
-[![https://travis-ci.org/MUSSLES/pipeline.svg?branch=master]](https://travis-ci.org/MUSSLES/pipeline)
+[![Travis CI](https://travis-ci.org/MUSSLES/pipeline.svg?branch=master)](https://travis-ci.org/MUSSLES/pipeline)
 
 ## Introduction
 
@@ -10,15 +10,17 @@ pipeline is released under the GPL v3 license.
 
 pipeline requires python 3 and can be installed by navigating to the directory containing the package and running the following command::
 
-  $ pip install .
+```shell
+$ pip install .
+```
 
-However we suggest using an isolated environment. A good option is to use
-`Miniconda <https://conda.io/miniconda.html>`__  ( make sure to install the
-Python 3 version), which has extensive documentation.
+However we suggest using an isolated environment. A good option is to use [Miniconda](https://conda.io/miniconda.html) (make sure to install the Python 3 version), which has extensive documentation.
 
 From a clean install the following command will install everything you need. It should be entered into the terminal (located in the pipeline directory)::
 
-  $ pip install . -r requirements.txt
+```shell
+$ pip install . -r requirements.txt
+```
 
 NB: This will soon be much simpler once a version of pipeline is uploaded to PyPi, please bear with us in the meantime.
 
