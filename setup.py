@@ -17,18 +17,23 @@
 # You should have received a copy of the GNU General Public License
 # along with MUSSLES.  If not, see <http://www.gnu.org/licenses/>.
 
-from setuptools import setup
+import setuptools
 
-exec(open("pipeline/version.py").read())  # grab version info
+exec(open("sspipeline/version.py").read())  # grab version info
 
-setup(
-    name="pipeline",
+with open("readme.md", "r") as f:
+    long_description = f.read()
+
+setuptools.setup(
+    name="sspipeline",
     version=__version__,
-    description="",
     author=__author__,
     author_email=__email__,
+    description="A pipeline for estimating and characterizing uncertainty in coastal storm surge levels",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     license="GPLv3",
-    url="https://github.com/MUSSLES/pipeline",
-    packages=["pipeline"],
-    entry_points={"console_scripts": ["pipeline=pipeline:cli_main"]},
+    url="https://github.com/MUSSLES/sspipeline",
+    packages=["sspipeline"],
+    entry_points={"console_scripts": ["sspipeline=sspipeline:cli_main"]},
 )

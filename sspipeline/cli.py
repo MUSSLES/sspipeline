@@ -27,21 +27,21 @@ import click
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from pipeline.core import acf_result
-from pipeline.core import diagnostic_plots
-from pipeline.core import final_params_pool
-from pipeline.core import history_plots
-from pipeline.core import max_ls_parameters
-from pipeline.core import runner
+from .core import acf_result
+from .core import diagnostic_plots
+from .core import final_params_pool
+from .core import history_plots
+from .core import max_ls_parameters
+from .core import runner
 
-from pipeline.gelman_rubin import GR_result
+from .gelman_rubin import GR_result
 
-from pipeline.distributions import normal_logpost
-from pipeline.distributions import gev_logpost
+from .distributions import normal_logpost
+from .distributions import gev_logpost
 
-from pipeline.utils import check_params
-from pipeline.utils import read_and_clean
-from pipeline.utils import log
+from .utils import check_params
+from .utils import read_and_clean
+from .utils import log
 
 from .version import __version__
 
@@ -67,7 +67,7 @@ ALPHAS = [1.0, 1.0, 0.45]
 )
 @click.pass_context
 def cli_main(ctx, config):
-    """A pipeline that takes in data from UHSLC and analyzes it using MCMC."""
+    """A  that takes in data from UHSLC and analyzes it using MCMC."""
 
     # Read in the config file
     with open(config) as f:
@@ -75,7 +75,7 @@ def cli_main(ctx, config):
     config_data = check_params(config_data)
     # Start up the logger
     logging.basicConfig(
-        filename=config_data["output"] + "/pipeline.log",
+        filename=config_data["output"] + "/ss.log",
         format="%(asctime)s %(message)s",
         filemode="w",
     )
@@ -101,26 +101,14 @@ def cli_main(ctx, config):
         config_data["plot"],
     )
     # Run the Adaptive Metropolis-Hastings Algorithm on the chains
-    if config_data["dist"] == "Normal":
-        mcmc_chains, ar, ls = runner(
-            m=config_data["sequences"],
-            n_iter=config_data["iterations"],
-            t=config_data["adaption"],
-            d=3,
-            logpost=normal_logpost,
-            data_meas=data_meas,
-            stepsize=config_data["transition"],
-        )
-    if config_data["dist"] == "GEV":
-        mcmc_chains, ar, ls = runner(
-            m=config_data["sequences"],
-            n_iter=config_data["iterations"],
-            t=config_data["adaption"],
-            d=3,
-            logpost=gev_logpost,
-            data_meas=data_meas,
-            stepsize=config_data["transition"],
-        )
+    mcmc_chains, ar, ls = runner(
+        m=config_data["sequences"],
+        n_iter=config_data["iterations"],
+        t=config_data["adaption"],
+        logpost=gev_logpost,
+        data_meas=data_meas,
+        stepsize=config_data["transition"],
+    )
     print(type(config_data["adaption"]))
     # Plot the history plots for the chains
     if config_data["plot"]:

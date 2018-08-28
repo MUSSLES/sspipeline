@@ -20,15 +20,15 @@
 # ===============================================================================
 #         Command Line
 # ===============================================================================
-from pipeline.cli import cli_main
+from .cli import cli_main
 
 # ===============================================================================
 #         Distributions
 # ===============================================================================
-from pipeline.distributions import normal_logpost
-from pipeline.distributions import gev_logpost
+from .distributions import normal_logpost
+from .distributions import gev_logpost
 
 # ===============================================================================
 #         Gelman & Rubin
 # ===============================================================================
-from pipeline.gelman_rubin import GR_result
+from .gelman_rubin import GR_result
