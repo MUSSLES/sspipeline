@@ -100,3 +100,6 @@ ENV/
 #auto changing files
 build/
 src/
+
+# pesky DS_Stores
+.DS_Store
