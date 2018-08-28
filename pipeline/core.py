@@ -197,7 +197,7 @@ def ACF(X, end=200):
     return lag, acf
 
 
-def acf_result(mcmc_chains, output_dir, params, burnin, plot):
+def acf_result(mcmc_chains, output_dir, params, plot):
     lag_params, acf_params = [], []
     m, d = len(mcmc_chains), len(mcmc_chains[0])
     end = 100
@@ -205,7 +205,7 @@ def acf_result(mcmc_chains, output_dir, params, burnin, plot):
         lag_params.append([])
         acf_params.append([])
         for j in range(m):
-            lag, acf = ACF(mcmc_chains[j][i][burnin:], end)
+            lag, acf = ACF(mcmc_chains[j][i], end)
             lag_params[i].append(lag)
             acf_params[i].append(acf)
     lags = [max(np.array(lag_params)[:, i]) for i in range(m)]

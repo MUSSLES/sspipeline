@@ -1,13 +1,6 @@
 pipeline package
 ================
 
-Subpackages
------------
-
-.. toctree::
-
-    pipeline.tests
-
 Submodules
 ----------
 

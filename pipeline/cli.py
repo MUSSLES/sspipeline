@@ -121,6 +121,7 @@ def cli_main(ctx, config):
             data_meas=data_meas,
             stepsize=config_data["transition"],
         )
+    print(type(config_data["adaption"]))
     # Plot the history plots for the chains
     if config_data["plot"]:
         history_plots(
@@ -142,12 +143,12 @@ def cli_main(ctx, config):
         config_data["adaption"],
         config_data["plot"],
     )
+    mcmc_chains = mcmc_chains[:][:][burnin:]
     # Thin the chains!
     lags = acf_result(
         mcmc_chains,
         config_data["output"],
         [r"$\mu$", r"$\sigma$", r"$\xi$"],
-        burnin,
         config_data["plot"],
     )
     # Calculate the final parameter pool
@@ -187,5 +188,13 @@ def cli_main(ctx, config):
     )
     df = df.loc[[1, 2, 5, 10, 50, 100, 200]]
     df.to_csv(config_data["output"] + "/return_levels.csv")
+    # Output the parameters
+    for i in range(len(mcmc_chains[0])):
+        with open(
+            config_data["ouptut"] + "/parameter-" + str(i + 1) + ".txt"
+        ) as f:
+            for j in range(len(mcmc_chains)):
+                f.write("CHAIN " + str(j + 1) + "\n\n\n")
+                f.write(mcmc_chains[j][i] + "\n\n")
     # Log "All done!"
     logger = log(logger, "All done!", True)

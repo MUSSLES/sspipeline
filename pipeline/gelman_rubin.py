@@ -126,6 +126,7 @@ def GR_result(
     -------
     TODO
     """
+    print(type(t))
     m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
     params_raw, GR_params, burnin_params = [], [], []
     start, interval, end = start, interval, n
@@ -137,8 +138,8 @@ def GR_result(
         GR, burnin = GR_diag(params_raw[i], interval, start)
         GR_params.append(GR)
         burnin_params.append(burnin)
-    print(burnin_params)
-    burnin = max(max(burnin_params), t)
+    print(type(t))
+    burnin = max(max(burnin_params), max(t))
     if plot:
         fig, ax = plt.subplots(figsize=(14, 6))
         for i in range(d):
