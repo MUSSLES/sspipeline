@@ -12,13 +12,13 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3
 script:
-  - pipeline --help
-  - pipeline --version
+  - sspipeline --help
+  - sspipeline --version
   - bash tests/test_pipeline.sh
   - cat tests/output/pipeline.log
   - black *.py -l 79 --check; black */*.py -l 79 --check
   - pycodestyle *.py --format=pylint --verbose; pycodestyle */*.py --format=pylint --verbose
-  - sphinx-apidoc -fo docs/source pipeline
+  - sphinx-apidoc -fo docs/source sspipeline
   - sphinx-build -b html docs/source docs/build
 
 deploy:

@@ -35,57 +35,74 @@ def update_mean(m, X):
     N = len(X[0])
     n = []
     for i in range(len(m)):
-        n.append([(m[i][0]*(N-1) + X[i][-1])/N])
+        n.append([(m[i][0] * (N - 1) + X[i][-1]) / N])
     return np.array(n)
+
 
 def update_cov(X, m, Ct, Sd, Id, eps):
     m1 = update_mean(m, X)
-    t = len(X[0])-1
-    part1 = ((t-1)/t)*Ct
-    part2 = t*np.matmul(m, np.transpose(m))
-    part3 = (t+1)*np.matmul(m1, np.transpose(m1))
+    t = len(X[0]) - 1
+    part1 = ((t - 1) / t) * Ct
+    part2 = t * np.matmul(m, np.transpose(m))
+    part3 = (t + 1) * np.matmul(m1, np.transpose(m1))
     Xt = []
-    Xt.append(X[:,-1])
+    Xt.append(X[:, -1])
     part4 = np.matmul(np.transpose(Xt), Xt)
-    part5 = eps*Id
-    cov = part1 + (Sd/t)*(part2 - part3 + part4 + part5)
-    return (cov + np.transpose(cov))/2, m1
+    part5 = eps * Id
+    cov = part1 + (Sd / t) * (part2 - part3 + part4 + part5)
+    return (cov + np.transpose(cov)) / 2, m1
 
-def random_move(current_state, X, Ct, t, t0, stepsize, data_meas, logpost, m, S_d, I_d):
-    if (t <= t0):
+
+def random_move(
+    current_state, X, Ct, t, t0, stepsize, data_meas, logpost, m, S_d, I_d
+):
+    if t <= t0:
         next_move = stats.multivariate_normal.rvs(current_state, stepsize)
         return next_move, logpost(next_move, data_meas), m, stepsize
-    elif (t == t0 + 1):
+    elif t == t0 + 1:
         n = []
         for i in range(len(X)):
             n.append([np.mean(X[i])])
-        cov = S_d*np.cov(X) + I_d*0.0001*S_d
+        cov = S_d * np.cov(X) + I_d * 0.0001 * S_d
         next_move = stats.multivariate_normal.rvs(current_state, cov)
         return next_move, logpost(next_move, data_meas), n, cov
     else:
         cov, m1 = update_cov(X, m, Ct, S_d, I_d, 0.0001)
         next_move = stats.multivariate_normal.rvs(current_state, cov)
         return next_move, logpost(next_move, data_meas), m1, cov
-    
+
+
 def adaptivemcmc(initial_state, n_iter, stepsize, data_meas, logpost, t0):
     d = len(initial_state)
     I_d = np.identity(d)
-    S_d = (2.4)**2/d
+    S_d = (2.4) ** 2 / d
     parameters = []
     current_state = initial_state
     current_value = logpost(initial_state, data_meas)
     for i in range(d):
         parameters.append([])
         parameters[i].append(initial_state[i])
-    lpost = [current_value]    
+    lpost = [current_value]
     n_accept = 0
     S = 0
-    np.seterr(over='ignore')
+    np.seterr(over="ignore")
     cov = stepsize
     m = []
     for t in range(n_iter):
         S += 1
-        nextMove, nextValue, m, cov = random_move(current_state, np.array(parameters), cov, t, t0, stepsize, data_meas, logpost,m, S_d, I_d)
+        nextMove, nextValue, m, cov = random_move(
+            current_state,
+            np.array(parameters),
+            cov,
+            t,
+            t0,
+            stepsize,
+            data_meas,
+            logpost,
+            m,
+            S_d,
+            I_d,
+        )
         delta_obj = np.exp(nextValue - lpost[-1])
         if delta_obj > 1:
             n_accept += 1
@@ -96,7 +113,9 @@ def adaptivemcmc(initial_state, n_iter, stepsize, data_meas, logpost, t0):
             current_value = nextValue
         else:
             p_accept = delta_obj
-            accept = np.random.choice([True, False], p=[p_accept, 1-p_accept])
+            accept = np.random.choice(
+                [True, False], p=[p_accept, 1 - p_accept]
+            )
             if accept:
                 n_accept += 1
                 for i in range(d):
@@ -108,37 +127,42 @@ def adaptivemcmc(initial_state, n_iter, stepsize, data_meas, logpost, t0):
                 for i in range(d):
                     parameters[i].append(parameters[i][-1])
                 lpost.append(lpost[-1])
-    return (parameters, lpost, n_accept/S)
+    return (parameters, lpost, n_accept / S)
+
 
 def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
-    np.seterr(divide='ignore', invalid='ignore')
+    np.seterr(divide="ignore", invalid="ignore")
     loc_est = np.median(data_meas)
-    scale_est = (np.percentile(data_meas, 75) - np.percentile(data_meas, 25))/2
+    scale_est = (
+        np.percentile(data_meas, 75) - np.percentile(data_meas, 25)
+    ) / 2
     shape_est = 0
     gevfit = stats.genextreme.fit(data_meas, loc=loc_est, scale=scale_est)
-    
+
     if logpost([gevfit[1], gevfit[2], gevfit[0]], data_meas) > -np.inf:
         loc_est, scale_est, shape_est = gevfit[1], gevfit[2], gevfit[0]
-        
+
     elif logpost([loc_est, scale_est, -0.1], data_meas) > -np.inf:
         loc_est, scale_est, shape_est = loc_est, scale_est, -0.1
-        
+
     elif logpost([loc_est, scale_est, 0.1], data_meas) > -np.inf:
         loc_est, scale_est, shape_est = loc_est, scale_est, 0.1
-        
+
     else:
         loc_est, scale_est, shape_est = loc_est, scale_est, 0
-        
+
     problems = []
     for i in range(m):
-        ui = np.random.randint(low=loc_est, high=loc_est+100)
-        si = np.random.randint(low=scale_est, high=scale_est+100)
+        ui = np.random.randint(low=loc_est, high=loc_est + 100)
+        si = np.random.randint(low=scale_est, high=scale_est + 100)
         shapei = shape_est
-        theta =[ui, si, shapei]
+        theta = [ui, si, shapei]
         problems.append(theta)
     ar, mcmc_chains, ls = [], [], []
     for i in range(m):
-        parameters, l, r = adaptivemcmc(problems[i], n_iter, stepsize, data_meas, logpost, t)
+        parameters, l, r = adaptivemcmc(
+            problems[i], n_iter, stepsize, data_meas, logpost, t
+        )
         mcmc_chains.append(parameters)
         ar.append(r)
         ls.append(l)
