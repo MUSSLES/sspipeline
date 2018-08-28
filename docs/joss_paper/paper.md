@@ -8,13 +8,11 @@ tags:
   - climate impacts
 authors:
   - name: John Letey
-    orcid:
+    affiliation: 1
+  - name: Mingxuan Zhang
     affiliation: 1
   - name: Tony E. Wong
     orcid: 0000-0002-7304-3883
-    affiliation: 1
-  - name: Mingxuan Zhang
-    orcid:
     affiliation: 1
 affiliations:
   - name: Department of Computer Science, University of Colorado, Boulder, CO, USA
