@@ -75,7 +75,7 @@ def cli_main(ctx, config):
     config_data = check_params(config_data)
     # Start up the logger
     logging.basicConfig(
-        filename=config_data["output"] + "/ss.log",
+        filename=config_data["output"] + "/sspipeline.log",
         format="%(asctime)s %(message)s",
         filemode="w",
     )

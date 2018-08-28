@@ -15,7 +15,7 @@ script:
   - sspipeline --help
   - sspipeline --version
   - bash tests/test_pipeline.sh
-  - cat tests/output/pipeline.log
+  - cat tests/output/sspipeline.log
   - black *.py -l 79 --check; black */*.py -l 79 --check
   - pycodestyle *.py --format=pylint --verbose; pycodestyle */*.py --format=pylint --verbose
   - sphinx-apidoc -fo docs/source sspipeline
