@@ -4,9 +4,14 @@ TODO
 
 ### Installation
 
+Since this project is still in the development stage, we will not be pushing to PyPi as much as we would like to, so this way of installation might be a bit old:
+
 ```shell
 pip install sspipeline
 ```
+
+To get the bleeding edge version, download the repository and run `pip install .` in the repository's root folder.
+ If you are using python 3.x, run `pip3 install .` instead. Note: this package depends on some requirements that don't come with Python, but you can install them via `pip install -r requirements.txt` or `pip3 install -r requirements.txt`.
 
 ### Repository Status
 
