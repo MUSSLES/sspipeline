@@ -18,17 +18,12 @@
 # along with MUSSLES.  If not, see <http://www.gnu.org/licenses/>.
 
 # Tell module what it's allowed to import
-__all__ = ["gev_logpost"]
+__all__ = ["logpost"]
 
 import scipy.stats as stats
 import numpy as np
 
-# ===============================================================================
-#         GEV Distribution
-# ===============================================================================
-
-
-def gev_loglikelihood(parameters, data):
+def loglikelihood(parameters, data):
     """
     Compute the log-likelihood of a GEV distribution
 
@@ -59,7 +54,7 @@ def gev_loglikelihood(parameters, data):
 # end function
 
 
-def gev_logprior(parameters):
+def logprior(parameters):
     """
     Compute the log-prior of a GEV distribution
 
@@ -85,7 +80,7 @@ def gev_logprior(parameters):
 # end function
 
 
-def gev_logpost(parameters, data):
+def logpost(parameters, data):
     """
     Compute the log-posterior (log-prior + log-likelihood) of a GEV
     distribution
@@ -104,7 +99,7 @@ def gev_logpost(parameters, data):
 
     Examples
     --------
-    >>> from pipeline.distributions import gev_logpost
+    >>> from pipeline.gev_utils import logpost
     >>> import scipy.stats as stats
     >>> params = (410, 100, -1)
     >>> real_params = (400, 100, -0.4)
@@ -112,13 +107,13 @@ def gev_logpost(parameters, data):
     ...                             scale=real_params[1],
     ...                             c=real_params[2],
     ...                             size=10)
-    >>> gev_logpost(params, data)
+    >>> logpost(params, data)
     -inf
     """
-    pi = gev_logprior(parameters)
+    pi = logprior(parameters)
     if pi == -np.inf:
         return -np.inf
-    LL = gev_loglikelihood(parameters, data)
+    LL = loglikelihood(parameters, data)
     return LL + pi
 
 

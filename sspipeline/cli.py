@@ -27,7 +27,6 @@ import click
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from .core import acf_result
 from .core import diagnostic_plots
 from .core import final_params_pool
 from .core import history_plots
@@ -36,7 +35,9 @@ from .core import runner
 
 from .gelman_rubin import GR_result
 
-from .distributions import gev_logpost
+from .acf import acf_result
+
+from .gev_utils import logpost
 
 from .utils import check_params
 from .utils import read_and_clean
@@ -79,7 +80,7 @@ def cli_main(ctx, config):
         filemode="w",
     )
     logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
+    # logger.setLevel(logging.INFO)
     # Log where the configuration file is at
     logger = log(
         logger,
@@ -104,7 +105,7 @@ def cli_main(ctx, config):
         m=config_data["sequences"],
         n_iter=config_data["iterations"],
         t=config_data["adaption"],
-        logpost=gev_logpost,
+        logpost=logpost,
         data_meas=data_meas,
         stepsize=config_data["transition"],
     )
