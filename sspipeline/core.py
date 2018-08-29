@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2018 The MUSSLES developers
+# Copyright 2018 The MUSSLES Developers
 #
 # This file is part of MUSSLES.
 #
@@ -188,15 +188,33 @@ def ACF(X, end=200):
     return lag, acf
 
 
-def acf_result(mcmc_chains, output_dir, params, plot):
+def ACF(X, end=200):
+    N = len(X)
+    acf = []
+    for a in range(0, end):
+        acf.append(np.corrcoef(X[a:], X[: N - a])[0][1])
+
+    lag = -1
+    for i in range(len(acf)):
+        if acf[i] <= 0.05:
+            lag = i
+            break
+    if lag == -1:
+        print(
+            "Please increase the value of the end parameter for this function"
+        )
+    return lag, acf
+
+
+def acf_result(mcmc_chains, params, burnin, output_dir="output", plot=False):
     lag_params, acf_params = [], []
-    m, d = len(mcmc_chains), len(mcmc_chains[0])
+    m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
     end = 100
     for i in range(d):
         lag_params.append([])
         acf_params.append([])
         for j in range(m):
-            lag, acf = ACF(mcmc_chains[j][i], end)
+            lag, acf = ACF(mcmc_chains[j][i][burnin:], end)
             lag_params[i].append(lag)
             acf_params[i].append(acf)
     lags = [max(np.array(lag_params)[:, i]) for i in range(m)]
@@ -223,7 +241,7 @@ def acf_result(mcmc_chains, output_dir, params, plot):
                 ax[i].get_ylim(),
                 label="lag = {0}".format(lags[i]),
             )
-            ax[i].set_xlabel("Lag")
+            ax[i].set_xlabel("Iag")
             ax[i].set_ylabel("ACF")
             ax[i].set_title("Sequence {0}".format(i + 1))
             ax[i].legend(loc="best")

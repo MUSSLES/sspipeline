@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2018 The MUSSLES developers
+# Copyright 2018 The MUSSLES Developers
 #
 # This file is part of MUSSLES.
 #
@@ -55,10 +55,10 @@ def check_params(params):
     else:
         raise TypeError("You need to pass in a 'data' parameter!")
     # Check for the output parameter
-    if "output" in params:
-        new_params["output"] = params["output"]
+    if "output_dir" in params:
+        new_params["output_dir"] = params["output_dir"]
     else:
-        new_params["output"] = "output"
+        new_params["output_dir"] = "output"
     # Check for the percentage of data in good years parameter
     if "percentage" in params:
         if params["percentage"] <= 1.0:
@@ -92,14 +92,6 @@ def check_params(params):
         new_params["plot"] = bool(params["plot"])
     else:
         new_params["plot"] = True
-    # Check for the distribution parameter
-    if "dist" in params:
-        if params["dist"] == "Normal" or params["dist"] == "GEV":
-            new_params["dist"] = params["dist"]
-        else:
-            new_params["dist"] = "GEV"
-    else:
-        new_params["dist"] = "GEV"
     # Return
     return new_params
 

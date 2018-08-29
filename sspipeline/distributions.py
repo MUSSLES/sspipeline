@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2018 The MUSSLES developers
+# Copyright 2018 The MUSSLES Developers
 #
 # This file is part of MUSSLES.
 #
@@ -18,106 +18,10 @@
 # along with MUSSLES.  If not, see <http://www.gnu.org/licenses/>.
 
 # Tell module what it's allowed to import
-__all__ = ["normal_logpost", "gev_logpost"]
+__all__ = ["gev_logpost"]
 
 import scipy.stats as stats
 import numpy as np
-
-# ===============================================================================
-#         Normal Distribution
-# ===============================================================================
-
-
-def normal_loglikelihood(parameters, data):
-    """
-    Compute the log-likelihood of a Normal distribution
-
-    Parameters
-    ----------
-    parameters : tuple
-        :math:`\mu` and :math:`\sigma` parameters for a Normal distribution
-    data : :class:`numpy.ndarray`
-        the data you're fitting
-
-    Returns
-    -------
-    log_likelihood : float
-    """
-    mu, sigma = parameters
-    log_likelihood = 0
-    for i in range(len(data)):
-        logpdf = stats.norm.logpdf(x=data[i], loc=mu, scale=sigma)
-        if logpdf == -np.inf:
-            return -np.inf
-        log_likelihood += logpdf
-    return log_likelihood
-
-
-# end function
-
-
-def normal_logprior(parameters):
-    """
-    Compute the log-prior of a Normal distribution
-
-    Parameters
-    ----------
-    parameters : tuple
-        :math:`\mu` and :math:`\sigma` parameters for a Normal distribution
-
-    Returns
-    -------
-    log_prior : float
-    """
-    mu, sigma = parameters
-
-    mu_logpdf = stats.norm.logpdf(x=mu, loc=0, scale=1000)
-
-    if sigma <= 0 or sigma >= 1000:
-        return -np.inf
-
-    return mu_logpdf + np.log(1 / 1000)
-
-
-# end function
-
-
-def normal_logpost(parameters, data):
-    """
-    Compute the log-posterior (log-prior + log-likelihood) of a Normal
-    distribution
-
-    Parameters
-    ----------
-    parameters : tuple
-        :math:`\mu` and :math:`\sigma` parameters for a Normal distribution
-    data : :class:`numpy.ndarray`
-        the data you're fitting
-
-    Returns
-    -------
-    log_post : float
-
-    Examples
-    --------
-    >>> from pipeline.distributions import normal_logpost
-    >>> import scipy.stats as stats
-    >>> params = (8, 1)
-    >>> real_params = (10, 2)
-    >>> data = stats.norm.rvs(loc=real_params[0],
-    ...                       scale=real_params[1],
-    ...                       size=10)
-    >>> normal_logpost(params, data)
-    -87.09445386092345
-    """
-    pi = normal_logprior(parameters)
-    if pi == -np.inf:
-        return -np.inf
-    LL = normal_loglikelihood(parameters, data)
-    return LL + pi
-
-
-# end function
 
 # ===============================================================================
 #         GEV Distribution

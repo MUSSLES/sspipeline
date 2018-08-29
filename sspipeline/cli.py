@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2018 The MUSSLES developers
+# Copyright 2018 The MUSSLES Developers
 #
 # This file is part of MUSSLES.
 #
@@ -36,7 +36,6 @@ from .core import runner
 
 from .gelman_rubin import GR_result
 
-from .distributions import normal_logpost
 from .distributions import gev_logpost
 
 from .utils import check_params
@@ -67,7 +66,7 @@ ALPHAS = [1.0, 1.0, 0.45]
 )
 @click.pass_context
 def cli_main(ctx, config):
-    """A  that takes in data from UHSLC and analyzes it using MCMC."""
+    """A pipeline for estimating and characterizing uncertainty in coastal storm surge levels"""
 
     # Read in the config file
     with open(config) as f:
@@ -75,7 +74,7 @@ def cli_main(ctx, config):
     config_data = check_params(config_data)
     # Start up the logger
     logging.basicConfig(
-        filename=config_data["output"] + "/sspipeline.log",
+        filename=config_data["output_dir"] + "/sspipeline.log",
         format="%(asctime)s %(message)s",
         filemode="w",
     )
@@ -95,7 +94,7 @@ def cli_main(ctx, config):
     data_meas, logger = read_and_clean(
         config_data["data"],
         config_data["percentage"],
-        config_data["output"],
+        config_data["output_dir"],
         logger,
         config_data["verbose"],
         config_data["plot"],
@@ -109,12 +108,11 @@ def cli_main(ctx, config):
         data_meas=data_meas,
         stepsize=config_data["transition"],
     )
-    print(type(config_data["adaption"]))
     # Plot the history plots for the chains
     if config_data["plot"]:
         history_plots(
             mcmc_chains,
-            config_data["output"],
+            config_data["output_dir"],
             [r"$\mu$", r"$\sigma$", r"$\xi$"],
         )
     # Log the acceptance rates
@@ -125,24 +123,24 @@ def cli_main(ctx, config):
     )
     # Burnin the chains!
     burnin = GR_result(
-        mcmc_chains,
-        config_data["output"],
-        [r"$\mu$", r"$\sigma$", r"$\xi$"],
-        config_data["adaption"],
-        config_data["plot"],
+        mcmc_chains=mcmc_chains,
+        params=[r"$\mu$", r"$\sigma$", r"$\xi$"],
+        t=config_data["adaption"],
+        output_dir=config_data["output_dir"],
+        plot=config_data["plot"],
     )
-    mcmc_chains = mcmc_chains[:][:][burnin:]
     # Thin the chains!
     lags = acf_result(
         mcmc_chains,
-        config_data["output"],
         [r"$\mu$", r"$\sigma$", r"$\xi$"],
+        burnin,
+        config_data["output_dir"],
         config_data["plot"],
     )
     # Calculate the final parameter pool
     params_analysis = final_params_pool(
         mcmc_chains,
-        config_data["output"],
+        config_data["output_dir"],
         burnin,
         lags,
         [r"$\mu$", r"$\sigma$", r"$\xi$"],
@@ -162,7 +160,7 @@ def cli_main(ctx, config):
         data_meas,
         max_params,
         params_analysis,
-        config_data["output"],
+        config_data["output_dir"],
         config_data["plot"],
     )
     # Output return levels
@@ -175,14 +173,14 @@ def cli_main(ctx, config):
         }
     )
     df = df.loc[[1, 2, 5, 10, 50, 100, 200]]
-    df.to_csv(config_data["output"] + "/return_levels.csv")
+    df.to_csv(config_data["output_dir"] + "/return_levels.csv")
     # Output the parameters
-    for i in range(len(mcmc_chains[0])):
-        with open(
-            config_data["ouptut"] + "/parameter-" + str(i + 1) + ".txt"
-        ) as f:
-            for j in range(len(mcmc_chains)):
-                f.write("CHAIN " + str(j + 1) + "\n\n\n")
-                f.write(mcmc_chains[j][i] + "\n\n")
+    # for i in range(len(mcmc_chains[0])):
+    #     with open(
+    #         config_data["output_dir"] + "/parameter-" + str(i + 1) + ".txt", "w"
+    #     ) as f:
+    #         for j in range(len(mcmc_chains)):
+    #             f.write("CHAIN " + str(j + 1) + "\n\n\n")
+    #             f.write(mcmc_chains[j][i] + "\n\n")
     # Log "All done!"
     logger = log(logger, "All done!", True)

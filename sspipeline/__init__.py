@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2018 The MUSSLES developers
+# Copyright 2018 The MUSSLES Developers
 #
 # This file is part of MUSSLES.
 #
@@ -25,7 +25,6 @@ from .cli import cli_main
 # ===============================================================================
 #         Distributions
 # ===============================================================================
-from .distributions import normal_logpost
 from .distributions import gev_logpost
 
 # ===============================================================================
