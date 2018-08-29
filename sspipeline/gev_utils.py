@@ -23,6 +23,7 @@ __all__ = ["logpost"]
 import scipy.stats as stats
 import numpy as np
 
+
 def loglikelihood(parameters, data):
     """
     Compute the log-likelihood of a GEV distribution

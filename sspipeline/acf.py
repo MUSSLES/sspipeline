@@ -26,6 +26,7 @@ import numpy as np
 plt.style.use("fivethirtyeight")
 COLORS = ["skyblue", "steelblue", "gray"]
 
+
 def ACF(X, end=200):
     N = len(X)
     acf = []
