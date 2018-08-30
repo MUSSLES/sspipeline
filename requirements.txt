@@ -1,8 +1,6 @@
 # Docs
 sphinx
 sphinx_bootstrap_theme
-# Formatting
-black
 # Testing
 nose
 # Actual Deps
