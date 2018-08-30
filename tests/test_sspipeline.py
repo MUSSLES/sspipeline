@@ -18,7 +18,9 @@
 # along with MUSSLES.  If not, see <http://www.gnu.org/licenses/>.
 import os
 
-os.system("curl -o tests/h765a.csv -# https://uhslc.soest.hawaii.edu/data/csv/rqds/atlantic/hourly/h765a.csv")
+os.system(
+    "curl -o tests/h765a.csv -# https://uhslc.soest.hawaii.edu/data/csv/rqds/atlantic/hourly/h765a.csv"
+)
 os.system("mkdir -p tests/output/")
 os.system("sspipeline --config tests/config.json")
 os.system("rm tests/h765a.csv")
