@@ -15,7 +15,7 @@ To get the bleeding edge version, download the repository and run `pip install .
 
 ### Repository Status
 
-[![Travis CI](https://travis-ci.org/MUSSLES/pipeline.svg?branch=master)](https://travis-ci.org/MUSSLES/pipeline)
+[![Travis CI](https://travis-ci.org/MUSSLES/sspipeline.svg?branch=master)](https://travis-ci.org/MUSSLES/sspipeline)
 
 ### Example Usage
 
