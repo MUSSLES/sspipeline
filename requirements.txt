@@ -3,11 +3,8 @@ sphinx
 sphinx_bootstrap_theme
 # Formatting
 black
-pycodestyle
 # Testing
-pytest
-pytest-cov
-coveralls
+nose
 # Actual Deps
 click
 numpy

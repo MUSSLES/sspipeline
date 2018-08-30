@@ -80,7 +80,7 @@ def cli_main(ctx, config):
         filemode="w",
     )
     logger = logging.getLogger()
-    # logger.setLevel(logging.INFO)
+    logger.setLevel(logging.INFO)
     # Log where the configuration file is at
     logger = log(
         logger,

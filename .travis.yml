@@ -1,23 +1,19 @@
 language: python
 python:
+  - "2.7"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
   - "3.6"
-
 sudo: false
+cache: pip
 
 install:
   - "pip install . -r requirements.txt"
 
-before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3
 script:
-  - sspipeline --help
-  - sspipeline --version
-  - bash tests/test_pipeline.sh
-  - cat tests/output/sspipeline.log
-  - black *.py -l 79 --check; black */*.py -l 79 --check
-  - pycodestyle *.py --format=pylint --verbose; pycodestyle */*.py --format=pylint --verbose
+  - nosetests
   - sphinx-apidoc -fo docs/source sspipeline
   - sphinx-build -b html docs/source docs/build
 

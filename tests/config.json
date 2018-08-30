@@ -1,11 +1,12 @@
 {
-    "verbose": 1,
-    "data": "h765a.csv",
-    "iterations": 3000,
-    "transition": [
-        10,
-        2,
-        0.01
-    ],
-    "plot": 0
+  "output_dir": "tests/output",
+  "verbose": 1,
+  "data": "tests/h765a.csv",
+  "iterations": 3000,
+  "transition": [
+    10,
+    2,
+    0.01
+  ],
+  "plot": 0
 }
