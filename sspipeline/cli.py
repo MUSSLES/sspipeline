@@ -45,10 +45,6 @@ from .utils import log
 
 from .version import __version__
 
-plt.style.use("fivethirtyeight")
-COLORS = ["skyblue", "steelblue", "gray"]
-ALPHAS = [1.0, 1.0, 0.45]
-
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.version_option(version=__version__)
@@ -112,9 +108,9 @@ def cli_main(ctx, config):
     # Plot the history plots for the chains
     if config_data["plot"]:
         history_plots(
-            mcmc_chains,
-            config_data["output_dir"],
-            [r"$\mu$", r"$\sigma$", r"$\xi$"],
+            mcmc_chains=mcmc_chains,
+            params=[r"$\mu$", r"$\sigma$", r"$\xi$"],
+            output_dir=config_data["output_dir"],
         )
     # Log the acceptance rates
     logger = log(

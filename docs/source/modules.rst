@@ -1,7 +1,7 @@
-pipeline
-========
+sspipeline
+==========
 
 .. toctree::
    :maxdepth: 4
 
-   pipeline
+   sspipeline

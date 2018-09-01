@@ -25,9 +25,9 @@ from .utils import log
 
 
 # Some settings
-plt.style.use("fivethirtyeight")
-COLORS = ["skyblue", "steelblue", "gray"]
-ALPHAS = [1.0, 1.0, 0.45]
+plt.style.use("seaborn")
+COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
+ALPHAS = [1.0, 1.0, 1.0]
 
 
 # Everything else!
@@ -137,20 +137,6 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
         np.percentile(data_meas, 75) - np.percentile(data_meas, 25)
     ) / 2
     shape_est = 0
-    gevfit = stats.genextreme.fit(data_meas, loc=loc_est, scale=scale_est)
-
-    if logpost([gevfit[1], gevfit[2], gevfit[0]], data_meas) > -np.inf:
-        loc_est, scale_est, shape_est = gevfit[1], gevfit[2], gevfit[0]
-
-    elif logpost([loc_est, scale_est, -0.1], data_meas) > -np.inf:
-        loc_est, scale_est, shape_est = loc_est, scale_est, -0.1
-
-    elif logpost([loc_est, scale_est, 0.1], data_meas) > -np.inf:
-        loc_est, scale_est, shape_est = loc_est, scale_est, 0.1
-
-    else:
-        loc_est, scale_est, shape_est = loc_est, scale_est, 0
-
     problems = []
     for i in range(m):
         ui = np.random.randint(low=loc_est, high=loc_est + 100)
@@ -170,7 +156,7 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
 
 
 # History plots
-def history_plots(mcmc_chains, output_dir, params, true_params=None):
+def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
     m = len(mcmc_chains)
     fig, ax = plt.subplots(nrows=1, ncols=len(params), figsize=(16, 6))
     fig.suptitle("History Plots", fontsize=20)
@@ -211,7 +197,7 @@ def final_params_pool(mcmc_chains, output_dir, burnin, lags, params, plot):
     if plot:
         fig, ax = plt.subplots(nrows=1, ncols=d, figsize=(16, 6))
         for i in range(d):
-            ax[i].hist(params_ana[i], color="steelblue")
+            ax[i].hist(params_ana[i], color="#34495e", edgecolor="white")
             ax[i].set_xlabel(params[i])
             ax[i].set_ylabel("Frequency")
             ax[i].grid(alpha=0.5)

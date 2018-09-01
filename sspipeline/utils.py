@@ -24,6 +24,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+plt.style.use("seaborn")
+
 # ===============================================================================
 #         Config Functions
 # ===============================================================================
@@ -141,14 +143,6 @@ def read_and_clean(
     )
     num_years = len(list(set(dfSL["year"])))
 
-    if plot:
-        fig, ax = plt.subplots(figsize=(14, 8))
-        ax.plot(dfSL["sealevel"], color="steelblue")
-        ax.set_title("Original Data Set", fontsize=20)
-        ax.set_xlabel("Time (in hours)", fontsize=16)
-        ax.set_ylabel("Sea level (in MM)", fontsize=16)
-        fig.savefig(output_dir + "/plots/original_data.png")
-
     fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()
     logger = log(
         logger, "the fill in value is {0}".format(float(fill_in)), verbose
@@ -159,10 +153,10 @@ def read_and_clean(
 
     if plot:
         fig, ax = plt.subplots(figsize=(12, 7))
-        ax.plot(dfSL["sealevel"], color="steelblue")
-        ax.set_title("Cleaned Data Set", fontsize=20)
-        ax.set_xlabel("Time (in hours)", fontsize=16)
-        ax.set_ylabel("Sea Level (in MM)", fontsize=16)
+        ax.plot(dfSL["year"], dfSL["sealevel"], "#34495e", lw=3)
+        ax.set_title("Hourly Sea Level Measurements", fontsize=20)
+        ax.set_xlabel("Time (years)", fontsize=16)
+        ax.set_ylabel("Sea Level (mm)", fontsize=16)
         fig.savefig(output_dir + "/plots/cleaned_data.png")
 
     n_hours = 365 * 24
@@ -192,6 +186,19 @@ def read_and_clean(
         ),
         verbose,
     )
+
+    if plot:
+        fig, ax = plt.subplots(figsize=(12, 7))
+        ax.hist(
+            x=data,
+            bins=np.linspace(min(data), max(data)),
+            color="#34495e",
+            edgecolor="white",
+        )
+        ax.set_title("Annual Max Sea Level", fontsize=20)
+        ax.set_xlabel("Annual Max Sea Level (mm)", fontsize=16)
+        ax.set_ylabel("Frequency", fontsize=16)
+        fig.savefig(output_dir + "/plots/annual_maximum.png")
 
     return data, logger
 
