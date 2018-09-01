@@ -143,7 +143,7 @@ def read_and_clean(
     )
     num_years = len(list(set(dfSL["year"])))
 
-    fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()
+    fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()[0]
     logger = log(
         logger, "the fill in value is {0}".format(float(fill_in)), verbose
     )
@@ -182,7 +182,7 @@ def read_and_clean(
     logger = log(
         logger,
         "the percentage of years that have enough data to use is {}%".format(
-            100 * len(data) / num_years
+            round(100 * len(data) / num_years, 2)
         ),
         verbose,
     )
