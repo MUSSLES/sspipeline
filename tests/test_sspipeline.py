@@ -22,5 +22,6 @@ os.system(
     "curl -o tests/h765a.csv -# https://uhslc.soest.hawaii.edu/data/csv/rqds/atlantic/hourly/h765a.csv"
 )
 os.system("mkdir -p tests/output/")
+os.system("mkdir -p tests/output/parameters/")
 os.system("sspipeline --config tests/config.json")
 os.system("rm tests/h765a.csv")
