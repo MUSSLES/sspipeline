@@ -23,14 +23,9 @@ import scipy.stats as stats
 
 from .utils import log
 
-
-# Some settings
 plt.style.use("seaborn")
 COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
-ALPHAS = [1.0, 1.0, 1.0]
 
-
-# Everything else!
 def update_mean(m, X):
     N = len(X[0])
     n = []
@@ -159,14 +154,13 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
 def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
     m = len(mcmc_chains)
     fig, ax = plt.subplots(nrows=1, ncols=len(params), figsize=(16, 6))
-    fig.suptitle("History Plots", fontsize=20)
+    fig.suptitle("History Plots", fontsize=14)
     for i in range(len(params)):
         for j in range(m):
             ax[i].plot(
                 mcmc_chains[j][i],
                 label="Sequence {0}".format(j + 1),
                 color=COLORS[j % 3],
-                alpha=ALPHAS[j % 3],
             )
         if true_params is not None:
             ax[i].plot(
@@ -177,8 +171,8 @@ def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
                 label=params[i] + " true value",
                 linewidth=2.5,
             )
-        ax[i].set_xlabel("Iteration", fontsize=16)
-        ax[i].set_ylabel(params[i] + " Trace", fontsize=16)
+        ax[i].set_xlabel("Iteration", fontsize=14)
+        ax[i].set_ylabel(params[i] + " Trace", fontsize=14)
         ax[i].legend(loc="best")
     fig.savefig(output_dir + "/plots/history_plots.png")
 

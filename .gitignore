@@ -102,3 +102,6 @@ src/
 
 # pesky DS_Stores
 .DS_Store
+
+# massive parameter files
+parameters/

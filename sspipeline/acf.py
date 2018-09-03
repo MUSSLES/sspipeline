@@ -23,8 +23,8 @@ __all__ = ["acf_result"]
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.style.use("fivethirtyeight")
-COLORS = ["skyblue", "steelblue", "gray"]
+plt.style.use("seaborn")
+COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 
 def ACF(X, end=200):
@@ -98,7 +98,7 @@ def acf_result(mcmc_chains, params, burnin, output_dir="output", plot=False):
                 ax[i].get_ylim(),
                 label="lag = {0}".format(lags[i]),
             )
-            ax[i].set_xlabel("Iag")
+            ax[i].set_xlabel("Lag")
             ax[i].set_ylabel("ACF")
             ax[i].set_title("Sequence {0}".format(i + 1))
             ax[i].legend(loc="best")

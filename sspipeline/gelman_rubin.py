@@ -24,7 +24,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 plt.style.use("seaborn")
-COLORS = ["skyblue", "steelblue", "gray"]
+COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 
 def GR_diag(parameter, interval=100, start=100):
@@ -153,9 +153,9 @@ def GR_result(
             label="burn in = {0}".format(burnin),
             color="black",
         )
-        ax.set_xlabel("Iteration", fontsize=16)
-        ax.set_ylabel("Potential Scale Reduction Fator", fontsize=16)
-        ax.set_title("Gelman & Rubin Diagnostic", fontsize=20)
+        ax.set_xlabel("Iteration", fontsize=14)
+        ax.set_ylabel("Potential Scale Reduction Fator", fontsize=14)
+        ax.set_title("Gelman & Rubin Diagnostic", fontsize=14)
         ax.legend(loc="best")
         fig.savefig(output_dir + "/plots/gr_diagnostic.png")
     return burnin

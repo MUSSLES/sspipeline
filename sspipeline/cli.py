@@ -169,7 +169,7 @@ def cli_main(ctx, config):
             "99.5%": percentile_995,
         }
     )
-    df = df.loc[[1, 2, 5, 10, 50, 100, 200]]
+    df = df.reindex([0, 1, 4, 9, 49, 99, 199, 499])
     df.to_csv(config_data["output_dir"] + "/return_levels.csv")
     # Output the parameters
     for i in range(len(mcmc_chains[0])):

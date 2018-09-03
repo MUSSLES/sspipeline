@@ -4,7 +4,7 @@ __copyright__ = (
 )
 __credits__ = ["Anthony E. Wong"]
 __license__ = "GPL"
-__version__ = "0.1.0.dev0"
+__version__ = "0.1"
 __maintainer__ = "John Letey"
 __email__ = "john.letey@colorado.edu"
 __status__ = "Development"

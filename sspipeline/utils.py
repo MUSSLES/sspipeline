@@ -154,9 +154,9 @@ def read_and_clean(
     if plot:
         fig, ax = plt.subplots(figsize=(12, 7))
         ax.plot(dfSL["year"], dfSL["sealevel"], "#34495e", lw=3)
-        ax.set_title("Hourly Sea Level Measurements", fontsize=20)
-        ax.set_xlabel("Time (years)", fontsize=16)
-        ax.set_ylabel("Sea Level (mm)", fontsize=16)
+        ax.set_title("Hourly Sea Level Measurements", fontsize=14)
+        ax.set_xlabel("Time (years)", fontsize=14)
+        ax.set_ylabel("Sea Level (mm)", fontsize=14)
         fig.savefig(output_dir + "/plots/cleaned_data.png")
 
     n_hours = 365 * 24
@@ -195,9 +195,9 @@ def read_and_clean(
             color="#34495e",
             edgecolor="white",
         )
-        ax.set_title("Annual Max Sea Level", fontsize=20)
-        ax.set_xlabel("Annual Max Sea Level (mm)", fontsize=16)
-        ax.set_ylabel("Frequency", fontsize=16)
+        ax.set_title("Annual Max Sea Level", fontsize=14)
+        ax.set_xlabel("Annual Max Sea Level (mm)", fontsize=14)
+        ax.set_ylabel("Frequency", fontsize=14)
         fig.savefig(output_dir + "/plots/annual_maximum.png")
 
     return data, logger
