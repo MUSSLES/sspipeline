@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:52d4da557706d02f09cc1615d7d58ee952ccde5212084ea719e22aea3eeeaae8
-size 102
+# Docs
+sphinx
+sphinx_bootstrap_theme
+# Testing
+nose
+# Actual Deps
+click
+numpy
+pandas
+scipy
+matplotlib
