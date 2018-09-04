@@ -9,7 +9,7 @@ install:
 
 script:
   - nosetests
-  - cd docs; make html; make clean; cd ..
+  - cd docs; make html; cd ..
 
 deploy:
   provider: pages
@@ -27,7 +27,7 @@ deploy:
 
 matrix:
   allow_failures:
-    - script: cd docs; make html; make clean; cd ..
+    - script: cd docs; make html; cd ..
 
 notifications:
     slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis
