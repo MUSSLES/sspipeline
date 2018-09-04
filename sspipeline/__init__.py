@@ -17,7 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with MUSSLES.  If not, see <http://www.gnu.org/licenses/>.
 
-# ===============================================================================
-#         Command Line
-# ===============================================================================
-from .cli import cli_main
+from .__version__ import __version__
+
+from .cli import main

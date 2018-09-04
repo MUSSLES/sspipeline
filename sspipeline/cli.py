@@ -18,7 +18,7 @@
 # along with MUSSLES.  If not, see <http://www.gnu.org/licenses/>.
 
 # Tell module what it's allowed to import
-__all__ = ["cli_main"]
+__all__ = ["main"]
 
 import json
 import logging
@@ -43,7 +43,7 @@ from .utils import check_params
 from .utils import read_and_clean
 from .utils import log
 
-from .version import __version__
+from .__version__ import __version__
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -62,7 +62,7 @@ from .version import __version__
     help="Read configuration from PATH.",
 )
 @click.pass_context
-def cli_main(ctx, config):
+def main(ctx, config):
     """A pipeline for estimating and characterizing uncertainty in coastal storm surge levels"""
 
     # Read in the config file
@@ -136,12 +136,12 @@ def cli_main(ctx, config):
     )
     # Calculate the final parameter pool
     params_analysis = final_params_pool(
-        mcmc_chains,
-        config_data["output_dir"],
-        burnin,
-        lags,
-        [r"$\mu$", r"$\sigma$", r"$\xi$"],
-        config_data["plot"],
+        mcmc_chains=mcmc_chains,
+        burnin=burnin,
+        lags=lags,
+        params=[r"$\mu$", r"$\sigma$", r"$\xi$"],
+        output_dir=config_data["output_dir"],
+        plot=config_data["plot"],
     )
     # Find the maximum parameters
     max_params = max_ls_parameters(
@@ -174,12 +174,16 @@ def cli_main(ctx, config):
     # Output the parameters
     for i in range(len(mcmc_chains[0])):
         with open(
-            config_data["output_dir"] + "/parameters/parameter-" + str(i + 1) + ".txt", "w"
+            config_data["output_dir"]
+            + "/parameters/parameter-"
+            + str(i + 1)
+            + ".txt",
+            "w",
         ) as f:
             for j in range(len(mcmc_chains)):
                 f.write("CHAIN " + str(j + 1) + "\n")
                 f.write("==========\n\n")
                 for k in range(len(mcmc_chains[j][i])):
-                  f.write(str(mcmc_chains[j][i][k]) + "\n")
+                    f.write(str(mcmc_chains[j][i][k]) + "\n")
     # Log "All done!"
     logger = log(logger, "All done!", True)

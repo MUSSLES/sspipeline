@@ -5,18 +5,17 @@ sudo: false
 cache: pip
 
 install:
-  - "pip install . -r requirements.txt"
+  - "pip install ."
 
 script:
   - nosetests
-  - sphinx-apidoc -fo docs/source sspipeline
-  - sphinx-build -b html docs/source docs/build
+  - cd docs; make html; make clean; cd ..
 
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: docs/build
+  local_dir: docs/_build/html
   on:
     branch: master
 
@@ -28,8 +27,7 @@ deploy:
 
 matrix:
   allow_failures:
-    - script: sphinx-apidoc -fo docs/source sspipeline
-    - script: sphinx-build -b html docs/source docs/build
+    - script: cd docs; make html; make clean; cd ..
 
 notifications:
     slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis

@@ -1,16 +1,16 @@
-2018-09-03 17:34:46,220 the config file is located at tests/config.json
-2018-09-03 17:34:46,220 ==> CONFIG FILE PARAMETERS
-2018-09-03 17:34:46,220 ==> 	   adaption : 300
-2018-09-03 17:34:46,220 ==> 	       data : tests/h765a.csv
-2018-09-03 17:34:46,220 ==> 	 iterations : 3000
-2018-09-03 17:34:46,220 ==> 	 output_dir : tests/output
-2018-09-03 17:34:46,221 ==> 	 percentage : 0.9
-2018-09-03 17:34:46,221 ==> 	       plot : False
-2018-09-03 17:34:46,221 ==> 	  sequences : 3
-2018-09-03 17:34:46,221 ==> 	 transition : [10, 2, 0.01]
-2018-09-03 17:34:46,221 ==> 	    verbose : True
-2018-09-03 17:34:46,498 the fill in value is -32767.0
-2018-09-03 17:35:04,259 the percentage of years that have enough data to use is 89.19%
-2018-09-03 17:36:46,826 the acceptance rates for these Markov chains are: [0.33066666666666666, 0.23166666666666666, 0.374]
-2018-09-03 17:36:47,384 The parameters with max log-posterior score are: [547.3530817833886, 112.72918563569668, -0.5111179762834857]
-2018-09-03 17:37:26,601 All done!
+2018-09-04 16:36:58,562 the config file is located at tests/config.json
+2018-09-04 16:36:58,562 ==> CONFIG FILE PARAMETERS
+2018-09-04 16:36:58,563 ==> 	   adaption : 300
+2018-09-04 16:36:58,563 ==> 	       data : tests/h765a.csv
+2018-09-04 16:36:58,563 ==> 	 iterations : 3000
+2018-09-04 16:36:58,563 ==> 	 output_dir : tests/output
+2018-09-04 16:36:58,563 ==> 	 percentage : 0.9
+2018-09-04 16:36:58,563 ==> 	       plot : False
+2018-09-04 16:36:58,563 ==> 	  sequences : 3
+2018-09-04 16:36:58,563 ==> 	 transition : [10, 2, 0.01]
+2018-09-04 16:36:58,563 ==> 	    verbose : True
+2018-09-04 16:36:59,089 the fill in value is -32767.0
+2018-09-04 16:37:52,277 the percentage of years that have enough data to use is 89.19%
+2018-09-04 16:40:44,298 the acceptance rates for these Markov chains are: [0.30266666666666664, 0.31133333333333335, 0.309]
+2018-09-04 16:40:45,379 The parameters with max log-posterior score are: [552.370998025276, 113.05925963502226, -0.49059386357278634]
+2018-09-04 16:41:38,403 All done!

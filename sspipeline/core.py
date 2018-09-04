@@ -17,16 +17,30 @@
 # You should have received a copy of the GNU General Public License
 # along with MUSSLES.  If not, see <http://www.gnu.org/licenses/>.
 
+# Tell module what it's allowed to import
+__all__ = [
+    "runner",
+    "history_plots",
+    "final_params_pool",
+    "max_ls_parameters",
+    "diagnostic_plots",
+]
+
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
+from tqdm import tqdm
 
 from .utils import log
 
 plt.style.use("seaborn")
 COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
+
 def update_mean(m, X):
+    """
+    TODO!
+    """
     N = len(X[0])
     n = []
     for i in range(len(m)):
@@ -35,6 +49,9 @@ def update_mean(m, X):
 
 
 def update_cov(X, m, Ct, Sd, Id, eps):
+    """
+    TODO!
+    """
     m1 = update_mean(m, X)
     t = len(X[0]) - 1
     part1 = ((t - 1) / t) * Ct
@@ -51,6 +68,9 @@ def update_cov(X, m, Ct, Sd, Id, eps):
 def random_move(
     current_state, X, Ct, t, t0, stepsize, data_meas, logpost, m, S_d, I_d
 ):
+    """
+    TODO!
+    """
     if t <= t0:
         next_move = stats.multivariate_normal.rvs(current_state, stepsize)
         return next_move, logpost(next_move, data_meas), m, stepsize
@@ -68,6 +88,9 @@ def random_move(
 
 
 def adaptivemcmc(initial_state, n_iter, stepsize, data_meas, logpost, t0):
+    """
+    TODO!
+    """
     d = len(initial_state)
     I_d = np.identity(d)
     S_d = (2.4) ** 2 / d
@@ -83,7 +106,7 @@ def adaptivemcmc(initial_state, n_iter, stepsize, data_meas, logpost, t0):
     np.seterr(over="ignore")
     cov = stepsize
     m = []
-    for t in range(n_iter):
+    for t in tqdm(range(n_iter)):
         S += 1
         nextMove, nextValue, m, cov = random_move(
             current_state,
@@ -126,6 +149,9 @@ def adaptivemcmc(initial_state, n_iter, stepsize, data_meas, logpost, t0):
 
 
 def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
+    """
+    TODO!
+    """
     np.seterr(divide="ignore", invalid="ignore")
     loc_est = np.median(data_meas)
     scale_est = (
@@ -141,6 +167,7 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
         problems.append(theta)
     ar, mcmc_chains, ls = [], [], []
     for i in range(m):
+        print("INFO : Running Chain " + str(i + 1))
         parameters, l, r = adaptivemcmc(
             problems[i], n_iter, stepsize, data_meas, logpost, t
         )
@@ -152,6 +179,9 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
 
 # History plots
 def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
+    """
+    TODO!
+    """
     m = len(mcmc_chains)
     fig, ax = plt.subplots(nrows=1, ncols=len(params), figsize=(16, 6))
     fig.suptitle("History Plots", fontsize=14)
@@ -178,7 +208,12 @@ def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
 
 
 # Final Parameters Pool
-def final_params_pool(mcmc_chains, output_dir, burnin, lags, params, plot):
+def final_params_pool(
+    mcmc_chains, burnin, lags, params, output_dir="output", plot=False
+):
+    """
+    TODO!
+    """
     m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
     params_pool, params_ana = [], [[] for i in range(d)]
     for i in range(m):
@@ -201,6 +236,9 @@ def final_params_pool(mcmc_chains, output_dir, burnin, lags, params, plot):
 
 # Max Log-Posterior Score
 def max_ls_parameters(ls, mcmc_chains, logger, verbose):
+    """
+    TODO!
+    """
     max_indices = []
     maxs = []
     for i in range(len(mcmc_chains)):
@@ -223,7 +261,12 @@ def max_ls_parameters(ls, mcmc_chains, logger, verbose):
 
 
 # Diagnostic Plots
-def diagnostic_plots(data_meas, max_params, params_analysis, output_dir, plot):
+def diagnostic_plots(
+    data_meas, max_params, params_analysis, output_dir="output", plot=False
+):
+    """
+    TODO!
+    """
     RP = np.arange(1, 501, 1)
     RL = []
     RL_max = []

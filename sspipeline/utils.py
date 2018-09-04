@@ -106,7 +106,7 @@ def check_params(params):
 def read_and_clean(
     datafile,
     percentage,
-    output_dir="output/",
+    output_dir="output",
     logger=None,
     verbose=False,
     plot=False,

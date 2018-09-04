@@ -17,23 +17,69 @@
 # You should have received a copy of the GNU General Public License
 # along with MUSSLES.  If not, see <http://www.gnu.org/licenses/>.
 
-import setuptools
+import io
+import os
+from setuptools import setup, find_packages
 
-exec(open("sspipeline/version.py").read())  # grab version info
+NAME = "sspipeline"
+DESCRIPTION = "SSPipeline: A pipeline for estimating and characterizing uncertainty in coastal storm surge levels"
+MAINTAINER = "John Letey"
+MAINTAINER_EMAIL = "john.letey@colorado.edu"
+URL = "https://github.com/mussles/sspipeline"
+LICENSE = "GPL"
 
-with open("readme.md", "r") as f:
-    long_description = f.read()
 
-setuptools.setup(
-    name="sspipeline",
-    version=__version__,
-    author=__author__,
-    author_email=__email__,
-    description="A pipeline for estimating and characterizing uncertainty in coastal storm surge levels",
-    long_description=long_description,
+here = os.path.abspath(os.path.dirname(__file__))
+
+
+def read(path, encoding="utf-8"):
+    with io.open(path, encoding=encoding) as f:
+        content = f.read()
+    return content
+
+
+LONG_DESCRIPTION = read(os.path.join(here, "readme.md"))
+
+# Want to read in package version number from __version__.py
+about = {}
+with io.open(
+    os.path.join(here, "sspipeline", "__version__.py"), encoding="utf-8"
+) as f:
+    exec(f.read(), about)
+    VERSION = about["__version__"]
+
+setup(
+    name=NAME,
+    version=VERSION,
+    description=DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
-    license="GPLv3",
-    url="https://github.com/MUSSLES/sspipeline",
-    packages=["sspipeline"],
-    entry_points={"console_scripts": ["sspipeline=sspipeline:cli_main"]},
+    url=URL,
+    author=MAINTAINER,
+    author_email=MAINTAINER_EMAIL,
+    license=LICENSE,
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Environment :: Console",
+        "Intended Audience :: Science/Research",
+        "Topic :: Scientific/Engineering",
+        "License :: OSI Approved :: GPL License",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3.6",
+    ],
+    packages=find_packages(),
+    install_requires=[
+        "click",
+        "tqdm",
+        "numpy",
+        "pandas",
+        "scipy",
+        "matplotlib",
+        "h5netcdf",
+        "nose",
+        "sphinx",
+        "sphinx_rtd_theme",
+    ],
+    entry_points={"console_scripts": ["sspipeline=sspipeline:main"]},
+    setup_requires=["setuptools>=38.6.0"],
 )

@@ -1,5 +1,5 @@
 ---
-title: 'SSPipeline: a pipeline for estimating and characterizing uncertainty in coastal storm surge levels'
+title: 'SSPipeline: A pipeline for estimating and characterizing uncertainty in coastal storm surge levels'
 tags:
   - Python
   - storm surge

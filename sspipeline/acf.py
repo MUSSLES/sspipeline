@@ -28,6 +28,9 @@ COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 
 def ACF(X, end=200):
+    """
+    TODO!
+    """
     N = len(X)
     acf = []
     for a in range(0, end):
@@ -46,6 +49,9 @@ def ACF(X, end=200):
 
 
 def ACF(X, end=200):
+    """
+    TODO!
+    """
     N = len(X)
     acf = []
     for a in range(0, end):
@@ -64,6 +70,9 @@ def ACF(X, end=200):
 
 
 def acf_result(mcmc_chains, params, burnin, output_dir="output", plot=False):
+    """
+    TODO!
+    """
     lag_params, acf_params = [], []
     m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
     end = 100

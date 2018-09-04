@@ -97,7 +97,7 @@ ENV/
 .idea/
 
 #auto changing files
-build/
+_build/
 src/
 
 # pesky DS_Stores
