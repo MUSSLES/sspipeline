@@ -79,6 +79,7 @@ setup(
         "nose",
         "sphinx",
         "sphinx_rtd_theme",
+        "numpydoc",
     ],
     entry_points={"console_scripts": ["sspipeline=sspipeline:main"]},
     setup_requires=["setuptools>=38.6.0"],
