@@ -181,9 +181,12 @@ def main(ctx, config):
             "w",
         ) as f:
             for j in range(len(mcmc_chains)):
-                f.write("CHAIN " + str(j + 1) + "\n")
+                if j == 0:
+                    f.write("CHAIN " + str(j + 1) + "\n")
+                else:
+                    f.write("\n\nCHAIN " + str(j + 1) + "\n")
                 f.write("==========\n\n")
-                for k in range(len(mcmc_chains[j][i])):
+                for k in range(burnin, len(mcmc_chains[j][i]), lags[i]):
                     f.write(str(mcmc_chains[j][i][k]) + "\n")
     # Log "All done!"
     logger = log(logger, "All done!", True)

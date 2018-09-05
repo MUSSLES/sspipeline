@@ -167,7 +167,7 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
         problems.append(theta)
     ar, mcmc_chains, ls = [], [], []
     for i in range(m):
-        print("INFO : Running Chain " + str(i + 1))
+        print("INFO : running Chain " + str(i + 1))
         parameters, l, r = adaptivemcmc(
             problems[i], n_iter, stepsize, data_meas, logpost, t
         )
@@ -254,7 +254,7 @@ def max_ls_parameters(ls, mcmc_chains, logger, verbose):
         max_params.append(mcmc_chains[seqi][i][iterj])
     logger = log(
         logger,
-        "The parameters with max log-posterior score are: " + str(max_params),
+        "the parameters with max log-posterior score are: " + str(max_params),
         verbose,
     )
     return max_params

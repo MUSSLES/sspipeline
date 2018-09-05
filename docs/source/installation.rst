@@ -48,6 +48,5 @@ SSPipeline has the following dependencies:
 - `pandas <http://pandas.pydata.org/pandas-docs/stable/>`_
 - `SciPy <https://www.scipy.org/>`_
 - `matplotlib <http://matplotlib.org/>`_
-- `h5netcdf <https://github.com/shoyer/h5netcdf>`_
 
 You can use ``pip`` or ``conda`` to install these automatically.

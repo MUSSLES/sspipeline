@@ -75,7 +75,6 @@ setup(
         "pandas",
         "scipy",
         "matplotlib",
-        "h5netcdf",
         "nose",
         "sphinx",
         "sphinx_rtd_theme",
