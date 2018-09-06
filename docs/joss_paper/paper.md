@@ -7,7 +7,7 @@ tags:
   - sea level
   - climate impacts
 authors:
-  - name: John Letey
+  - name: John M. Letey
     affiliation: 1
     email: john.letey@colorado.edu
   - name: Mingxuan Zhang
