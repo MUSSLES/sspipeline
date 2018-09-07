@@ -1,4 +1,4 @@
-# SSPipeline v0.1.dev0
+# SSPipeline v0.1.dev0 [![Travis CI](https://travis-ci.org/MUSSLES/sspipeline.svg?branch=master)](https://travis-ci.org/MUSSLES/sspipeline) ![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
 ## Synopsis
 
@@ -34,11 +34,30 @@ This project is in early stages of development and there will be bugs. Many meth
 
 ## Motivation
 
-The motivation for the SSPipeline is detailed in the [paper](https://github.com/MUSSLES/sspipeline/blob/master/docs/joss_paper/paper.pdf):
+The motivation for the SSPipeline is detailed in the [project paper](https://github.com/MUSSLES/sspipeline/blob/master/docs/joss_paper/paper.pdf):
 
-    Effective management of coastal risks demands projections of flood hazards that account for a wide variety of potential sources of uncertainty. Two typical approaches for estimating flood hazards include (1) direct physical process-based modeling of the storms themselves, and (2) statistical modeling of the distributions and relevant characteristics of extreme sea level events. Recently, flexible and efficient mechanistically-motivated models for sea-level change have become widely used for characterizing uncertainty in projections of mean sea levels (Oppenheimer & Alley, 2016). Although the information obtained from modeling mean sea levels if useful, there is also a need for additional research for measuring extreme sea levels. The above, is a motivating factor in the focus within the SSPipeline (Storm Surge Pipeline) project, which characterizes uncertainty in estimates of extreme sea levels, using a statistical modeling approach. Specifically, the SSPipeline project includes processes for raw sea level data and fits a statistical distribution to the extreme sea levels, which permits estimation of the probabilities associated with extreme sea levels.
+    Effective management of coastal risks demands projections of flood hazards that account for
+    a wide variety of potential sources of uncertainty. Two typical approaches for estimating
+    flood hazards include (1) direct physical process-based modeling of the storms themselves,
+    and (2) statistical modeling of the distributions and relevant characteristics of extreme
+    sea level events. Recently, flexible and efficient mechanistically-motivated models for sea-
+    level change have become widely used for characterizing uncertainty in projections of mean
+    sea levels (Oppenheimer & Alley, 2016). Although the information obtained from modeling mean
+    sea levels if useful, there is also a need for additional research for measuring extreme sea
+    levels. The above, is a motivating factor in the focus within the SSPipeline (Storm Surge
+    Pipeline) project, which characterizes uncertainty in estimates of extreme sea levels, using
+    a statistical modeling approach. Specifically, the SSPipeline project includes processes for
+    raw sea level data and fits a statistical distribution to the extreme sea levels, which
+    permits estimation of the probabilities associated with extreme sea levels.
 
-    To satisfy the demand for fast estimation of flood hazard and characterization of uncertainty, we implemented an API that only requires a user to configure a text file, which includes arguments for the tide gauge data set, some statistical modeling paramters, and output options. The the program will run, from a single terminal command, resulting in a suite of calibration and diagnostic routines. Importantly, the output consists of a set of diagnostic plots, data sets of calibrated parameters, and storm surge return level estimates. Secondly, the program is modular so that developers can extend the options for statistical modeling or calibrate the methods employed if they so choose.
+    To satisfy the demand for fast estimation of flood hazard and characterization of
+    uncertainty, we implemented an API that only requires a user to configure a text file, which
+    includes arguments for the tide gauge data set, some statistical modeling paramters, and
+    output options. The the program will run, from a single terminal command, resulting in a
+    suite of calibration and diagnostic routines. Importantly, the output consists of a set of
+    diagnostic plots, data sets of calibrated parameters, and storm surge return level
+    estimates. Secondly, the program is modular so that developers can extend the options for
+    statistical modeling or calibrate the methods employed if they so choose.
 
 ## Installation
 
@@ -46,7 +65,9 @@ The motivation for the SSPipeline is detailed in the [paper](https://github.com/
 
 Disclaimer: Since this project is still in the developmental stage, and we are not updating the package on PyPi as much as we would like to, so this way of installation might be a bit old (being impatient always has it's downsides):
 
-    pip install sspipeline
+```sh
+pip install sspipeline
+```
 
 ### Longer-term support
 
@@ -54,22 +75,23 @@ Note that since we're still developing SSPipeline,
 
 To obtain the codes:
 
-    git clone https://github.com/mussles/sspipeline.git
-
+```sh
+git clone https://github.com/mussles/sspipeline.git
+```
 
 Next, you have two choices: 1) you can install SSPipeline permanently, this can be nice, although you can't edit the code; or 2) you can install the source code in editable form, so that the command line tool automatically reloads whenever you edit any code. For option 1:
 
-    pip install .
+```sh
+pip install .
+```
 
 For option 2:
 
-    pip install -e .
+```sh
+pip install -e .
+```
 
 Please note that you don't have to use `pip`, and if you are using python 3.x, we sugjest use `pip3` instead.
-
-## Repository Status
-
-[![Travis CI](https://travis-ci.org/MUSSLES/sspipeline.svg?branch=master)](https://travis-ci.org/MUSSLES/sspipeline)
 
 ## Code Example: Projecting sea level for Grande Isle, Louisiana, USA
 
