@@ -1,14 +1,15 @@
-# SSPipeline v0.1.dev0 [![Travis CI](https://travis-ci.org/MUSSLES/sspipeline.svg?branch=master)](https://travis-ci.org/MUSSLES/sspipeline) ![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
+# SSPipeline v0.1.dev0 [![Travis CI](https://travis-ci.org/MUSSLES/sspipeline.svg?branch=master)](https://travis-ci.org/MUSSLES/sspipeline) ![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg?style=flat-square) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/ambv/black)
 
 ## Synopsis
 
 TODO
 
-### An important note:
+### Important Notes:
 
-This project is in early stages of development and there will be bugs. Many methods must be used with care and could be improved significantly. The developers take no responsibility for inappropriate application of the code or incorrect conclusions drawn as a result of their application. Users must take responsibility for ensuring results obtained are sensible. We hope that by releasing the code at this stage the community can move forward more quickly together.
+- This project is in early stages of development and there will be bugs. Many methods must be used with care and could be improved significantly. The developers take no responsibility for inappropriate application of the code or incorrect conclusions drawn as a result of their application. Users must take responsibility for ensuring results obtained are sensible. We hope that by releasing the code at this stage the community can move forward more quickly together.
+- This project is **only** tested on Python 3.6! It can possibly work on other Python versions, but please use at your own risk!
 
-## Directory structure
+## Directory Structure
 
 ./
 
@@ -61,7 +62,7 @@ The motivation for the SSPipeline is detailed in the [project paper](https://git
 
 ## Installation
 
-### For the impatient
+### For the Impatient
 
 Disclaimer: Since this project is still in the developmental stage, and we are not updating the package on PyPi as much as we would like to, so this way of installation might be a bit old (being impatient always has it's downsides):
 
@@ -69,7 +70,7 @@ Disclaimer: Since this project is still in the developmental stage, and we are n
 pip install sspipeline
 ```
 
-### Longer-term support
+### Longer-term Support
 
 Note that since we're still developing SSPipeline, 
 
@@ -91,7 +92,7 @@ For option 2:
 pip install -e .
 ```
 
-Please note that you don't have to use `pip`, and if you are using python 3.x, we sugjest use `pip3` instead.
+Disclaimer: You might have to use `pip3` instead of `pip`.
 
 ## Code Example: Projecting sea level for Grande Isle, Louisiana, USA
 
