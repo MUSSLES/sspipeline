@@ -350,8 +350,8 @@ def diagnostic_plots(
             color="steelblue",
         )
         ax[0, 1].set_title("Quantile Plot", fontsize=14)
-        ax[0, 1].set_xlabel("Model (in MM)", fontsize=14)
-        ax[0, 1].set_ylabel("Empirical (in MM)", fontsize=14)
+        ax[0, 1].set_xlabel("Model (millimeters)", fontsize=14)
+        ax[0, 1].set_ylabel("Empirical (millimeters)", fontsize=14)
         ax[0, 1].annotate(
             "B", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
         )
@@ -394,8 +394,8 @@ def diagnostic_plots(
         ax[1, 0].set_xticks(np.log10([1, 2, 5, 10, 20, 100, 200, 500]))
         ax[1, 0].set_xticklabels([1, 2, 5, 10, 20, 100, 200, 500])
         ax[1, 0].set_title("Return Level Plot", fontsize=14)
-        ax[1, 0].set_xlabel("Return Period (in year)", fontsize=14)
-        ax[1, 0].set_ylabel("Return Level (in MM)", fontsize=14)
+        ax[1, 0].set_xlabel("Return Period (years)", fontsize=14)
+        ax[1, 0].set_ylabel("Return Level (millimeters)", fontsize=14)
         ax[1, 0].annotate(
             "C", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
         )
@@ -421,7 +421,7 @@ def diagnostic_plots(
         ax[1, 1].legend(loc="best", fontsize=10)
         ax[1, 1].set_yticklabels([])
         ax[1, 1].set_title("Density Plot", fontsize=14)
-        ax[1, 1].set_xlabel("Annual Max Sea Level (in MM)", fontsize=14)
+        ax[1, 1].set_xlabel("Annual Max Sea Level (millimeters)", fontsize=14)
         ax[1, 1].set_ylabel("Density", fontsize=14)
         ax[1, 1].annotate(
             "D", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30

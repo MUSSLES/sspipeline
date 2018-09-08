@@ -31,7 +31,7 @@ TODO
 
 ./tests/
 
-- the test(s) that Travis runs to make sure that everything is okay
+- the test that Travis runs to make sure that everything is okay
 
 ## Motivation
 
@@ -72,7 +72,7 @@ pip install sspipeline
 
 ### Longer-term Support
 
-Note that since we're still developing SSPipeline, 
+Note that since we're still developing SSPipeline,
 
 To obtain the codes:
 
@@ -92,11 +92,11 @@ For option 2:
 pip install -e .
 ```
 
-Disclaimer: You might have to use `pip3` instead of `pip`.
+Note: You might have to use `pip3` instead of `pip`.
 
-## Code Example: Projecting sea level for Grande Isle, Louisiana, USA
+## Code Example: Projecting sea level for Grand Isle, Louisiana, USA
 
-Below, is just showing you how to run the code in our [example repository](https://github.com/MUSSLES/sspipeline-example).
+Before you continue, make sure that you have SSPipeline installed. You can check this by typing `sspipeline --help`. Below, is just showing you how to run the code in our [example repository](https://github.com/MUSSLES/sspipeline-example).
 
 ```sh
 # clone the repository
@@ -104,13 +104,13 @@ git clone https://github.com/mussles/sspipeline-example.git
 # move to the example directory
 cd sspipeline-example
 # run the example
-bash run.sh run
-```  
+bash bootstrap.sh run
+```
 
 ## Citations
 
-If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. Until a specific publication is written about SSPipeline please cite the github URL: www.github.com/MUSSLES/sspipeline
+If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. Until a specific publication is written about SSPipeline please cite the GitHub URL: www.github.com/MUSSLES/sspipeline
 
 ## License Info
 
-This code is offered under the [GPLv3 License](LICENSE).
+This code is offered under the [GNU General Public License version 3](LICENSE).
