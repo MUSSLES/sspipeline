@@ -112,5 +112,5 @@ def acf_result(mcmc_chains, params, burnin, output_dir="output", plot=False):
             ax[i].set_title("Sequence {0}".format(i + 1))
             ax[i].legend(loc="best")
             ax[i].grid(alpha=0.5)
-        fig.savefig(output_dir + "/plots/ac_function.png")
+        fig.savefig(output_dir + "/plots/acf_function.png")
     return lags
