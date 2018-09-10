@@ -48,27 +48,6 @@ def ACF(X, end=200):
     return lag, acf
 
 
-def ACF(X, end=200):
-    """
-    TODO!
-    """
-    N = len(X)
-    acf = []
-    for a in range(0, end):
-        acf.append(np.corrcoef(X[a:], X[: N - a])[0][1])
-
-    lag = -1
-    for i in range(len(acf)):
-        if acf[i] <= 0.05:
-            lag = i
-            break
-    if lag == -1:
-        print(
-            "Please increase the value of the end parameter for this function"
-        )
-    return lag, acf
-
-
 def acf_result(mcmc_chains, params, burnin, output_dir="output", plot=False):
     """
     TODO!

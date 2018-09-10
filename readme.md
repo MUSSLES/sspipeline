@@ -1,4 +1,4 @@
-# SSPipeline v0.1.dev0 [![Travis CI](https://travis-ci.org/MUSSLES/sspipeline.svg?branch=master)](https://travis-ci.org/MUSSLES/sspipeline) ![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg?style=flat-square) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/ambv/black)
+# SSPipeline v0.1.dev0 <img alt="CI Build Status" src="https://img.shields.io/travis/MUSSLES/sspipeline/master.svg?style=flat-square&label=CI"> ![Python 3.6](https://img.shields.io/badge/python-3.6-blue.svg?style=flat-square) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/ambv/black)
 
 ## Synopsis
 
@@ -70,9 +70,7 @@ Disclaimer: Since this project is still in the developmental stage, and we are n
 pip install sspipeline
 ```
 
-### Longer-term Support
-
-Note that since we're still developing SSPipeline,
+### Bleeding Edge
 
 To obtain the codes:
 
@@ -94,9 +92,9 @@ pip install -e .
 
 Note: You might have to use `pip3` instead of `pip`.
 
-## Code Example: Projecting sea level for Grand Isle, Louisiana, USA
+## Code Example: Analyzing storm surges for Grand Isle, Louisiana, USA
 
-Before you continue, make sure that you have SSPipeline installed. You can check this by typing `sspipeline --help`. Below, is just showing you how to run the code in our [example repository](https://github.com/MUSSLES/sspipeline-example).
+Before you continue, make sure that you have SSPipeline installed. You can check this by typing `sspipeline --help`.
 
 ```sh
 # clone the repository
@@ -107,9 +105,9 @@ cd sspipeline-example
 bash bootstrap.sh run
 ```
 
-## Citations
+## Citation
 
-If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. Until a specific publication is written about SSPipeline please cite the GitHub URL: www.github.com/MUSSLES/sspipeline
+If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. At the moment, we are currently planning on submitting a paper to the Journal of Open Source Software (JOSS), but until a specific publication is written about SSPipeline, please cite the GitHub URL: www.github.com/MUSSLES/sspipeline
 
 ## License Info
 
