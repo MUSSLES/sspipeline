@@ -30,6 +30,14 @@ The [`bootstrap.sh`](bootstrap.sh) file is the script that you will want to run 
 bash bootstrap.sh --help
 ```
 
+If you want to just solely run the example:
+
+```sh
+bash bootstrap.sh run
+```
+
+Note that if you want to play around with the parameters with which the example uses to fit the data set, check out this [file](configs/config.json).
+
 ## Results
 
 **Diagnostic Plots:** [link](output/plots/diagnostic_plots.png)
