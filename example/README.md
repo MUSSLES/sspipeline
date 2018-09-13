@@ -2,7 +2,7 @@
 
 ## Motivation
 
-We at MUSSLES thought that it would be extremely useful, for the user, if there was a demo of a real world application of our SSPipeline package. So, we have put together an example which runs on the [Grand Isle, Louisiana, USA](https://uhslc.soest.hawaii.edu/rqds/atlantic/doc/qa765a.dmt) data set from the University of Hawaii Sea Level Center (UHSLC). We chose this data set because not only does it barely have any gaps, but it also only takes roughly 5 minutes to run the data set through the pipeline on an average computer.
+We at MUSSLES thought that it would be extremely useful, for the user of SSPipeline, if there was a demo for our SSPipeline package. So, we have put together an example which uses the [Grand Isle, Louisiana, USA](https://uhslc.soest.hawaii.edu/rqds/atlantic/doc/qa765a.dmt) data set from the University of Hawaii Sea Level Center (UHSLC). We chose this data set because not only does it barely have any gaps, but it also only takes roughly 5 minutes to run on an average computer.
 
 ## Directory Structure
 
@@ -36,7 +36,27 @@ If you want to just solely run the example:
 bash bootstrap.sh run
 ```
 
-Note that if you want to play around with the parameters with which the example uses to fit the data set, check out this [file](configs/config.json).
+Note that if you want to play around with the parameters with which the example uses to fit the data set, check out this [file](configs/config.json). See more in the [customization](#customization) section.
+
+## Customization
+
+A full blown configuration file for SSPipeline should look something along the lines of:
+
+```json
+{
+  "adaption": 300,
+  "data": "data/h765a.csv",
+  "iterations": 3000,
+  "output_dir": "output",
+  "percentage": 0.9,
+  "plot": 1,
+  "sequences": 3,
+  "transition": [10, 2, 0.01],
+  "verbose": 1
+}
+```
+
+You can change all of these configurations to fit your preferences, however, some of them have a more drastic effect on your output than others do. TODO
 
 ## Results
 
