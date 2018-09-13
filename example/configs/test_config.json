@@ -1,0 +1,11 @@
+{
+  "verbose": 1,
+  "data": "data/h765a.csv",
+  "iterations": 3000,
+  "transition": [
+    10,
+    2,
+    0.01
+  ],
+  "plot": 0
+}
