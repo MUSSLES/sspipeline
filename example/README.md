@@ -1,4 +1,4 @@
-# SSPipeline Example <img alt="CI Build Status" src="https://img.shields.io/travis/MUSSLES/sspipeline-example/master.svg?style=flat-square&label=CI">
+# SSPipeline Example
 
 ## Motivation
 
@@ -54,7 +54,3 @@ bash bootstrap.sh --help
 **Return Levels:** [link](output/return_levels.csv)
 
 **Log:** [link](output/sspipeline.log)
-
-## License Info
-
-This code is offered under the [GNU General Public License version 3](LICENSE).

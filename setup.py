@@ -38,13 +38,11 @@ def read(path, encoding="utf-8"):
     return content
 
 
-LONG_DESCRIPTION = read(os.path.join(here, "readme.md"))
+LONG_DESCRIPTION = read(os.path.join(here, "README.md"))
 
 # Want to read in package version number from __version__.py
 about = {}
-with io.open(
-    os.path.join(here, "sspipeline", "__version__.py"), encoding="utf-8"
-) as f:
+with io.open(os.path.join(here, "sspipeline", "__version__.py"), encoding="utf-8") as f:
     exec(f.read(), about)
     VERSION = about["__version__"]
 
