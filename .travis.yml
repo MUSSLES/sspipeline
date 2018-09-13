@@ -9,25 +9,19 @@ install:
 
 script:
   - cd example; bash bootstrap.sh test; cd ..
-  - cd docs; make html; cd ..
+  - cd doc; make html; cd ..
 
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: docs/_build/html
+  local_dir: doc/_build/html
   on:
     branch: master
 
-# deploy:
-#   provider: pypi
-#   user: "MingxuanZhang"
-#   password: "mussles-sspipeline"
-#   distributions: "sdist bdist_wheel"
-
 matrix:
   allow_failures:
-    - script: cd docs; make html; cd ..
+    - script: cd doc; make html; cd ..
 
 notifications:
     slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis

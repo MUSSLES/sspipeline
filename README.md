@@ -35,7 +35,7 @@ TODO
 
 ## Motivation
 
-The motivation for the SSPipeline is detailed in the [project paper](https://github.com/MUSSLES/sspipeline/blob/master/docs/joss_paper/paper.pdf):
+The motivation for the SSPipeline is detailed in the [project paper](https://github.com/MUSSLES/sspipeline/blob/master/doc/joss_paper/paper.pdf):
 
     Effective management of coastal risks demands projections of flood hazards that account for
     a wide variety of potential sources of uncertainty. Two typical approaches for estimating
@@ -94,16 +94,18 @@ Note: You might have to use `pip3` instead of `pip`.
 
 ## Code Example: Analyzing storm surges for Grand Isle, Louisiana, USA
 
-Before you continue, make sure that you have SSPipeline installed. You can check this by typing `sspipeline --help`.
+Before you continue, make sure that you have SSPipeline installed. You can check this by typing `sspipeline --help`. Make sure that you're in the home directory of this repository, in other words, where this files is located.
 
 ```sh
-# clone the repository
-git clone https://github.com/mussles/sspipeline-example.git
 # move to the example directory
-cd sspipeline-example
+cd example
 # run the example
 bash bootstrap.sh run
 ```
+
+### Things to do differently
+
+TODO
 
 ## Citation
 

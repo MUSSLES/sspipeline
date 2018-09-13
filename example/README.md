@@ -8,7 +8,7 @@ We at MUSSLES thought that it would be extremely useful, for the user, if there 
 
 ./
 
-- the SSPipeline Example "home" directory
+- example "home" directory
 
 ./configs/
 
@@ -16,7 +16,7 @@ We at MUSSLES thought that it would be extremely useful, for the user, if there 
 
 ./data/
 
-- directory for the data set
+- directory for the data set used in the example
 
 ./output/
 
