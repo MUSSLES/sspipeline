@@ -430,3 +430,23 @@ def diagnostic_plots(
         fig.savefig(output_dir + "/plots/diagnostic_plots.png")
 
     return percentile_05, percentile_5, percentile_95, percentile_995
+
+
+# Output fitted parameters
+def output_parameters(mcmc_chains, burnin, lags, output_dir="output"):
+    for i in range(len(mcmc_chains[0])):
+        with open(
+            output_dir
+            + "/parameters/parameter-"
+            + str(i + 1)
+            + ".txt",
+            "w",
+        ) as f:
+            for j in range(len(mcmc_chains)):
+                if j == 0:
+                    f.write("CHAIN " + str(j + 1) + "\n")
+                else:
+                    f.write("\n\nCHAIN " + str(j + 1) + "\n")
+                f.write("==========\n\n")
+                for k in range(burnin, len(mcmc_chains[j][i]), lags[i]):
+                    f.write(str(mcmc_chains[j][i][k]) + "\n")

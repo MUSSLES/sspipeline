@@ -27,6 +27,7 @@ import click
 import matplotlib.pyplot as plt
 import pandas as pd
 
+from .core import output_parameters
 from .core import diagnostic_plots
 from .core import final_params_pool
 from .core import history_plots
@@ -51,11 +52,7 @@ from .__version__ import __version__
 @click.option(
     "--config",
     type=click.Path(
-        exists=False,
-        file_okay=True,
-        dir_okay=False,
-        readable=True,
-        allow_dash=False,
+        exists=False, file_okay=True, dir_okay=False, readable=True, allow_dash=False
     ),
     default="config.json",
     show_default=1,
@@ -79,9 +76,7 @@ def main(ctx, config):
     logger.setLevel(logging.INFO)
     # Log where the configuration file is at
     logger = log(
-        logger,
-        "the config file is located at " + config,
-        config_data["verbose"],
+        logger, "the config file is located at " + config, config_data["verbose"]
     )
     # Put the config file into the log file
     logger.info("==> CONFIG FILE PARAMETERS")
@@ -144,16 +139,9 @@ def main(ctx, config):
         plot=config_data["plot"],
     )
     # Find the maximum parameters
-    max_params = max_ls_parameters(
-        ls, mcmc_chains, logger, config_data["verbose"]
-    )
+    max_params = max_ls_parameters(ls, mcmc_chains, logger, config_data["verbose"])
     # Diagnostic Plots
-    (
-        percentile_05,
-        percentile_5,
-        percentile_95,
-        percentile_995,
-    ) = diagnostic_plots(
+    (percentile_05, percentile_5, percentile_95, percentile_995) = diagnostic_plots(
         data_meas,
         max_params,
         params_analysis,
@@ -172,21 +160,11 @@ def main(ctx, config):
     df = df.reindex([0, 1, 4, 9, 49, 99, 199, 499])
     df.to_csv(config_data["output_dir"] + "/return_levels.csv")
     # Output the parameters
-    for i in range(len(mcmc_chains[0])):
-        with open(
-            config_data["output_dir"]
-            + "/parameters/parameter-"
-            + str(i + 1)
-            + ".txt",
-            "w",
-        ) as f:
-            for j in range(len(mcmc_chains)):
-                if j == 0:
-                    f.write("CHAIN " + str(j + 1) + "\n")
-                else:
-                    f.write("\n\nCHAIN " + str(j + 1) + "\n")
-                f.write("==========\n\n")
-                for k in range(burnin, len(mcmc_chains[j][i]), lags[i]):
-                    f.write(str(mcmc_chains[j][i][k]) + "\n")
+    output_parameters(
+        mcmc_chains=mcmc_chains,
+        burnin=burnin,
+        lags=lags,
+        output_dir=config_data["output_dir"],
+    )
     # Log "All done!"
     logger = log(logger, "All done!", True)

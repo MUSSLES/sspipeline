@@ -15,50 +15,27 @@ TODO
 
 - SSPipeline "home" directory
 
-./docs/
+./doc/
 
-- ./docs/joss_paper
+- ./doc/joss_paper
 
     - home to the SSPipeline JOSS paper (currently not submitted)
 
-- ./docs/source
+- ./doc/source
 
     - sphinx-doc source code for the SSPipeline documentation
+
+./example/
+
+- an example for SSPipeline
 
 ./sspipeline/
 
 - all the source code for SSPipeline
 
-./tests/
-
-- the test that Travis runs to make sure that everything is okay
-
 ## Motivation
 
-The motivation for the SSPipeline is detailed in the [project paper](https://github.com/MUSSLES/sspipeline/blob/master/doc/joss_paper/paper.pdf):
-
-    Effective management of coastal risks demands projections of flood hazards that account for
-    a wide variety of potential sources of uncertainty. Two typical approaches for estimating
-    flood hazards include (1) direct physical process-based modeling of the storms themselves,
-    and (2) statistical modeling of the distributions and relevant characteristics of extreme
-    sea level events. Recently, flexible and efficient mechanistically-motivated models for sea-
-    level change have become widely used for characterizing uncertainty in projections of mean
-    sea levels (Oppenheimer & Alley, 2016). Although the information obtained from modeling mean
-    sea levels if useful, there is also a need for additional research for measuring extreme sea
-    levels. The above, is a motivating factor in the focus within the SSPipeline (Storm Surge
-    Pipeline) project, which characterizes uncertainty in estimates of extreme sea levels, using
-    a statistical modeling approach. Specifically, the SSPipeline project includes processes for
-    raw sea level data and fits a statistical distribution to the extreme sea levels, which
-    permits estimation of the probabilities associated with extreme sea levels.
-
-    To satisfy the demand for fast estimation of flood hazard and characterization of
-    uncertainty, we implemented an API that only requires a user to configure a text file, which
-    includes arguments for the tide gauge data set, some statistical modeling paramters, and
-    output options. The the program will run, from a single terminal command, resulting in a
-    suite of calibration and diagnostic routines. Importantly, the output consists of a set of
-    diagnostic plots, data sets of calibrated parameters, and storm surge return level
-    estimates. Secondly, the program is modular so that developers can extend the options for
-    statistical modeling or calibrate the methods employed if they so choose.
+TODO
 
 ## Installation
 
@@ -109,7 +86,9 @@ TODO
 
 ## Citation
 
-If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. At the moment, we are currently planning on submitting a paper to the Journal of Open Source Software (JOSS), but until a specific publication is written about SSPipeline, please cite the GitHub URL: www.github.com/MUSSLES/sspipeline
+If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. At the moment, we are currently planning on submitting a paper to the Journal of Open Source Software (JOSS), but until a specific publication is written about SSPipeline, please cite the GitHub URL: www.github.com/MUSSLES/sspipeline.
+
+You can however check out a proof of the paper that we will be submitting to JOSS [here](https://github.com/MUSSLES/sspipeline/blob/master/doc/joss_paper/paper.pdf).
 
 ## License Info
 
