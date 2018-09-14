@@ -353,6 +353,7 @@ def diagnostic_plots(
         ax[0, 1].set_title("Quantile Plot", fontsize=14)
         ax[0, 1].set_xlabel("Model (millimeters)", fontsize=14)
         ax[0, 1].set_ylabel("Empirical (millimeters)", fontsize=14)
+        ax[0, 1].set_xlim(ax[0, 1].set_ylim()[0], ax[0, 1].set_ylim()[1])
         ax[0, 1].annotate(
             "B", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
         )
@@ -424,6 +425,7 @@ def diagnostic_plots(
         ax[1, 1].set_title("Density Plot", fontsize=14)
         ax[1, 1].set_xlabel("Annual Max Sea Level (millimeters)", fontsize=14)
         ax[1, 1].set_ylabel("Density", fontsize=14)
+        ax[1, 1].set_xlim(ax[0, 1].set_xlim()[0], ax[0, 1].set_xlim()[1])
         ax[1, 1].annotate(
             "D", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
         )
