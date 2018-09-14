@@ -1,0 +1,12 @@
+{
+  "verbose": 1,
+  "data": "data/h765a.csv",
+  "output_dir": "output/h765a/",
+  "iterations": 3000,
+  "transition": [
+    10,
+    2,
+    0.01
+  ],
+  "plot": 1
+}

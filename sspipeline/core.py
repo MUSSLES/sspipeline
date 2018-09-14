@@ -267,7 +267,8 @@ def diagnostic_plots(
     """
     TODO!
     """
-    RP = np.arange(1, 501, 1)
+    print(max_params)
+    RP = np.arange(2, 501, 1)
     RL = []
     RL_max = []
     percentile_95 = []
@@ -279,7 +280,7 @@ def diagnostic_plots(
         RL_max.append(
             stats.genextreme.ppf(
                 q=(1 - 1 / RP[i]),
-                c=max_params[2],
+                c=-max_params[2],
                 loc=max_params[0],
                 scale=max_params[1],
             )
@@ -288,7 +289,7 @@ def diagnostic_plots(
             RL[i].append(
                 stats.genextreme.ppf(
                     q=(1 - 1 / RP[i]),
-                    c=params_analysis[j][2],
+                    c=-params_analysis[j][2],
                     loc=params_analysis[j][0],
                     scale=params_analysis[j][1],
                 )
@@ -302,7 +303,7 @@ def diagnostic_plots(
     empirical = [
         stats.genextreme.ppf(
             q=(i + 1) / (len(data_meas) + 1),
-            c=max_params[2],
+            c=-max_params[2],
             loc=max_params[0],
             scale=max_params[1],
         )
@@ -311,7 +312,7 @@ def diagnostic_plots(
     cdf = [
         stats.genextreme.cdf(
             x=np.sort(data_meas)[i],
-            c=max_params[2],
+            c=-max_params[2],
             loc=max_params[0],
             scale=max_params[1],
         )
@@ -320,7 +321,7 @@ def diagnostic_plots(
     x_range = np.arange(0, max(data_meas) + 1, 0.5)
     y_range = [
         stats.genextreme.pdf(
-            x=xi, c=max_params[2], loc=max_params[0], scale=max_params[1]
+            x=xi, c=-max_params[2], loc=max_params[0], scale=max_params[1]
         )
         for xi in x_range
     ]
@@ -436,11 +437,7 @@ def diagnostic_plots(
 def output_parameters(mcmc_chains, burnin, lags, output_dir="output"):
     for i in range(len(mcmc_chains[0])):
         with open(
-            output_dir
-            + "/parameters/parameter-"
-            + str(i + 1)
-            + ".txt",
-            "w",
+            output_dir + "/parameters/parameter-" + str(i + 1) + ".txt", "w"
         ) as f:
             for j in range(len(mcmc_chains)):
                 if j == 0:

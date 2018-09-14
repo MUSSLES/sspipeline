@@ -52,7 +52,11 @@ from .__version__ import __version__
 @click.option(
     "--config",
     type=click.Path(
-        exists=False, file_okay=True, dir_okay=False, readable=True, allow_dash=False
+        exists=False,
+        file_okay=True,
+        dir_okay=False,
+        readable=True,
+        allow_dash=False,
     ),
     default="config.json",
     show_default=1,
@@ -76,7 +80,9 @@ def main(ctx, config):
     logger.setLevel(logging.INFO)
     # Log where the configuration file is at
     logger = log(
-        logger, "the config file is located at " + config, config_data["verbose"]
+        logger,
+        "the config file is located at " + config,
+        config_data["verbose"],
     )
     # Put the config file into the log file
     logger.info("==> CONFIG FILE PARAMETERS")
@@ -139,9 +145,16 @@ def main(ctx, config):
         plot=config_data["plot"],
     )
     # Find the maximum parameters
-    max_params = max_ls_parameters(ls, mcmc_chains, logger, config_data["verbose"])
+    max_params = max_ls_parameters(
+        ls, mcmc_chains, logger, config_data["verbose"]
+    )
     # Diagnostic Plots
-    (percentile_05, percentile_5, percentile_95, percentile_995) = diagnostic_plots(
+    (
+        percentile_05,
+        percentile_5,
+        percentile_95,
+        percentile_995,
+    ) = diagnostic_plots(
         data_meas,
         max_params,
         params_analysis,
@@ -157,7 +170,7 @@ def main(ctx, config):
             "99.5%": percentile_995,
         }
     )
-    df = df.reindex([0, 1, 4, 9, 49, 99, 199, 499])
+    df = df.reindex([0, 3, 8, 48, 98, 498])
     df.to_csv(config_data["output_dir"] + "/return_levels.csv")
     # Output the parameters
     output_parameters(

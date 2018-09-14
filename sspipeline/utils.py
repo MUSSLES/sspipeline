@@ -151,14 +151,6 @@ def read_and_clean(
     dfSL["sealevel"].replace(fill_in, np.nan, inplace=True)
     dfSL.dropna(inplace=True)
 
-    if plot:
-        fig, ax = plt.subplots(figsize=(12, 7))
-        ax.plot(dfSL["year"], dfSL["sealevel"], "#34495e", lw=3)
-        ax.set_title("Hourly Sea Level Measurements", fontsize=14)
-        ax.set_xlabel("Time (years)", fontsize=14)
-        ax.set_ylabel("Sea Level (millimeters)", fontsize=14)
-        fig.savefig(output_dir + "/plots/cleaned_data.png")
-
     n_hours = 365 * 24
     sl_year = {}
 
@@ -178,6 +170,14 @@ def read_and_clean(
             max_sl[year] = max(np.array(sealevel) - np.mean(sealevel))
 
     data = list(max_sl.values())
+
+    if plot:
+        fig, ax = plt.subplots(figsize=(12, 7))
+        ax.plot(max_sl.keys(), max_sl.values(), "#34495e")
+        ax.set_title("Hourly Sea Level Measurements", fontsize=14)
+        ax.set_xlabel("Time (years)", fontsize=14)
+        ax.set_ylabel("Sea Level (millimeters)", fontsize=14)
+        fig.savefig(output_dir + "/plots/cleaned_data.png")
 
     logger = log(
         logger,

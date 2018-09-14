@@ -27,10 +27,15 @@ __bootstrap() {
   run() {
     # Set up
     \mkdir -p output
-    \mkdir -p output/plots
-    \mkdir -p output/parameters
+    \mkdir -p output/h750a
+    \mkdir -p output/h750a/plots
+    \mkdir -p output/h750a/parameters
+    \mkdir -p output/h765a
+    \mkdir -p output/h765a/plots
+    \mkdir -p output/h765a/parameters
     # Run the pipeline
-    \sspipeline --config configs/config.json
+    \sspipeline --config configs/config_h750a.json
+    \sspipeline --config configs/config_h765a.json
   }
 
   # bootstrap test
