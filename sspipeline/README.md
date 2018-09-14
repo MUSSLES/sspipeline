@@ -34,4 +34,4 @@ TODO
 
 ## [`utils.py`](utils.py)
 
-TODO
+This file contains three functions, each of which are important to SSPipeline. The first function, [`check_params`](https://github.com/MUSSLES/sspipeline/blob/master/sspipeline/utils.py#L30%23L94), takes in the settings found in the configuration file, and parses them to make sure required parameters were passed in and also inserts common settings to optional parameters, not were not included in the configuration file. TODO

@@ -26,10 +26,6 @@ import matplotlib.pyplot as plt
 
 plt.style.use("seaborn")
 
-# ===============================================================================
-#         Config Functions
-# ===============================================================================
-
 
 def check_params(params):
     """
@@ -96,11 +92,6 @@ def check_params(params):
         new_params["plot"] = True
     # Return
     return new_params
-
-
-# ===============================================================================
-#         Data Functions
-# ===============================================================================
 
 
 def read_and_clean(
@@ -201,11 +192,6 @@ def read_and_clean(
         fig.savefig(output_dir + "/plots/annual_maximum.png")
 
     return data, logger
-
-
-# ===============================================================================
-#         Logging Functions
-# ===============================================================================
 
 
 def log(logger, message, verbose):
