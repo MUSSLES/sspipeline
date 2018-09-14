@@ -53,7 +53,7 @@ __bootstrap() {
     echo 'Usage:
   bootstrap.sh --version    # display the version number and exit
   bootstrap.sh --help       # display this text and exit
-  bootstrap.sh run          # run the example!
+  bootstrap.sh run          # run the examples
   bootstrap.sh test         # test the example (used by Travis CI)'
     echo
     echo 'What This Will Do:
