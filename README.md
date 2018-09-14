@@ -35,7 +35,7 @@ TODO
 
 ## Motivation
 
-TODO
+For a while now, sea-level rise has been gradually becoming a bigger and bigger deal. A lot of people often look at mean sea-levels to depict how much sea-levels are rising on average, but we wanted to look at extreme sea levels (a.k.a storm surges) over annual maxima blocks, because this is extremely helpful when determining how tall to build a levee.
 
 ## Installation
 
@@ -47,7 +47,7 @@ Disclaimer: Since this project is still in the developmental stage, and we are n
 pip install sspipeline
 ```
 
-### Bleeding Edge Version
+### Developmental Version
 
 To obtain the codes:
 
@@ -69,9 +69,11 @@ pip install -e .
 
 Note: You might have to use `pip3` instead of `pip`.
 
+You can check your installation this by running `sspipeline --help`.
+
 ## Code Example: Analyzing storm surges for Grand Isle, Louisiana, USA
 
-Before you continue, make sure that you have SSPipeline installed. You can check this by typing `sspipeline --help`.
+Before you run the following, make sure that you have the SSPipeline installed (see the [Installation](#installation) section above).
 
 ```sh
 # move to the example directory
@@ -80,11 +82,13 @@ cd example
 bash bootstrap.sh run
 ```
 
+If you want to know how to customize your SSPipeline configuration file, go [here](https://github.com/MUSSLES/sspipeline/tree/master/example#customization).
+
 ## Citation
 
 If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. At the moment, we are currently planning on submitting a paper to the Journal of Open Source Software (JOSS), but until a specific publication is written about SSPipeline, please cite the GitHub URL: www.github.com/MUSSLES/sspipeline.
 
-You can however check out a proof of the paper that we will be submitting to JOSS [here](https://github.com/MUSSLES/sspipeline/blob/master/doc/joss_paper/paper.pdf).
+Note: You can check out a draft of the paper that we will be submitting to JOSS [here](https://github.com/MUSSLES/sspipeline/blob/master/doc/joss_paper/paper.pdf).
 
 ## License Info
 

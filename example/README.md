@@ -36,7 +36,7 @@ If you want to just solely run the example:
 bash bootstrap.sh run
 ```
 
-Note that if you want to play around with the parameters with which the example uses to fit the data set, check out this [file](configs/config.json). See more in the [customization](#customization) section.
+Note that if you want to play around with the parameters with which the example uses to fit the data set, check out this [file](configs/config.json). See more in the [Customization](#customization) section.
 
 ## Customization
 
