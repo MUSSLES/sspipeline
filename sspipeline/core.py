@@ -262,7 +262,11 @@ def max_ls_parameters(ls, mcmc_chains, logger, verbose):
 
 # Diagnostic Plots
 def diagnostic_plots(
-    data_meas, max_params, params_analysis, output_dir="output", plot=False
+    data_meas,
+    max_params,
+    params_analysis,
+    output_dir="output",
+    plot=False,
 ):
     """
     TODO!
@@ -398,6 +402,8 @@ def diagnostic_plots(
         ax[1, 0].set_title("Return Level Plot", fontsize=14)
         ax[1, 0].set_xlabel("Return Period (years)", fontsize=14)
         ax[1, 0].set_ylabel("Return Level (millimeters)", fontsize=14)
+        if ax[1, 0].set_ylim()[1] > 10000:
+            ax[1, 0].set_ylim(0, 10000)
         ax[1, 0].annotate(
             "C", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
         )

@@ -95,12 +95,7 @@ def check_params(params):
 
 
 def read_and_clean(
-    datafile,
-    percentage,
-    output_dir="output",
-    logger=None,
-    verbose=False,
-    plot=False,
+    datafile, percentage, output_dir="output", logger=None, verbose=False, plot=False
 ):
     """
     Reads & cleans the dataset
@@ -135,9 +130,7 @@ def read_and_clean(
     num_years = len(list(set(dfSL["year"])))
 
     fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()[0]
-    logger = log(
-        logger, "the fill in value is {0}".format(float(fill_in)), verbose
-    )
+    logger = log(logger, "the fill in value is {0}".format(float(fill_in)), verbose)
 
     dfSL["sealevel"].replace(fill_in, np.nan, inplace=True)
     dfSL.dropna(inplace=True)
@@ -164,7 +157,7 @@ def read_and_clean(
 
     if plot:
         fig, ax = plt.subplots(figsize=(12, 7))
-        ax.plot(max_sl.keys(), max_sl.values(), "#34495e")
+        ax.scatter(list(max_sl.keys()), list(max_sl.values()), color="#34495e")
         ax.set_title("Hourly Sea Level Measurements", fontsize=14)
         ax.set_xlabel("Time (years)", fontsize=14)
         ax.set_ylabel("Sea Level (millimeters)", fontsize=14)

@@ -84,6 +84,7 @@ def acf_result(mcmc_chains, params, burnin, output_dir="output", plot=False):
             ax[i].plot(
                 [lags[i], lags[i]],
                 ax[i].get_ylim(),
+                color="black",
                 label="lag = {0}".format(lags[i]),
             )
             ax[i].set_xlabel("Lag")
