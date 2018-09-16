@@ -36,27 +36,7 @@ If you want to just solely run the example:
 bash bootstrap.sh run
 ```
 
-Note that if you want to play around with the parameters with which the example uses to fit the data set, check out this [file](configs/config.json). See more in the [Customization](#customization) section.
-
-## Customization
-
-A full blown configuration file for SSPipeline should look something along the lines of:
-
-```json
-{
-  "adaption": 300,
-  "data": "data/h765a.csv",
-  "iterations": 3000,
-  "output_dir": "output",
-  "percentage": 0.9,
-  "plot": 1,
-  "sequences": 3,
-  "transition": [10, 2, 0.01],
-  "verbose": 1
-}
-```
-
-You can change all of these configurations to fit your preferences, however, some of them have a more drastic effect on your output than others do. TODO
+Note that if you want to play around with the parameters with which the example uses to fit the data set, check out all three of the examples configurations files [here](configs).
 
 ## Results
 
