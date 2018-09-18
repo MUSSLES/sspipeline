@@ -12,7 +12,11 @@ This file contains the version of the command line tool. Nothing too important! 
 
 - [`ACF`](acf.py#L30%23L48)
 
+Helper function for `acf_result`
+
 - [`acf_result`](acf.py#L51%23L96)
+
+Obtains the lags for each parameter
 
 ## [`cli.py`](cli.py#L1)
 
@@ -46,17 +50,29 @@ This function implements the SSPipeline command line tool. It uses the [Click](h
 
 - [`GR_diag`](gelman_rubin.py#L30%23L47)
 
+Helper function to `GR_result`
+
 - [`psrf`](gelman_rubin.py#L50%23L93)
 
+Helper function to `GR_result`
+
 - [`GR_result`](gelman_rubin.py#L96%23L161)
+
+Obtains the maximum burnin for the chains
 
 ## [`gev_utils.py`](gev_utils.py#L1)
 
 - [`loglikelihood`](gev_utils.py#L27%23L52)
 
+This function implements the log-likelihood.
+
 - [`logprior`](gev_utils.py#L55%23L75)
 
+This function implements the prior distribution.
+
 - [`logpost`](gev_utils.py#L78%23L112)
+
+In this function, we add the the log-prior and log-likelihood together to obtain the log-posterior score.
 
 ## [`utils.py`](utils.py#L1)
 
