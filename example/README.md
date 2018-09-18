@@ -40,7 +40,7 @@ Note that if you want to play around with the parameters with which the example 
 
 ## Results
 
-### Wilmington, North Carolina, USA
+<details><summary>Wilmington, North Carolina, USA</summary>
 
 **Diagnostic Plots:** [link](output/h750a/plots/diagnostic_plots.png)
 
@@ -64,8 +64,9 @@ Note that if you want to play around with the parameters with which the example 
 **Return Levels:** [link](output/h750a/return_levels.csv)
 
 **Log:** [link](output/h750a/sspipeline.log)
+</details>
 
-### Grand Isle, Louisiana, USA
+<details><summary>Grand Isle, Louisiana, USA</summary>
 
 **Diagnostic Plots:** [link](output/h765a/plots/diagnostic_plots.png)
 
@@ -89,3 +90,4 @@ Note that if you want to play around with the parameters with which the example 
 **Return Levels:** [link](output/h765a/return_levels.csv)
 
 **Log:** [link](output/h765a/sspipeline.log)
+</details>
