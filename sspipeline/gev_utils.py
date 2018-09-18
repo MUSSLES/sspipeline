@@ -91,19 +91,6 @@ def logpost(parameters, data):
     Returns
     -------
     log_post : float
-
-    Examples
-    --------
-    >>> from pipeline.gev_utils import logpost
-    >>> import scipy.stats as stats
-    >>> params = (410, 100, -1)
-    >>> real_params = (400, 100, -0.4)
-    >>> data = stats.genextreme.rvs(loc=real_params[0],
-    ...                             scale=real_params[1],
-    ...                             c=real_params[2],
-    ...                             size=10)
-    >>> logpost(params, data)
-    -inf
     """
     pi = logprior(parameters)
     if pi == -np.inf:

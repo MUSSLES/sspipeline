@@ -8,7 +8,7 @@ Installation
 PyPI
 ----
 
-Since SSPipeline is still in development, PyPi won't be up to date with the latest changes, however, SSPipeline can be installed with ``pip``:
+Since SSPipeline is still in development, PyPi won't be up to date with the latest changes, however, you can still install using ``pip``:
 
 .. code-block:: bash
 
@@ -32,7 +32,8 @@ or you can fork the `SSPipeline GitHub repository <https://github.com/mussles/ss
 .. code-block:: bash
 
     git clone https://github.com/<your-username>/sspipeline.git
-    pip install sspipeline
+    cd sspipeline
+    pip install .
 
 
 ------------
@@ -49,4 +50,4 @@ SSPipeline has the following dependencies:
 - `SciPy <https://www.scipy.org/>`_
 - `matplotlib <http://matplotlib.org/>`_
 
-You can use ``pip`` or ``conda`` to install these automatically.
+When you install SSPipeline, these requirements are installed automatically.

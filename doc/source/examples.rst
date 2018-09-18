@@ -4,4 +4,4 @@
 Examples
 ********
 
-Please check out our `example repo <https://github.com/MUSSLES/sspipeline-example>`_ for a real world application of SSPipeline!
+We have two extremely useful and applicable examples for SSPipeline! You can check them out `here <https://github.com/MUSSLES/sspipeline/tree/master/example#readme>`_.
