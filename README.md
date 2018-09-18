@@ -1,4 +1,21 @@
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD022 -->
 # SSPipeline v0.1.dev0 ![CI Build Status](https://img.shields.io/travis/MUSSLES/sspipeline/master.svg?style=flat-square&label=CI) ![Python 3.6](https://img.shields.io/badge/Python-3.6-blue.svg?style=flat-square) [![Code style: black](https://img.shields.io/badge/Code%20Style-black-000000.svg?style=flat-square)](https://github.com/ambv/black)
+
+<details><summary>Table of Contents</summary>
+
+- [Synopsis](#synopsis)
+  - [Important Notes](#important-notes)
+- [Directory Structure](#directory-structure)
+- [Motivation](#motivation)
+- [Installation](#installation)
+  - [For the Impatient](#for-the-impatient)
+  - [Developmental Version](#developmental-version)
+- [Code Examples](#code-examples)
+- [Citation](#citation)
+- [License Info](#license-info)
+
+</details>
 
 ## Synopsis
 
@@ -57,7 +74,7 @@ Note: You might have to use `pip3` instead of `pip`.
 
 You can check your installation this by running `sspipeline --help`.
 
-## Code Example: Analyzing storm surges for Grand Isle, Louisiana, USA
+## Code Examples
 
 Before you run the following, make sure that you have the SSPipeline installed (see the [Installation](#installation) section above).
 
@@ -68,13 +85,13 @@ cd example
 bash bootstrap.sh run
 ```
 
-If you want to know how to customize your SSPipeline configuration file, go [here](https://github.com/MUSSLES/sspipeline/tree/master/example#customization).
+If you want to know how to customize your SSPipeline configuration file, go [here](example#customization).
 
 ## Citation
 
 If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. At the moment, we are currently planning on submitting a paper to the Journal of Open Source Software (JOSS), but until a specific publication is written about SSPipeline, please cite the GitHub URL: www.github.com/MUSSLES/sspipeline.
 
-Note: You can check out a draft of the paper that we will be submitting to JOSS [here](https://github.com/MUSSLES/sspipeline/blob/master/doc/joss_paper/paper.pdf).
+Note: You can check out a draft of the paper that we will be submitting to JOSS [here](doc/joss_paper/paper.pdf).
 
 ## License Info
 
