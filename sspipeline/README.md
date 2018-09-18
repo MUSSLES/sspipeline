@@ -10,28 +10,60 @@ This file contains the version of the command line tool. Nothing too important! 
 
 ## [`acf.py`](acf.py#L1)
 
-This code file implements the Auto Correlation Function, which was proposed by TODO.
+- [`ACF`](acf.py#L30%23L48)
 
-This file includes one major function, used throughout the analysis, with some of it's helper functions. See the function declaration [here](acf.py#L51%23L95).
+- [`acf_result`](acf.py#L51%23L96)
 
 ## [`cli.py`](cli.py#L1)
 
-This code file implements the SSPipeline command line tool. It uses the [Click](http://click.pocoo.org/) Python package to achieve this.
+- [`main`](cli.py#L62%23L170)
+
+This function implements the SSPipeline command line tool. It uses the [Click](http://click.pocoo.org/) Python package to achieve this.
 
 ## [`core.py`](core.py#L1)
 
-TODO
+- [`update_mean`](core.py#L40%23L48)
+
+- [`update_cov`](core.py#L51%23L65)
+
+- [`random_move`](core.py#L68%23L87)
+
+- [`adaptivemcmc`](core.py#L90%23L148)
+
+- [`runner`](core.py#L151%23L177)
+
+- [`history_plots`](core.py#L180%23L206)
+
+- [`final_params_pool`](core.py#L209%23L232)
+
+- [`max_ls_parameters`](core.py#L235%23L257)
+
+- [`diagnostic_plots`](core.py#L260%23L437)
+
+- [`output_parameters`](core.py#L440%23L452)
 
 ## [`gelman_rubin.py`](gelman_rubin.py#L1)
 
-This code file implements the Gelman & Rubin Diagnostic, which was proposed by Andrew Gelman and Donald B. Rubin in 1992  in their *Inference from Iterative Simulation Using Multiple Sequences* paper. TODO
+- [`GR_diag`](gelman_rubin.py#L30%23L47)
 
-This file includes one major function, used throughout the analysis, with some of it's helper functions. See the function declaration [here](gelman_rubin.py#L96%23L161).
+- [`psrf`](gelman_rubin.py#L50%23L93)
+
+- [`GR_result`](gelman_rubin.py#L96%23L161)
 
 ## [`gev_utils.py`](gev_utils.py#L1)
 
-TODO
+- [`loglikelihood`](gev_utils.py#L27%23L52)
+
+- [`logprior`](gev_utils.py#L55%23L75)
+
+- [`logpost`](gev_utils.py#L78%23L112)
 
 ## [`utils.py`](utils.py#L1)
 
-This file contains three functions, each of which are important to SSPipeline. The first function, [`check_params`](utils.py#L30%23L94), takes in the settings found in the configuration file, and parses them to make sure required parameters were passed in and also inserts common settings to optional parameters, not were not included in the configuration file. The next function, [`read_and_clean`](utils.py#L97%23L187), TODO. Last, but not least, [`log`](utils.py#L190%23L211), TODO.
+- [`check_params`](utils.py#L30%23L94)
+
+This function takes in the settings found in the configuration file, and parses them to make sure required parameters were passed in and also inserts common settings to optional parameters, not were not included in the configuration file.
+
+-  [`read_and_clean`](utils.py#L97%23L187)
+
+- [`log`](utils.py#L190%23L211)

@@ -52,9 +52,6 @@ def loglikelihood(parameters, data):
     return s
 
 
-# end function
-
-
 def logprior(parameters):
     """
     Compute the log-prior of a GEV distribution
@@ -76,9 +73,6 @@ def logprior(parameters):
         return -np.inf
     else:
         return mu_logpdf + np.log(1 / 10000) + shape_logpdf
-
-
-# end function
 
 
 def logpost(parameters, data):
@@ -116,6 +110,3 @@ def logpost(parameters, data):
         return -np.inf
     LL = loglikelihood(parameters, data)
     return LL + pi
-
-
-# end function

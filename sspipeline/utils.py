@@ -95,7 +95,12 @@ def check_params(params):
 
 
 def read_and_clean(
-    datafile, percentage, output_dir="output", logger=None, verbose=False, plot=False
+    datafile,
+    percentage,
+    output_dir="output",
+    logger=None,
+    verbose=False,
+    plot=False,
 ):
     """
     Reads & cleans the dataset
@@ -130,7 +135,9 @@ def read_and_clean(
     num_years = len(list(set(dfSL["year"])))
 
     fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()[0]
-    logger = log(logger, "the fill in value is {0}".format(float(fill_in)), verbose)
+    logger = log(
+        logger, "the fill in value is {0}".format(float(fill_in)), verbose
+    )
 
     dfSL["sealevel"].replace(fill_in, np.nan, inplace=True)
     dfSL.dropna(inplace=True)

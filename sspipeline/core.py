@@ -177,7 +177,6 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
     return mcmc_chains, ar, ls
 
 
-# History plots
 def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
     """
     TODO!
@@ -207,7 +206,6 @@ def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
     fig.savefig(output_dir + "/plots/history_plots.png")
 
 
-# Final Parameters Pool
 def final_params_pool(
     mcmc_chains, burnin, lags, params, output_dir="output", plot=False
 ):
@@ -234,7 +232,6 @@ def final_params_pool(
     return params_pool
 
 
-# Max Log-Posterior Score
 def max_ls_parameters(ls, mcmc_chains, logger, verbose):
     """
     TODO!
@@ -260,13 +257,8 @@ def max_ls_parameters(ls, mcmc_chains, logger, verbose):
     return max_params
 
 
-# Diagnostic Plots
 def diagnostic_plots(
-    data_meas,
-    max_params,
-    params_analysis,
-    output_dir="output",
-    plot=False,
+    data_meas, max_params, params_analysis, output_dir="output", plot=False
 ):
     """
     TODO!
@@ -441,7 +433,6 @@ def diagnostic_plots(
     return percentile_05, percentile_5, percentile_95, percentile_995
 
 
-# Output fitted parameters
 def output_parameters(mcmc_chains, burnin, lags, output_dir="output"):
     for i in range(len(mcmc_chains[0])):
         with open(
