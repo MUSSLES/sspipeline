@@ -3,15 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-SSPipeline
-==========
+SSPipeline (Storm Surge Pipeline)
+=================================
 
-.. image:: https://travis-ci.org/MUSSLES/sspipeline.svg?branch=master
+.. image:: https://img.shields.io/travis/MUSSLES/sspipeline/master.svg?style=flat-square&label=CI
     :target: https://travis-ci.org/MUSSLES/sspipeline
 
-TODO
-
-SSPipeline is released under the GPL v3 license.
+For a while now, sea-level rise has been gradually becoming a bigger and bigger deal. A lot of people often look at mean sea-levels to depict how much sea-levels are rising on average, but we wanted to look at extreme sea levels (a.k.a storm surges) over annual maxima blocks, because this is extremely helpful when determining how tall to build a levee.
 
 .. warning::
 
