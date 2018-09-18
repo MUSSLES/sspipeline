@@ -10,15 +10,15 @@ We thought that it would be extremely useful if there was a demo for our SSPipel
 
 - example "home" directory
 
-./configs/
+[`./configs/`](configs)
 
 - home of the different configuration files for the example
 
-./data/
+[`./data/`](data)
 
 - directory for the data set used in the example
 
-./output/
+[`./output/`](output)
 
 - output directory for the example
 

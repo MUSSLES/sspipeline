@@ -17,13 +17,7 @@ TODO
 
 [`./doc/`](doc)
 
-- [`./doc/joss_paper`](doc/joss_paper)
-
-  - home to the SSPipeline JOSS paper (currently not submitted)
-
-- [`./doc/source`](doc/source)
-
-  - sphinx-doc source code for the SSPipeline documentation
+- home to both the SSPipeline JOSS paper (currently not submitted) and the SSPipeline documentation source code.
 
 [`./example/`](example#readme)
 
