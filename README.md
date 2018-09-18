@@ -15,21 +15,21 @@ TODO
 
 - SSPipeline "home" directory
 
-./doc/
+[`./doc/`](doc)
 
-- ./doc/joss_paper
+- [`./doc/joss_paper`](doc/joss_paper)
 
   - home to the SSPipeline JOSS paper (currently not submitted)
 
-- ./doc/source
+- [`./doc/source`](doc/source)
 
   - sphinx-doc source code for the SSPipeline documentation
 
-./example/
+[`./example/`](example#readme)
 
 - an example for SSPipeline
 
-./sspipeline/
+[`./sspipeline/`](sspipeline#readme)
 
 - all the source code for SSPipeline
 
@@ -43,29 +43,21 @@ For a while now, sea-level rise has been gradually becoming a bigger and bigger 
 
 Disclaimer: Since this project is still in the developmental stage, and we are not updating the package on PyPi as much as we would like to, so this way of installation might be a bit old (being impatient always has it's downsides):
 
-```sh
-pip install sspipeline
-```
+    pip install sspipeline
 
 ### Developmental Version
 
 To obtain the codes:
 
-```sh
-git clone https://github.com/mussles/sspipeline.git
-```
+    git clone https://github.com/mussles/sspipeline.git
 
 Next, you can either install SSPipeline permanently to your computer or you can install SSPipeline in editable form, so that the command line tool automatically reloads whenever you edit any code. For the former option:
 
-```sh
-pip install .
-```
+    pip install .
 
 For the latter option:
 
-```sh
-pip install -e .
-```
+    pip install -e .
 
 Note: You might have to use `pip3` instead of `pip`.
 
