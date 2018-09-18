@@ -263,7 +263,6 @@ def diagnostic_plots(
     """
     TODO!
     """
-    print(max_params)
     RP = np.arange(2, 501, 1)
     RL = []
     RL_max = []
@@ -342,8 +341,8 @@ def diagnostic_plots(
 
         ax[0, 1].scatter(empirical, np.sort(data_meas), color="black")
         ax[0, 1].plot(
-            np.arange(0, max(empirical)),
-            np.arange(0, max(empirical)),
+            np.arange(0, max(data_meas)),
+            np.arange(0, max(data_meas)),
             color="steelblue",
         )
         ax[0, 1].set_title("Quantile Plot", fontsize=14)

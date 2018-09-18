@@ -1,16 +1,16 @@
-2018-09-15 12:15:12,342 the config file is located at configs/config_h750a.json
-2018-09-15 12:15:12,342 ==> CONFIG FILE PARAMETERS
-2018-09-15 12:15:12,343 ==> 	   adaption : 300
-2018-09-15 12:15:12,343 ==> 	       data : data/h750a.csv
-2018-09-15 12:15:12,343 ==> 	 iterations : 3000
-2018-09-15 12:15:12,343 ==> 	 output_dir : output/h750a/
-2018-09-15 12:15:12,343 ==> 	 percentage : 0.9
-2018-09-15 12:15:12,343 ==> 	       plot : True
-2018-09-15 12:15:12,343 ==> 	  sequences : 3
-2018-09-15 12:15:12,343 ==> 	 transition : [10, 2, 0.01]
-2018-09-15 12:15:12,343 ==> 	    verbose : True
-2018-09-15 12:15:13,061 the fill in value is -32767.0
-2018-09-15 12:15:49,405 the percentage of years that have enough data to use is 93.9%
-2018-09-15 12:20:16,722 the acceptance rates for these Markov chains are: [0.23233333333333334, 0.2773333333333333, 0.299]
-2018-09-15 12:20:18,476 the parameters with max log-posterior score are: [1030.499585219549, 115.22406578506201, 0.04673313744510785]
-2018-09-15 12:21:02,434 All done!
+2018-09-18 11:23:57,340 the config file is located at configs/config_h750a.json
+2018-09-18 11:23:57,341 ==> CONFIG FILE PARAMETERS
+2018-09-18 11:23:57,341 ==> 	   adaption : 300
+2018-09-18 11:23:57,341 ==> 	       data : data/h750a.csv
+2018-09-18 11:23:57,341 ==> 	 iterations : 3000
+2018-09-18 11:23:57,341 ==> 	 output_dir : output/h750a/
+2018-09-18 11:23:57,341 ==> 	 percentage : 0.9
+2018-09-18 11:23:57,341 ==> 	       plot : True
+2018-09-18 11:23:57,341 ==> 	  sequences : 3
+2018-09-18 11:23:57,341 ==> 	 transition : [10, 2, 0.01]
+2018-09-18 11:23:57,341 ==> 	    verbose : True
+2018-09-18 11:23:58,015 the fill in value is -32767.0
+2018-09-18 11:24:31,847 the percentage of years that have enough data to use is 93.9%
+2018-09-18 11:27:50,183 the acceptance rates for these Markov chains are: [0.19133333333333333, 0.25366666666666665, 0.23233333333333334]
+2018-09-18 11:27:51,739 the parameters with max log-posterior score are: [1027.9890082171191, 113.50963293820487, 0.03589795298898084]
+2018-09-18 11:28:29,461 All done!
