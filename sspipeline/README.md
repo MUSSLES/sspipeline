@@ -34,4 +34,4 @@ TODO
 
 ## [`utils.py`](utils.py#L1)
 
-This file contains three functions, each of which are important to SSPipeline. The first function, [`check_params`](utils.py#L30%23L94), takes in the settings found in the configuration file, and parses them to make sure required parameters were passed in and also inserts common settings to optional parameters, not were not included in the configuration file. TODO
+This file contains three functions, each of which are important to SSPipeline. The first function, [`check_params`](utils.py#L30%23L94), takes in the settings found in the configuration file, and parses them to make sure required parameters were passed in and also inserts common settings to optional parameters, not were not included in the configuration file. The next function, [`read_and_clean`](utils.py#L97%23L187), TODO. Last, but not least, [`log`](utils.py#L190%23L211), TODO.
