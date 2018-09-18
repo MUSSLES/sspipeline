@@ -1,14 +1,16 @@
 # SSPipeline Source Code
 
-## [`__init__.py`](__init__.py#L1)
+<details><summary><a href="__init__.py#L1">__init__.py</summary>
 
 This file is very minor to the actual proccess of the analysis of sea levels, and is only needed to build the Python package. TODO
+</details>
 
-## [`__version__.py`](__version__.py#L1)
+<details><summary><a href="__version__.py#L1">__version__.py</summary>
 
 This file contains the version of the command line tool. Nothing too important! TODO
+</details>
 
-## [`acf.py`](acf.py#L1)
+<details><summary><a href="acf.py#L1">acf.py</summary>
 
 - [`ACF`](acf.py#L30%23L48)
 
@@ -17,14 +19,16 @@ Helper function for `acf_result`
 - [`acf_result`](acf.py#L51%23L96)
 
 Obtains the lags for each parameter
+</details>
 
-## [`cli.py`](cli.py#L1)
+<details><summary><a href="cli.py#L1">cli.py</summary>
 
 - [`main`](cli.py#L62%23L170)
 
 This function implements the SSPipeline command line tool. It uses the [Click](http://click.pocoo.org/) Python package to achieve this.
+</details>
 
-## [`core.py`](core.py#L1)
+<details><summary><a href="core.py#L1">core.py</a></summary>
 
 - [`update_mean`](core.py#L40%23L48)
 
@@ -45,8 +49,9 @@ This function implements the SSPipeline command line tool. It uses the [Click](h
 - [`diagnostic_plots`](core.py#L260%23L437)
 
 - [`output_parameters`](core.py#L440%23L452)
+</details>
 
-## [`gelman_rubin.py`](gelman_rubin.py#L1)
+<details><summary><a href="gelman_rubin.py#L1">gelman_rubin.py</summary>
 
 - [`GR_diag`](gelman_rubin.py#L30%23L47)
 
@@ -59,8 +64,9 @@ Helper function to `GR_result`
 - [`GR_result`](gelman_rubin.py#L96%23L161)
 
 Obtains the maximum burnin for the chains
+</details>
 
-## [`gev_utils.py`](gev_utils.py#L1)
+<details><summary><a href="gev_utils.py#L1">gev_utils.py</summary>
 
 - [`loglikelihood`](gev_utils.py#L27%23L52)
 
@@ -73,8 +79,9 @@ This function implements the prior distribution.
 - [`logpost`](gev_utils.py#L78%23L112)
 
 In this function, we add the the log-prior and log-likelihood together to obtain the log-posterior score.
+</details>
 
-## [`utils.py`](utils.py#L1)
+<details><summary><a href="utils.py#L1">utils.py</summary>
 
 - [`check_params`](utils.py#L30%23L94)
 
@@ -83,3 +90,4 @@ This function takes in the settings found in the configuration file, and parses 
 -  [`read_and_clean`](utils.py#L97%23L187)
 
 - [`log`](utils.py#L190%23L211)
+</details>
