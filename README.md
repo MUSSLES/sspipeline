@@ -85,8 +85,6 @@ cd example
 bash bootstrap.sh run
 ```
 
-If you want to know how to customize your SSPipeline configuration file, go [here](example#customization).
-
 ## Citation
 
 If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. At the moment, we are currently planning on submitting a paper to the Journal of Open Source Software (JOSS), but until a specific publication is written about SSPipeline, please cite the GitHub URL: www.github.com/MUSSLES/sspipeline.

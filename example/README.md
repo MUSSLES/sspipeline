@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD022 -->
 # SSPipeline Example
 
 ## Motivation
