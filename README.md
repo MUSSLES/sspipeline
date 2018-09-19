@@ -1,5 +1,6 @@
 <!-- markdownlint-disable MD033 -->
 <!-- markdownlint-disable MD022 -->
+
 # SSPipeline v0.1.dev0 ![CI Build Status](https://img.shields.io/travis/MUSSLES/sspipeline/master.svg?style=flat-square&label=CI) ![Python 3.6](https://img.shields.io/badge/Python-3.6-blue.svg?style=flat-square) [![Code style: black](https://img.shields.io/badge/Code%20Style-black-000000.svg?style=flat-square)](https://github.com/ambv/black)
 
 <details><summary>Table of Contents</summary>

@@ -1,16 +1,19 @@
 <!-- markdownlint-disable MD033 -->
 <!-- markdownlint-disable MD032 -->
 <!-- markdownlint-disable MD022 -->
+
 # SSPipeline Source Code
 
 <details><summary><a href="__init__.py#L1">__init__.py</a></summary>
 
 This file is where Python goes whenever you want to run the pipeline. The pipeline wouldn't work without this!
+
 </details>
 
 <details><summary><a href="__version__.py#L1">__version__.py</a></summary>
 
 This file contains the version of the command line tool. Nothing too important!
+
 </details>
 
 <details><summary><a href="acf.py#L1">acf.py</a></summary>
@@ -24,11 +27,13 @@ Helper function for `acf_result`
 - [`acf_result`](acf.py#L51%23L96)
 
 Obtains the lags for each parameter
+
 </details>
 
 <details><summary><a href="cli.py#L1">cli.py</a></summary>
 
 This file contains the function [`main`](cli.py#L62%23L170), which implements the pipeline's command line tool. It uses the [Click](http://click.pocoo.org/) Python package to do this.
+
 </details>
 
 <details><summary><a href="core.py#L1">core.py</a></summary>
@@ -54,7 +59,7 @@ This file contains the following functions:
 - [`diagnostic_plots`](core.py#L260%23L437)
 
 - [`output_parameters`](core.py#L440%23L452)
-</details>
+  </details>
 
 <details><summary><a href="gelman_rubin.py#L1">gelman_rubin.py</a></summary>
 
@@ -71,6 +76,7 @@ Helper function to `GR_result`
 - [`GR_result`](gelman_rubin.py#L96%23L161)
 
 Obtains the maximum burnin for the chains
+
 </details>
 
 <details><summary><a href="gev_utils.py#L1">gev_utils.py</a></summary>
@@ -88,6 +94,7 @@ This function implements the prior distribution.
 - [`logpost`](gev_utils.py#L78%23L112)
 
 In this function, we add the the log-prior and log-likelihood together to obtain the log-posterior score.
+
 </details>
 
 <details><summary><a href="utils.py#L1">utils.py</a></summary>
@@ -101,4 +108,4 @@ This function takes in the settings found in the configuration file, and parses 
 - [`read_and_clean`](utils.py#L97%23L187)
 
 - [`log`](utils.py#L190%23L211)
-</details>
+  </details>
