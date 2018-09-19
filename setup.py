@@ -75,7 +75,6 @@ setup(
         "pandas",
         "scipy",
         "matplotlib",
-        "nose",
         "sphinx",
         "sphinx_rtd_theme",
         "numpydoc",
