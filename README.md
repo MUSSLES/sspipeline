@@ -4,10 +4,9 @@
 
 <details><summary>Table of Contents</summary>
 
-- [Synopsis](#synopsis)
+- [Motivation](#motivation)
   - [Important Notes](#important-notes)
 - [Directory Structure](#directory-structure)
-- [Motivation](#motivation)
 - [Installation](#installation)
   - [For the Impatient](#for-the-impatient)
   - [Developmental Version](#developmental-version)
@@ -17,9 +16,9 @@
 
 </details>
 
-## Synopsis
+## Motivation
 
-TODO
+For a while now, sea-level rise has been gradually becoming a bigger and bigger deal. A lot of people often look at mean sea-levels to depict how much sea-levels are rising on average, but we wanted to look at extreme sea levels (a.k.a storm surges) over annual maxima blocks. This work is extremely helpful for determining how tall to build a levee. With our work, you can determine the return levels for your sea level dataset.
 
 ### Important Notes
 
@@ -44,10 +43,6 @@ TODO
 
 - all the source code for SSPipeline
 
-## Motivation
-
-For a while now, sea-level rise has been gradually becoming a bigger and bigger deal. A lot of people often look at mean sea-levels to depict how much sea-levels are rising on average, but we wanted to look at extreme sea levels (a.k.a storm surges) over annual maxima blocks, because this is extremely helpful when determining how tall to build a levee.
-
 ## Installation
 
 ### For the Impatient
@@ -62,17 +57,15 @@ To obtain the codes:
 
     git clone https://github.com/mussles/sspipeline.git
 
-Next, you can either install SSPipeline permanently to your computer or you can install SSPipeline in editable form, so that the command line tool automatically reloads whenever you edit any code. For the former option:
+Next, you can install the pipeline via `pip`:
 
     pip install .
 
-For the latter option:
+You might have to use `pip3` instead of `pip`. Note that if you want to develop the pipeline, you'll want to install an editable version, so that the pipeline automatically reloads whenever you changes the codes:
 
     pip install -e .
 
-Note: You might have to use `pip3` instead of `pip`.
-
-You can check your installation this by running `sspipeline --help`.
+You can check your pipeline installation by running `sspipeline --help`.
 
 ## Code Examples
 
@@ -85,11 +78,13 @@ cd example
 bash bootstrap.sh run
 ```
 
+You can see exactly what this does [here](example#readme).
+
 ## Citation
 
 If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. At the moment, we are currently planning on submitting a paper to the Journal of Open Source Software (JOSS), but until a specific publication is written about SSPipeline, please cite the GitHub URL: www.github.com/MUSSLES/sspipeline.
 
-Note: You can check out a draft of the paper that we will be submitting to JOSS [here](doc/joss_paper/paper.pdf).
+You can check out a draft of the paper that we will be submitting to JOSS [here](doc/joss_paper/paper.pdf).
 
 ## License Info
 

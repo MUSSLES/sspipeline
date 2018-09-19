@@ -9,7 +9,7 @@ SSPipeline (Storm Surge Pipeline)
 .. image:: https://img.shields.io/travis/MUSSLES/sspipeline/master.svg?style=flat-square&label=CI
     :target: https://travis-ci.org/MUSSLES/sspipeline
 
-For a while now, sea-level rise has been gradually becoming a bigger and bigger deal. A lot of people often look at mean sea-levels to depict how much sea-levels are rising on average, but we wanted to look at extreme sea levels (a.k.a storm surges) over annual maxima blocks, because this is extremely helpful when determining how tall to build a levee.
+For a while now, sea-level rise has been gradually becoming a bigger and bigger deal. A lot of people often look at mean sea-levels to depict how much sea-levels are rising on average, but we wanted to look at extreme sea levels (a.k.a storm surges) over annual maxima blocks. This work is extremely helpful for determining how tall to build a levee. With our work, you can determine the return levels for your sea level dataset.
 
 .. warning::
 
