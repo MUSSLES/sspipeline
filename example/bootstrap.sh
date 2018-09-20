@@ -55,9 +55,6 @@ __bootstrap() {
   bootstrap.sh --help       # display this text and exit
   bootstrap.sh run          # run the examples
   bootstrap.sh test         # test the example (used by Travis CI)'
-    echo
-    echo 'What This Will Do:
-  TODO'
   }
 
   # bootstrap version
