@@ -79,9 +79,9 @@ cd example
 bash bootstrap.sh run
 ```
 
-<span style="color:red">
+---
 **HERE** is where we need a second code example that shows step-by-step ***explicitly*** everything that should be done in order to modify the config file and run a user's own customized case.
-</span>
+---
 
 You can see exactly what this does [here](example#readme).
 
