@@ -39,7 +39,10 @@ COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 def update_mean(m, X):
     """
-    TODO!
+    Online adaptation of the mean of the previous MCMC iterates. Used to
+    tune the MCMC proposal distribution.
+    See Haario et al (2001; https://projecteuclid.org/euclid.bj/1080222083) for
+    more information.
     """
     N = len(X[0])
     n = []
@@ -50,7 +53,10 @@ def update_mean(m, X):
 
 def update_cov(X, m, Ct, Sd, Id, eps):
     """
-    TODO!
+    Online adaptation of the covariance of the previous MCMC iterates. Used to
+    tune the MCMC proposal distribution.
+    See Haario et al (2001; https://projecteuclid.org/euclid.bj/1080222083) for
+    more information.
     """
     m1 = update_mean(m, X)
     t = len(X[0]) - 1
@@ -69,7 +75,11 @@ def random_move(
     current_state, X, Ct, t, t0, stepsize, data_meas, logpost, m, S_d, I_d
 ):
     """
-    TODO!
+    Proposal step of the Metropolis-Hastings algorithm. This is a multivariate
+    normal random draw, given the current Markov chain state and the covariance
+    matrix from the `update_cov` above.
+    Returns the proposed move and log-posterior score, to be used in the
+    Metropolis acceptance probability calculation in the main iteration.
     """
     if t <= t0:
         next_move = stats.multivariate_normal.rvs(current_state, stepsize)
@@ -89,7 +99,8 @@ def random_move(
 
 def adaptivemcmc(initial_state, n_iter, stepsize, data_meas, logpost, t0):
     """
-    TODO!
+    Simple adaptive Metropolis-Hastings iteration, as detailed by Haario et al
+    (2001; https://projecteuclid.org/euclid.bj/1080222083).
     """
     d = len(initial_state)
     I_d = np.identity(d)
@@ -150,7 +161,8 @@ def adaptivemcmc(initial_state, n_iter, stepsize, data_meas, logpost, t0):
 
 def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
     """
-    TODO!
+    Driver to run `m` separate simulations of the Adaptive Metropolis-Hastings
+    algorithm (`adaptivemcmc` above).
     """
     np.seterr(divide="ignore", invalid="ignore")
     loc_est = np.median(data_meas)
@@ -179,7 +191,8 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
 
 def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
     """
-    TODO!
+    Make history plots for the Markov chain output from the `adaptivemcmc`
+    simulations.
     """
     m = len(mcmc_chains)
     fig, ax = plt.subplots(nrows=1, ncols=len(params), figsize=(16, 6))
@@ -210,7 +223,13 @@ def final_params_pool(
     mcmc_chains, burnin, lags, params, output_dir="output", plot=False
 ):
     """
-    TODO!
+    Take the raw `adaptivemcmc` output, and apply the burn-in (denoting when we
+    have evidence that they have reached the stationary distribution) and the
+    thinning (lag; denoting how far apart Markov chain iterates must be before
+    we believe they are roughly independent draws from the posterior). Results
+    in a pool of concomitant parameter sets that represent independent samples
+    from the joint posterior distribution of the parameters, given the processed
+    tide gauge data.
     """
     m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
     params_pool, params_ana = [], [[] for i in range(d)]
@@ -234,7 +253,8 @@ def final_params_pool(
 
 def max_ls_parameters(ls, mcmc_chains, logger, verbose):
     """
-    TODO!
+    Determine the maximum log-posterior score set of parameters, from the
+    `mcmc_chains` output.
     """
     max_indices = []
     maxs = []
@@ -261,7 +281,19 @@ def diagnostic_plots(
     data_meas, max_params, params_analysis, output_dir="output", plot=False
 ):
     """
-    TODO!
+    Generates a set of diagnostic plots, as displayed in the accompanying code
+    examples and JOSS manuscript. Includes:
+    A) probability plot:  shows the empirical CDF probabilities for each data
+       point from the processed data set, along with the corresponding modeled
+       estimate associated with those events is.
+    B) quantile plot:  shows the observed extreme sea levels, along with the
+       corresponding model estimates for sea levels with the same annual
+       probability
+    C) return level plot:  shows the return periods (x-axis), which denote the
+       number of years, on average, we expect to see a storm with the given
+       return level (y-axis) in surge height.
+    D) density plot:  the estimated distribution of annual maximum sea levels,
+       with the histogram of processed data points superimposed
     """
     RP = np.arange(2, 501, 1)
     RL = []

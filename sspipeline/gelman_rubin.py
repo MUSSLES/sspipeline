@@ -29,7 +29,9 @@ COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 def GR_diag(parameter, interval=100, start=100):
     """
-    TODO!
+    Computes the potential scale reduction factor for MCMC output array
+    `parameter`, starting with iteration `start` at intervals of `interval`
+    until the end of the parameter list.
     """
     end = len(parameter[0])
     m = len(parameter)
@@ -103,28 +105,12 @@ def GR_result(
     interval=100,
 ):
     """
-    TODO
-
-    Parameters
-    ----------
-    mcmc_chains : :class:`numpy.ndarray`
-        MCMC chains that you want to calculate the burn-in for
-    params : list
-        TODO
-    t : int
-        TODO
-    output_dir : str
-        where to put the output from the function
-    plot : bool
-        whether or not to plot
-    start : int
-        TODO
-    interval : int
-        TODO
-
-    Returns
-    -------
-    TODO
+    Run the Gelman and Rubin (1992) diagnostic on the tails of the `mcmc_chains`
+    output object. Start by considering tails of length [start:], and reduce the
+    length by moving the initial point considered `interval` closer to the end
+    of the chain. Once the potential scale reduction factor is below 1.1 (by
+    default; can be adjusted in the config file), the chains are considered to
+    be burned-in/warmed-up, and converged to the posterior distribution.
     """
     m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
     params_raw, GR_params, burnin_params = [], [], []

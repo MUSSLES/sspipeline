@@ -29,7 +29,9 @@ COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 def ACF(X, end=200):
     """
-    TODO!
+    Calculate the autocorrelation function (ACF) for input vector `X`,
+    considering lags from 0 to `end`. Checks to find where the ACF < 0.05, which
+    is used as the threshold for independence among samples.
     """
     N = len(X)
     acf = []
@@ -50,7 +52,9 @@ def ACF(X, end=200):
 
 def acf_result(mcmc_chains, params, burnin, output_dir="output", plot=False):
     """
-    TODO!
+    Compute the autocorrelation function (above) for each model parameter in the
+    input `mcmc_chains`, and return the lag that satisfies independence for all
+    parameters. Also, plot the ACF?
     """
     lag_params, acf_params = [], []
     m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
