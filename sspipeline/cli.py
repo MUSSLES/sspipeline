@@ -124,6 +124,7 @@ def main(ctx, config):
         mcmc_chains=mcmc_chains,
         params=[r"$\mu$", r"$\sigma$", r"$\xi$"],
         t=config_data["adaption"],
+        threshold=config_data["gr_threshold"],
         output_dir=config_data["output_dir"],
         plot=config_data["plot"],
     )

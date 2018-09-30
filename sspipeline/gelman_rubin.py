@@ -27,7 +27,7 @@ plt.style.use("seaborn")
 COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 
-def GR_diag(parameter, interval=100, start=100):
+def GR_diag(parameter, threshold, interval=100, start=100):
     """
     Computes the potential scale reduction factor for MCMC output array
     `parameter`, starting with iteration `start` at intervals of `interval`
@@ -43,7 +43,7 @@ def GR_diag(parameter, interval=100, start=100):
         GR_result.append(psrf(sequences))
     burnin = 0
     for i in range(len(GR_result)):
-        if max(GR_result[i:]) < 1.1:
+        if max(GR_result[i:]) < threshold:
             burnin = i + 1
             break
     return GR_result, burnin * interval
@@ -99,6 +99,7 @@ def GR_result(
     mcmc_chains,
     params,
     t,
+    threshold,
     output_dir="output",
     plot=False,
     start=100,
@@ -120,7 +121,7 @@ def GR_result(
         for j in range(m):
             params_raw[i].append(mcmc_chains[j][i])
     for i in range(d):
-        GR, burnin = GR_diag(params_raw[i], interval, start)
+        GR, burnin = GR_diag(params_raw[i], threshold, interval, start)
         GR_params.append(GR)
         burnin_params.append(burnin)
     burnin = max(max(burnin_params), t)

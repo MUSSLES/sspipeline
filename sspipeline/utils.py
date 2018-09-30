@@ -95,6 +95,11 @@ def check_params(params):
         new_params["acf_threshold"] = params["acf_threshold"]
     else:
         new_params["acf_threshold"] = 0.05
+    # Check to see if the user specified a Gelman&Rubin Diagnostic threshold
+    if "gr_threshold" in params:
+        new_params["gr_threshold"] = params["gr_threshold"]
+    else:
+        new_params["gr_threshold"] = 1.1
     # Return
     return new_params
 
