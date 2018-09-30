@@ -132,7 +132,7 @@ def main(ctx, config):
         mcmc_chains,
         [r"$\mu$", r"$\sigma$", r"$\xi$"],
         burnin,
-        config_data["acf_threshold"]
+        config_data["acf_threshold"],
         config_data["output_dir"],
         config_data["plot"],
     )
