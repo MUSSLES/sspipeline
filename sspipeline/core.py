@@ -169,7 +169,7 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
     scale_est = (
         np.percentile(data_meas, 75) - np.percentile(data_meas, 25)
     ) / 2
-    shape_est = 0
+    shape_est = 0.01
     problems = []
     for i in range(m):
         ui = np.random.randint(low=loc_est, high=loc_est + 100)
