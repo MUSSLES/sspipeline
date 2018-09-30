@@ -12,6 +12,8 @@
   - [For the Impatient](#for-the-impatient)
   - [Developmental Version](#developmental-version)
 - [Code Examples](#code-examples)
+  - [Pre-Setup Examples](#pre-setup-examples)
+  - [Template Example](#template-example)
 - [Citation](#citation)
 - [License Info](#license-info)
 
@@ -72,6 +74,8 @@ You can check your pipeline installation by running `sspipeline --help`.
 
 Before you run the following, make sure that you have the SSPipeline installed (see the [Installation](#installation) section above).
 
+### Pre-Setup Examples
+
 ```sh
 # move to the example directory
 cd example
@@ -79,11 +83,19 @@ cd example
 bash bootstrap.sh run
 ```
 
----
-**HERE** is where we need a second code example that shows step-by-step ***explicitly*** everything that should be done in order to modify the config file and run a user's own customized case.
----
-
 You can see exactly what this does [here](example#readme).
+
+### Template Example
+
+Here, we're going to walk you through the different steps that you will need to do in order to successfully use our tool.
+
+Let's start with the data. As you may know, our pipeline only takes in _hourly_ data from The University of Hawaii Sea Level Center (UHSLC). You can go to there website by simply clicking this [link](https://uhslc.soest.hawaii.edu/data/?rq) and find yourself a nice dataset that fits your needs. Wence you have found a dataset that you like, you can either choose to download the hourly csv version of the data, or you can simply execute the following command in your terminal:
+
+    curl -O http://uhslc.soest.hawaii.edu/data/csv/rqds/pacific/hourly/h[UH#][version].csv
+
+This command downloads the dataset to whatever directory you are currently in, assuming that you filled in your datasets appropiate UH# and version.
+
+**_More Comming!_**
 
 ## Citation
 
