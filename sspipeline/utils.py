@@ -90,6 +90,11 @@ def check_params(params):
         new_params["plot"] = bool(params["plot"])
     else:
         new_params["plot"] = True
+    # Check to see if the user specified an ACF threshold
+    if "acf_threshold" in params:
+        new_params["acf_threshold"] = params["acf_threshold"]
+    else:
+        new_params["acf_threshold"] = 0.05
     # Return
     return new_params
 

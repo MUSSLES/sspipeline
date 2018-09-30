@@ -27,10 +27,10 @@ plt.style.use("seaborn")
 COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 
-def ACF(X, end=200):
+def ACF(X, threshold, end=200):
     """
     Calculate the autocorrelation function (ACF) for input vector `X`,
-    considering lags from 0 to `end`. Checks to find where the ACF < 0.05, which
+    considering lags from 0 to `end`. Checks to find where the ACF < `threshold`, which
     is used as the threshold for independence among samples.
     """
     N = len(X)
@@ -40,7 +40,7 @@ def ACF(X, end=200):
 
     lag = -1
     for i in range(len(acf)):
-        if acf[i] <= 0.05:
+        if acf[i] <= threshold:
             lag = i
             break
     if lag == -1:
@@ -50,7 +50,9 @@ def ACF(X, end=200):
     return lag, acf
 
 
-def acf_result(mcmc_chains, params, burnin, output_dir="output", plot=False):
+def acf_result(
+    mcmc_chains, params, burnin, threshold, output_dir="output", plot=False
+):
     """
     Compute the autocorrelation function (above) for each model parameter in the
     input `mcmc_chains`, and return the lag that satisfies independence for all
@@ -63,7 +65,7 @@ def acf_result(mcmc_chains, params, burnin, output_dir="output", plot=False):
         lag_params.append([])
         acf_params.append([])
         for j in range(m):
-            lag, acf = ACF(mcmc_chains[j][i][burnin:], end)
+            lag, acf = ACF(mcmc_chains[j][i][burnin:], threshold, end)
             lag_params[i].append(lag)
             acf_params[i].append(acf)
     lags = [max(np.array(lag_params)[:, i]) for i in range(m)]
