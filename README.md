@@ -93,9 +93,43 @@ Let's start with the data. As you may know, our pipeline only takes in _hourly_ 
 
     curl -O http://uhslc.soest.hawaii.edu/data/csv/rqds/pacific/hourly/h[UH#][version].csv
 
-This command downloads the dataset to whatever directory you are currently in, assuming that you filled in your datasets appropiate UH# and version.
+This command downloads the dataset to whatever directory you are currently in, assuming that you filled in your datasets appropiate UH# and version correctly.
 
-**_More Comming!_**
+**_Fill In Some More Here!_**
+
+The foll an example template for a config file (please note that most of these values are default):
+
+```json
+{
+  "acf_threshold": 0.05,
+  "adaption": 300,
+  "data": h[UH#][version].csv,
+  "gr_threshold": 1.1,
+  "iterations": 3000,
+  "output_dir": "output/",
+  "percentage": 0.9,
+  "plot": 1,
+  "sequences": 3,
+  "transition": [10, 2, 0.01],
+  "verbose": 1
+}
+```
+
+You can copy-pasta this above template directly into a file named `config.json` in your current directory, or you can name it something else. If you place your configuration file in `config.json`, in order to run the pipeline, all you have to do is run:
+
+    sspipeline
+
+Just make sure that you are running this command from the same directory as the one that contains the `config.json` file in it. However, if you decided to put your configuration in a different file, please run the following command:
+
+    sspipeline --config [your configuration file name relative to your current directory]
+
+For example:
+
+    sspipleine --config my_special_dir/another_one/my_weird_config_file.json
+
+Please make sure that your configuration file is always of type JSON.
+
+If you do all of the above correctly, you should have the pipelines output within 5 minutes!
 
 ## Citation
 
