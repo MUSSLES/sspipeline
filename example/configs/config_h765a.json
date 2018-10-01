@@ -1,12 +1,17 @@
 {
-  "verbose": 1,
   "data": "data/h765a.csv",
   "output_dir": "output/h765a/",
-  "iterations": 3000,
+  "percentage": 0.9,
+  "iterations": 5000,
+  "sequences": 3,
+  "adaption": 500,
+  "acf_threshold": 0.05,
+  "gr_threshold": 1.1,
   "transition": [
     10,
     2,
     0.01
   ],
+  "verbose": 1,
   "plot": 1
 }
