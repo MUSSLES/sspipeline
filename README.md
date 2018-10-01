@@ -13,9 +13,9 @@
   - [Developmental Version](#developmental-version)
 - [Code Examples](#code-examples)
   - [Pre-Setup Examples](#pre-setup-examples)
-  - [Template Example](#template-example)
+  - [More General Example](#more-general-example)
 - [Citation](#citation)
-- [License Info](#license-info)
+- [License](#license)
 
 </details>
 
@@ -85,41 +85,49 @@ bash bootstrap.sh run
 
 You can see exactly what this does [here](example#readme).
 
-### Template Example
+### More General Example
 
-Here, we're going to walk you through the different steps that you will need to do in order to successfully use our tool.
+As you may already know, our pipeline only takes in _hourly_ datasets from the University of Hawaii Sea Level Center (UHSLC). You can go to there website by simply clicking this [link](https://uhslc.soest.hawaii.edu/data/?rq) and find yourself a nice dataset that suits your needs. Once you have found a dataset that you like, you can either choose to download the hourly CSV version of the data, or you can simply execute the following command in your terminal:
 
-Let's start with the data. As you may know, our pipeline only takes in _hourly_ data from The University of Hawaii Sea Level Center (UHSLC). You can go to there website by simply clicking this [link](https://uhslc.soest.hawaii.edu/data/?rq) and find yourself a nice dataset that fits your needs. Wence you have found a dataset that you like, you can either choose to download the hourly csv version of the data, or you can simply execute the following command in your terminal:
+    curl -O https://uhslc.soest.hawaii.edu/data/csv/rqds/pacific/hourly/h[UH#][version].csv
 
-    curl -O http://uhslc.soest.hawaii.edu/data/csv/rqds/pacific/hourly/h[UH#][version].csv
+This command downloads the dataset to whatever directory you are run the command in, but that assumes that you filled in your datasets appropiate UH# and version correctly, which can be found on the website.
 
-This command downloads the dataset to whatever directory you are currently in, assuming that you filled in your datasets appropiate UH# and version correctly.
+After you have downloaded your sealevel dataset from UHSLC, you can start to fill out your pipeline configuration. Below, is a list of all the possible parameters that you can pass in to the pipeline, and whether or not they are optional:
 
-**_Fill In Some More Here!_**
+- `acf_theshold` is an optional parameter with default 0.05.
+- `adaption` is technically an optional parameter, since just as long as you pass in `iterations`, the pipeline will always take 10% of `iterations` and set it to `adaption`. Feel free to set it to whatever you want!
+- `data` is **not** an optional parameter, and you should always pass this in! Please note that this should be where the dataset file is located in your PATH relative to where you will be running the pipeline from, and not where the configuration file is located.
+- `gr_theshold` is an optional parameter with default 1.1.
+- `iterations` is an optional parameter with default 10000.
+- `output_dir` is an optional parameter with default "output".
+- `percentage` is an optional parameter with default 0.9.
+- `plot` is an optional parameter with default 1 (which means plot).
+- `sequences` is an optional parameter with defualt 3.
+- `transition` is **not** an optional parameter, and you should always pass this in!.
+- `verbose` is an optional parameter with default 0 (which means don't be verbose).
 
-The foll an example template for a config file (please note that most of these values are default):
+Thus, we can use all of the above parameters, and make a template configuration file (note that this uses the JSON format):
 
-```json
-{
-  "acf_threshold": 0.05,
-  "adaption": 300,
-  "data": h[UH#][version].csv,
-  "gr_threshold": 1.1,
-  "iterations": 3000,
-  "output_dir": "output/",
-  "percentage": 0.9,
-  "plot": 1,
-  "sequences": 3,
-  "transition": [10, 2, 0.01],
-  "verbose": 1
-}
-```
+    {
+        "acf_threshold": 0.05,
+        "adaption": 300,
+        "data": h[UH#][version].csv,
+        "gr_threshold": 1.1,
+        "iterations": 3000,
+        "output_dir": "output",
+        "percentage": 0.9,
+        "plot": 1,
+        "sequences": 3,
+        "transition": [10, 2, 0.01],
+        "verbose": 1
+    }
 
-You can copy-pasta this above template directly into a file named `config.json` in your current directory, or you can name it something else. If you place your configuration file in `config.json`, in order to run the pipeline, all you have to do is run:
+You can copy-pasta this above template directly into a file named `config.json` in your current directory, or if you like, you can name it whatever you like and place it wherever you like as well. If you place your configuration file in `config.json` in your current directory, in order to run the pipeline, all you have to do is run the below command in that same directory:
 
     sspipeline
 
-Just make sure that you are running this command from the same directory as the one that contains the `config.json` file in it. However, if you decided to put your configuration in a different file, please run the following command:
+Make sure that you are running this command from the same directory as the one that contains the `config.json` file in it. However, if you decided to put your configuration in a different file, please run the following command:
 
     sspipeline --config [your configuration file name relative to your current directory]
 
@@ -137,6 +145,6 @@ If SSPipeline has enabled significant parts of an academic publication, please a
 
 You can check out a draft of the paper that we will be submitting to JOSS [here](doc/joss_paper/paper.pdf).
 
-## License Info
+## License
 
-This code is offered under the [GNU General Public License version 3](LICENSE).
+[![GPLv3](https://img.shields.io/badge/license-GPLv3-0a0a0a.svg?style=flat&colorA=0a0a0a)](LICENSE)
