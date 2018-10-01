@@ -11,9 +11,9 @@
 - [Installation](#installation)
   - [For the Impatient](#for-the-impatient)
   - [Developmental Version](#developmental-version)
-- [Code Examples](#code-examples)
+- [Examples & Usage](#examples-&-usage)
   - [Pre-Setup Examples](#pre-setup-examples)
-  - [More General Example](#more-general-example)
+  - [General Example](#general-example)
 - [Citation](#citation)
 - [License](#license)
 
@@ -70,11 +70,13 @@ You might have to use `pip3` instead of `pip`. Note that if you want to develop 
 
 You can check your pipeline installation by running `sspipeline --help`.
 
-## Code Examples
+## Examples & Usage
 
-Before you run the following, make sure that you have the SSPipeline installed (see the [Installation](#installation) section above).
+Before you take a look at the examples, make sure that you have the pipeline installed (see the [Installation](#installation) section above).
 
 ### Pre-Setup Examples
+
+These examples were put together to show you what the output of the pipeline looks like. To run them:
 
 ```sh
 # move to the example directory
@@ -83,9 +85,9 @@ cd example
 bash bootstrap.sh run
 ```
 
-You can see exactly what this does [here](example#readme).
+You can see more about this [here](example#readme).
 
-### More General Example
+### General Example
 
 As you may already know, our pipeline only takes in _hourly_ datasets from the University of Hawaii Sea Level Center (UHSLC). You can go to there website by simply clicking this [link](https://uhslc.soest.hawaii.edu/data/?rq) and find yourself a nice dataset that suits your needs. Once you have found a dataset that you like, you can either choose to download the hourly CSV version of the data, or you can simply execute the following command in your terminal:
 
