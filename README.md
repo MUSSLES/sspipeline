@@ -56,15 +56,22 @@ Disclaimer: Since this project is still in the developmental stage, and we are n
 
 To obtain the codes:
 
-    git clone https://github.com/mussles/sspipeline.git
+```
+git clone https://github.com/mussles/sspipeline.git
+```
 
-Next, you can install the pipeline via `pip`:
+Next, you can go into the `sspipeline` directory, and install the pipeline via `pip`:
 
-    pip install .
+```
+cd sspipeline
+pip install .
+```
 
 You might have to use `pip3` instead of `pip`. Note that if you want to develop the pipeline, you'll want to install an editable version, so that the pipeline automatically reloads whenever you changes the codes:
 
-    pip install -e .
+```
+pip install -e .
+```
 
 You can check your pipeline installation by running `sspipeline --help`.
 
@@ -72,7 +79,8 @@ You can check your pipeline installation by running `sspipeline --help`.
 
 Before you run the following, make sure that you have the SSPipeline installed (see the [Installation](#installation) section above).
 
-```sh
+```
+sh
 # move to the example directory
 cd example
 # run the example
