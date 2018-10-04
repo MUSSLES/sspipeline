@@ -89,11 +89,23 @@ You can see more about this [here](example#readme).
 
 ### General Example
 
+First, in the spirit of the pre-set-up examples, let us create a new directory for our test case (here, demonstrating using the data set for Wilmington, NC, ID=h750a). We also create sub-directories for the data and the output.
+
+```
+cd pipeline
+mkdir h750a
+cd h750a
+mkdir data
+mkdir output
+```
+
 Input tide gauge data sets to the pipeline must be hourly datasets set up in the format of the [University of Hawaii Sea Level Center (UHSLC)](https://uhslc.soest.hawaii.edu/data/?rq). You can either choose to download the hourly CSV version of your chosen data, or you can simply execute the following command in your terminal:
 
-    curl -O https://uhslc.soest.hawaii.edu/data/csv/rqds/pacific/hourly/h[UH#][version].csv
+```
+curl -O https://uhslc.soest.hawaii.edu/data/csv/rqds/pacific/hourly/h[UH#][version].csv
+```
 
-This command downloads the dataset to whatever directory you are run the command in, but that assumes that you filled in your datasets appropiate UH# and version correctly, which can be found on the website.
+This command downloads the dataset to whatever directory you are run the command in, but that assumes that you filled in your datasets appropiate UH# and version correctly, which can be found on the website. Wherever you place this data set should match the relative path set for `data` in the config.json file below.
 
 After you have downloaded your sea level dataset from UHSLC, you can start to fill out your pipeline configuration. Below, is a list of all the possible parameters that you can pass in to the pipeline, and whether or not they are optional:
 
@@ -133,15 +145,21 @@ Thus, we can use all of the above parameters, and make a template configuration 
 
 You can copy-paste this above template directly into a file named `config.json` in your current directory, or if you like, you can name it whatever you like and place it wherever you like as well. If you place your configuration file in `config.json` in your current directory, in order to run the pipeline, all you have to do is run the below command in that same directory:
 
-    sspipeline
+```
+sspipeline
+```
 
 Make sure that you are running this command from the same directory as the one that contains the `config.json` file in it. However, if you decided to put your configuration in a different file, please run the following command:
 
-    sspipeline --config [your configuration file name relative to your current directory]
+```
+sspipeline --config [your configuration file name relative to your current directory]
+```
 
 For example:
 
-    sspipleine --config my_special_dir/another_one/my_weird_config_file.json
+```
+sspipleine --config my_special_dir/another_one/my_weird_config_file.json
+```
 
 Please make sure that your configuration file is always of type JSON.
 
