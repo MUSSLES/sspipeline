@@ -21,12 +21,12 @@
 
 ## Motivation
 
-For a while now, sea-level rise has been gradually becoming a bigger and bigger deal. A lot of people often look at mean sea-levels to depict how much sea-levels are rising on average, but we wanted to look at extreme sea levels (a.k.a storm surges) over annual maxima blocks. This work is extremely helpful for determining how tall to build a levee. With our work, you can determine the return levels for your sea level dataset.
+Effective management of coastal risks demands projections of flood hazards that account for a wide variety of potential sources of uncertainty. Two typical approaches for estimating flood hazards include (1) direct physical process-based modeling of the storms themselves and (2) statistical modeling of the distributions and relevant characteristics of extreme sea level events. Recently, flexible and efficient mechanistically-motivated models for sea-level change have become widely used for characterizing uncertainty in projections of mean sea levels. In order to complement these models for mean sea levels, there is also a need for fast and flexible estimates of extreme sea levels, and corresponding uncertainties. This is the motivating factor in the focus within the SSPipeline (Storm Surge Pipeline) project, that characterizes uncertainty in estimates of extreme sea levels, using a statistical modeling approach. Specifically, the SSPipeline project ingests and processes raw sea-level data and fits a statistical distribution to the extreme sea levels, which in turn permits estimation of the probabilities associated with these extremes.
 
 ### Important Notes
 
 - This project is in early stages of development and there will be bugs. Many methods must be used with care and could be improved significantly. The developers take no responsibility for inappropriate application of the code or incorrect conclusions drawn as a result of their application. Users must take responsibility for ensuring results obtained are sensible. We hope that by releasing the code at this stage the community can move forward more quickly together.
-- This project is **only** tested on Python 3.6! It can possibly work on other Python versions, but please use at your own risk (and your computer's risk too)!
+- This project is **only** tested on Python 3.6! It can possibly work on other Python versions, but use at your own risk, and please let us know about any issues.
 
 ## Directory Structure
 
@@ -89,24 +89,24 @@ You can see more about this [here](example#readme).
 
 ### General Example
 
-As you may already know, our pipeline only takes in _hourly_ datasets from the University of Hawaii Sea Level Center (UHSLC). You can go to there website by simply clicking this [link](https://uhslc.soest.hawaii.edu/data/?rq) and find yourself a nice dataset that suits your needs. Once you have found a dataset that you like, you can either choose to download the hourly CSV version of the data, or you can simply execute the following command in your terminal:
+Input tide gauge data sets to the pipeline must be hourly datasets set up in the format of the [University of Hawaii Sea Level Center (UHSLC)](https://uhslc.soest.hawaii.edu/data/?rq). You can either choose to download the hourly CSV version of your chosen data, or you can simply execute the following command in your terminal:
 
     curl -O https://uhslc.soest.hawaii.edu/data/csv/rqds/pacific/hourly/h[UH#][version].csv
 
 This command downloads the dataset to whatever directory you are run the command in, but that assumes that you filled in your datasets appropiate UH# and version correctly, which can be found on the website.
 
-After you have downloaded your sealevel dataset from UHSLC, you can start to fill out your pipeline configuration. Below, is a list of all the possible parameters that you can pass in to the pipeline, and whether or not they are optional:
+After you have downloaded your sea level dataset from UHSLC, you can start to fill out your pipeline configuration. Below, is a list of all the possible parameters that you can pass in to the pipeline, and whether or not they are optional:
 
-- `acf_theshold` is an optional parameter with default 0.05.
-- `adaption` is technically an optional parameter, since just as long as you pass in `iterations`, the pipeline will always take 10% of `iterations` and set it to `adaption`. Feel free to set it to whatever you want!
 - `data` is **not** an optional parameter, and you should always pass this in! Please note that this should be where the dataset file is located in your PATH relative to where you will be running the pipeline from, and not where the configuration file is located.
-- `gr_theshold` is an optional parameter with default 1.1.
-- `iterations` is an optional parameter with default 10000.
-- `output_dir` is an optional parameter with default "output".
-- `percentage` is an optional parameter with default 0.9.
-- `plot` is an optional parameter with default 1 (which means plot).
-- `sequences` is an optional parameter with defualt 3.
-- `transition` is **not** an optional parameter, and you should always pass this in!.
+- `iterations` is an optional parameter with default 10000. This is the number of iterations for each Markov chain.
+- `adaption` is technically an optional parameter, since just as long as you pass in `iterations`, the pipeline will by default take 10% of `iterations` and set it to `adaption`. This is the number of iterations at which to begin the adaptation of the proposal covariance matrix (step sizes for multivariate normal random walk).
+- `sequences` is an optional parameter with defualt 3. This is the number of Markov chain sequences to simulate. Must be at least two in order to use the potential scale reduction factor to evaluate Markov chain convergence.
+- `transition` is **not** an optional parameter, and you should always pass this in! This is the initial Markov chain proposal step sizes (using Gaussian random walk). Must be a list of length = number of parameters to calibrate.
+- `gr_theshold` is an optional parameter with default 1.1. This is the threshold for the potential scale reduction factor, below which we diagnose convergence to the posterior/stationary distribution.
+- `acf_theshold` is an optional parameter with default 0.05. This is the threshold for the autocorrelation function. Once the maximum ACF (among all parameters and chains) is below this threshold, we diagnose that sampling at that lag yields (relatively) independent draws from the Markov chains.
+- `output_dir` is an optional parameter with default "output". This is where the output from the pipeline will be stored, relative to the current directory.
+- `percentage` is an optional parameter with default 0.9. Years with fewer than this percentage of data points present will be removed from the analysis.
+- `plot` is an optional parameter with default 1. This represents whether or not to output diagnostic plots.
 - `verbose` is an optional parameter with default 0 (which means don't be verbose).
 
 Thus, we can use all of the above parameters, and make a template configuration file (note that this uses the JSON format):
@@ -125,7 +125,7 @@ Thus, we can use all of the above parameters, and make a template configuration 
         "verbose": 1
     }
 
-You can copy-pasta this above template directly into a file named `config.json` in your current directory, or if you like, you can name it whatever you like and place it wherever you like as well. If you place your configuration file in `config.json` in your current directory, in order to run the pipeline, all you have to do is run the below command in that same directory:
+You can copy-paste this above template directly into a file named `config.json` in your current directory, or if you like, you can name it whatever you like and place it wherever you like as well. If you place your configuration file in `config.json` in your current directory, in order to run the pipeline, all you have to do is run the below command in that same directory:
 
     sspipeline
 
@@ -139,7 +139,7 @@ For example:
 
 Please make sure that your configuration file is always of type JSON.
 
-If you do all of the above correctly, you should have the pipelines output within 5 minutes!
+If everything is running smoothly, the pipeline default cases and gentle modifications thereof run in about 5-10 minutes on a modern laptop computer (for three sequences at 10,000 iterations each).
 
 ## Citation
 
