@@ -35,18 +35,18 @@ def GR_diag(parameter, threshold, interval=100, start=100):
     """
     end = len(parameter[0])
     m = len(parameter)
-    GR_result = []
+    GR_result_out = []
     for n in range(start, end, interval):
         sequences = []
         for i in range(m):
             sequences.append(parameter[i][:n])
-        GR_result.append(psrf(sequences))
+        GR_result_out.append(psrf(sequences))
     burnin = 0
-    for i in range(len(GR_result)):
-        if max(GR_result[i:]) < threshold:
+    for i in range(len(GR_result_out)):
+        if max(GR_result_out[i:]) < threshold:
             burnin = i + 1
             break
-    return GR_result, burnin * interval
+    return GR_result_out, burnin * interval
 
 
 def psrf(sequences):
@@ -93,7 +93,6 @@ def psrf(sequences):
     W = W / m
     Var = (1 - (1 / n)) * W + (B / n)
     return np.sqrt(Var / W)
-
 
 def GR_result(
     mcmc_chains,

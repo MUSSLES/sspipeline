@@ -5,7 +5,10 @@
 
 ## Motivation
 
-We thought that it would be extremely useful if there was a demo for our SSPipeline package. So, we have put together an example which uses the [Wilmington, North Carolina, USA](https://uhslc.soest.hawaii.edu/rqds/atlantic/doc/qa750a.dmt) and [Grand Isle, Louisiana, USA](https://uhslc.soest.hawaii.edu/rqds/atlantic/doc/qa765a.dmt) datasets from the University of Hawaii Sea Level Center (UHSLC). Fortunately, the example only takes 2-3 minutes (per dataset) to run on an average computer.
+Here is a demo for our SSPipeline package. These examples use the [Wilmington, North Carolina,
+USA](https://uhslc.soest.hawaii.edu/rqds/atlantic/doc/qa750a.dmt) and [Grand Isle, Louisiana,
+USA](https://uhslc.soest.hawaii.edu/rqds/atlantic/doc/qa765a.dmt) datasets from the University of Hawaii Sea
+Level Center (UHSLC). The example only takes 2-3 minutes (per dataset) to run on an average computer.
 
 ## Directory Structure
 
