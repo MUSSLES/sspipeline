@@ -111,19 +111,25 @@ After you have downloaded your sea level dataset from UHSLC, you can start to fi
 
 Thus, we can use all of the above parameters, and make a template configuration file (note that this uses the JSON format):
 
-    {
-        "acf_threshold": 0.05,
-        "adaption": 300,
-        "data": h[UH#][version].csv,
-        "gr_threshold": 1.1,
-        "iterations": 3000,
-        "output_dir": "output",
-        "percentage": 0.9,
-        "plot": 1,
-        "sequences": 3,
-        "transition": [10, 2, 0.01],
-        "verbose": 1
-    }
+```
+{
+  "data": "data/h750a.csv",
+  "output_dir": "output/h750a/",
+  "percentage": 0.9,
+  "iterations": 3000,
+  "sequences": 3,
+  "adaption": 300,
+  "acf_threshold": 0.05,
+  "gr_threshold": 1.1,
+  "transition": [
+    10,
+    2,
+    0.01
+  ],
+  "verbose": 1,
+  "plot": 1
+}
+```
 
 You can copy-paste this above template directly into a file named `config.json` in your current directory, or if you like, you can name it whatever you like and place it wherever you like as well. If you place your configuration file in `config.json` in your current directory, in order to run the pipeline, all you have to do is run the below command in that same directory:
 
