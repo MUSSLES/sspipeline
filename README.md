@@ -89,7 +89,7 @@ You can see more about this [here](example#readme).
 
 ### General Example
 
-First, in the spirit of the pre-set-up examples, let us create a new directory for our test case (here, demonstrating using the data set for Wilmington, NC, ID=h750a). We also create sub-directories for the data and the output.
+First, in the spirit of the pre-set-up examples, let us create a new directory for our test case (here, demonstrating using the data set for Wilmington, NC, ID=h750a). We also create sub-directories for the data and the output, and directories within the output directory, for plots and parameter output.
 
 ```
 cd pipeline
@@ -97,6 +97,10 @@ mkdir h750a
 cd h750a
 mkdir data
 mkdir output
+cd output
+mkdir plots
+mkdir parameters
+cd ..
 ```
 
 Input tide gauge data sets to the pipeline must be hourly datasets set up in the format of the [University of Hawaii Sea Level Center (UHSLC)](https://uhslc.soest.hawaii.edu/data/?rq). You can either choose to download the hourly CSV version of your chosen data, or you can simply execute the following command in your terminal:
@@ -143,7 +147,7 @@ Thus, we can use all of the above parameters, and make a template configuration 
 }
 ```
 
-You can copy-paste this above template directly into a file named `config.json` in your current directory, or if you like, you can name it whatever you like and place it wherever you like as well. If you place your configuration file in `config.json` in your current directory, in order to run the pipeline, all you have to do is run the below command in that same directory:
+You can copy-paste this above template directly into a file named `config.json` in your current directory, or if you like, you can name it whatever you like and place it wherever you like as well. If you place your configuration file in `config.json` in your current directory (in this example, assumed to be the h750a directory we created above), to run the pipeline, execute the below command in that same directory:
 
 ```
 sspipeline
