@@ -1,7 +1,8 @@
 <!-- markdownlint-disable MD033 -->
 <!-- markdownlint-disable MD022 -->
+<!-- markdownlint-disable MD040 -->
 
-# SSPipeline v0.1.dev0 ![CI Build Status](https://img.shields.io/travis/MUSSLES/sspipeline/master.svg?style=flat-square&label=CI) ![Python 3.6](https://img.shields.io/badge/Python-3.6-blue.svg?style=flat-square) [![Code style: black](https://img.shields.io/badge/Code%20Style-black-000000.svg?style=flat-square)](https://github.com/ambv/black)
+# SSPipeline v0.1.dev0 ![CI Build Status](https://img.shields.io/travis/MUSSLES/sspipeline/master.svg?style=flat&colorA=0a0a0a) [![Python 3.6](https://img.shields.io/badge/Python-3.6-0a0a0a.svg?style=flat&colorA=0a0a0a)](LICENSE) [![Code style: black](https://img.shields.io/badge/Code%20Style-black-0a0a0a.svg?style=flat&colorA=0a0a0a)](LICENSE)
 
 <details><summary>Table of Contents</summary>
 
