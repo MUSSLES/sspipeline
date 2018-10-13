@@ -1,15 +1,16 @@
-2018-09-30 20:34:03,453 the config file is located at configs/config_h750a.json
-2018-09-30 20:34:03,453 ==> CONFIG FILE PARAMETERS
-2018-09-30 20:34:03,454 ==> 	 acf_threshold : 0.05
-2018-09-30 20:34:03,454 ==> 	   adaption : 300
-2018-09-30 20:34:03,454 ==> 	       data : data/h750a.csv
-2018-09-30 20:34:03,454 ==> 	 gr_threshold : 1.1
-2018-09-30 20:34:03,454 ==> 	 iterations : 3000
-2018-09-30 20:34:03,454 ==> 	 output_dir : output/h750a/
-2018-09-30 20:34:03,454 ==> 	 percentage : 0.9
-2018-09-30 20:34:03,454 ==> 	       plot : True
-2018-09-30 20:34:03,454 ==> 	  sequences : 3
-2018-09-30 20:34:03,454 ==> 	 transition : [10, 2, 0.01]
-2018-09-30 20:34:03,454 ==> 	    verbose : True
-2018-09-30 20:34:04,655 the fill in value is -32767.0
-2018-09-30 20:34:33,483 the percentage of years that have enough data to use is 93.9%
+2018-10-13 17:19:31,460 the config file is located at configs/config_h750a.json
+2018-10-13 17:19:31,460 ==> CONFIG FILE PARAMETERS
+2018-10-13 17:19:31,460 ==> 	 acf_threshold : 0.05
+2018-10-13 17:19:31,460 ==> 	   adaption : 300
+2018-10-13 17:19:31,460 ==> 	       data : data/h750a.csv
+2018-10-13 17:19:31,460 ==> 	 gr_threshold : 1.1
+2018-10-13 17:19:31,460 ==> 	 iterations : 3000
+2018-10-13 17:19:31,460 ==> 	 output_dir : output/h750a/
+2018-10-13 17:19:31,460 ==> 	 percentage : 0.9
+2018-10-13 17:19:31,460 ==> 	       plot : True
+2018-10-13 17:19:31,460 ==> 	  sequences : 3
+2018-10-13 17:19:31,461 ==> 	 transition : [10, 2, 0.01]
+2018-10-13 17:19:31,461 ==> 	    verbose : True
+2018-10-13 17:19:32,772 the fill in value is -32.767
+2018-10-13 17:20:10,075 the percentage of years that have enough data to use is 93.9%
+2018-10-13 17:22:03,264 the acceptance rates for these Markov chains are: [0.016666666666666666, 0.021333333333333333, 0.014666666666666666]

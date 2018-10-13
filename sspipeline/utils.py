@@ -20,6 +20,7 @@
 # Tell module what it's allowed to import
 __all__ = ["check_params", "read_and_clean", "log"]
 
+import datetime
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -144,7 +145,27 @@ def read_and_clean(
     )
     num_years = len(list(set(dfSL["year"])))
 
-    fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()[0]
+    # convert sealevels from millimeters to meters
+    dfSL["sealevel"] = dfSL["sealevel"].apply(lambda x: x / 1000)
+
+    # plot the original dataset
+    # FIXME: extremely slow when saving the figure!
+    # if plot:
+    #     timestamps = (
+    #         dfSL["day"].map(str)
+    #         + "/"
+    #         + dfSL["month"].map(str)
+    #         + "/"
+    #         + dfSL["year"].map(str)
+    #     )
+    #     fig, ax = plt.subplots(figsize=(12, 7))
+    #     ax.plot(timestamps, dfSL["sealevel"], color="#34495e")
+    #     ax.set_title("Original Sea Levels", fontsize=14)
+    #     ax.set_xlabel("Time [years]", fontsize=14)
+    #     ax.set_ylabel("Sea Level [m]", fontsize=14)
+    #     fig.savefig(output_dir + "/plots/original_data_set.png")
+
+    fill_in = dfSL.loc[dfSL["sealevel"] < -5, "sealevel"].mode()[0]
     logger = log(
         logger, "the fill in value is {0}".format(float(fill_in)), verbose
     )
@@ -175,9 +196,8 @@ def read_and_clean(
     if plot:
         fig, ax = plt.subplots(figsize=(12, 7))
         ax.scatter(list(max_sl.keys()), list(max_sl.values()), color="#34495e")
-        ax.set_title("Hourly Sea Level Measurements", fontsize=14)
-        ax.set_xlabel("Time (years)", fontsize=14)
-        ax.set_ylabel("Sea Level (millimeters)", fontsize=14)
+        ax.set_xlabel("Time [years]", fontsize=14)
+        ax.set_ylabel("Annual maximum sea level [m]", fontsize=14)
         fig.savefig(output_dir + "/plots/cleaned_data.png")
 
     logger = log(
@@ -196,8 +216,7 @@ def read_and_clean(
             color="#34495e",
             edgecolor="white",
         )
-        ax.set_title("Annual Max Sea Level", fontsize=14)
-        ax.set_xlabel("Annual Max Sea Level (millimeters)", fontsize=14)
+        ax.set_xlabel("Annual Max Sea Level [m]", fontsize=14)
         ax.set_ylabel("Frequency", fontsize=14)
         fig.savefig(output_dir + "/plots/annual_maximum.png")
 

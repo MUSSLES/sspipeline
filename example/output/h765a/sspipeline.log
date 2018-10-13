@@ -1,18 +1,16 @@
-2018-09-30 20:38:48,319 the config file is located at configs/config_h765a.json
-2018-09-30 20:38:48,319 ==> CONFIG FILE PARAMETERS
-2018-09-30 20:38:48,319 ==> 	 acf_threshold : 0.05
-2018-09-30 20:38:48,319 ==> 	   adaption : 300
-2018-09-30 20:38:48,319 ==> 	       data : data/h765a.csv
-2018-09-30 20:38:48,319 ==> 	 gr_threshold : 1.1
-2018-09-30 20:38:48,319 ==> 	 iterations : 3000
-2018-09-30 20:38:48,319 ==> 	 output_dir : output/h765a/
-2018-09-30 20:38:48,320 ==> 	 percentage : 0.9
-2018-09-30 20:38:48,320 ==> 	       plot : True
-2018-09-30 20:38:48,320 ==> 	  sequences : 3
-2018-09-30 20:38:48,320 ==> 	 transition : [10, 2, 0.01]
-2018-09-30 20:38:48,320 ==> 	    verbose : True
-2018-09-30 20:38:48,826 the fill in value is -32767.0
-2018-09-30 20:39:05,720 the percentage of years that have enough data to use is 89.19%
-2018-09-30 20:40:28,904 the acceptance rates for these Markov chains are: [0.2976666666666667, 0.31266666666666665, 0.32]
-2018-09-30 20:40:30,089 the parameters with max log-posterior score are: [551.9892811978137, 115.94282887157189, 0.49503463038237777]
-2018-09-30 20:40:53,252 All done!
+2018-10-13 17:22:06,052 the config file is located at configs/config_h765a.json
+2018-10-13 17:22:06,052 ==> CONFIG FILE PARAMETERS
+2018-10-13 17:22:06,053 ==> 	 acf_threshold : 0.05
+2018-10-13 17:22:06,053 ==> 	   adaption : 500
+2018-10-13 17:22:06,053 ==> 	       data : data/h765a.csv
+2018-10-13 17:22:06,053 ==> 	 gr_threshold : 1.1
+2018-10-13 17:22:06,053 ==> 	 iterations : 5000
+2018-10-13 17:22:06,053 ==> 	 output_dir : output/h765a/
+2018-10-13 17:22:06,053 ==> 	 percentage : 0.9
+2018-10-13 17:22:06,053 ==> 	       plot : True
+2018-10-13 17:22:06,054 ==> 	  sequences : 3
+2018-10-13 17:22:06,054 ==> 	 transition : [10, 2, 0.01]
+2018-10-13 17:22:06,054 ==> 	    verbose : True
+2018-10-13 17:22:06,658 the fill in value is -32.767
+2018-10-13 17:22:21,705 the percentage of years that have enough data to use is 89.19%
+2018-10-13 17:23:52,859 the acceptance rates for these Markov chains are: [0.026, 0.0166, 0.0126]

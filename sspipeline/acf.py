@@ -60,7 +60,7 @@ def acf_result(
     """
     lag_params, acf_params = [], []
     m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
-    end = 100
+    end = 10000
     for i in range(d):
         lag_params.append([])
         acf_params.append([])

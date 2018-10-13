@@ -142,7 +142,6 @@ def main(ctx, config):
         mcmc_chains=mcmc_chains,
         burnin=burnin,
         lags=lags,
-        params=[r"$\mu$", r"$\sigma$", r"$\xi$"],
         output_dir=config_data["output_dir"],
         plot=config_data["plot"],
     )
@@ -153,8 +152,12 @@ def main(ctx, config):
     # Diagnostic Plots
     (
         percentile_05,
+        percentile_1,
+        percentile_2,
         percentile_5,
         percentile_95,
+        percentile_98,
+        percentile_99,
         percentile_995,
     ) = diagnostic_plots(
         data_meas,
@@ -166,10 +169,14 @@ def main(ctx, config):
     # Output return levels
     df = pd.DataFrame(
         data={
-            ".05%": percentile_05,
-            "5%": percentile_5,
-            "95%": percentile_95,
-            "99.5%": percentile_995,
+            ".5": percentile_05,
+            "1": percentile_1,
+            "2": percentile_2,
+            "5": percentile_5,
+            "95": percentile_95,
+            "98": percentile_98,
+            "99": percentile_99,
+            "99.5": percentile_995,
         }
     )
     df = df.reindex([0, 3, 8, 48, 98, 498])

@@ -214,13 +214,13 @@ def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
                 linewidth=2.5,
             )
         ax[i].set_xlabel("Iteration", fontsize=14)
-        ax[i].set_ylabel(params[i] + " Trace", fontsize=14)
+        ax[i].set_ylabel(params[i] + " Trace [m]", fontsize=14)
         ax[i].legend(loc="best")
     fig.savefig(output_dir + "/plots/history_plots.png")
 
 
 def final_params_pool(
-    mcmc_chains, burnin, lags, params, output_dir="output", plot=False
+    mcmc_chains, burnin, lags, output_dir="output", plot=False
 ):
     """
     Take the raw `adaptivemcmc` output, and apply the burn-in (denoting when we
@@ -231,22 +231,33 @@ def final_params_pool(
     from the joint posterior distribution of the parameters, given the processed
     tide gauge data.
     """
-    m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
-    params_pool, params_ana = [], [[] for i in range(d)]
+    m, n = len(mcmc_chains), len(mcmc_chains[0][0])
+    params_pool, params_ana = [], [[] for i in range(3)]
     for i in range(m):
         for j in range(burnin, n, lags[i]):
             params_pool.append([])
-            for k in range(d):
+            for k in range(3):
                 params_ana[k].append(mcmc_chains[i][k][j])
                 params_pool[-1].append(mcmc_chains[i][k][j])
 
     if plot:
-        fig, ax = plt.subplots(nrows=1, ncols=d, figsize=(16, 6))
-        for i in range(d):
-            ax[i].hist(params_ana[i], color="#34495e", edgecolor="white")
-            ax[i].set_xlabel(params[i])
-            ax[i].set_ylabel("Frequency")
-            ax[i].grid(alpha=0.5)
+        fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(16, 6))
+        # mu parameter
+        ax[0].hist(params_ana[0], color="#34495e", edgecolor="white")
+        ax[0].set_xlabel(r"$\mu$ [m]")
+        ax[0].set_ylabel("Frequency")
+        ax[0].grid(alpha=0.5)
+        # sigma parameter
+        ax[1].hist(params_ana[0], color="#34495e", edgecolor="white")
+        ax[1].set_xlabel(r"$\sigma$ [m]")
+        ax[1].set_ylabel("Frequency")
+        ax[1].grid(alpha=0.5)
+        # c parameter
+        ax[2].hist(params_ana[0], color="#34495e", edgecolor="white")
+        ax[2].set_xlabel(r"$\xi$")
+        ax[2].set_ylabel("Frequency")
+        ax[2].grid(alpha=0.5)
+        # output the figure
         fig.savefig(output_dir + "/plots/params_pool.png")
     return params_pool
 
@@ -298,10 +309,14 @@ def diagnostic_plots(
     RP = np.arange(2, 501, 1)
     RL = []
     RL_max = []
-    percentile_95 = []
-    percentile_5 = []
-    percentile_995 = []
     percentile_05 = []
+    percentile_1 = []
+    percentile_2 = []
+    percentile_5 = []
+    percentile_95 = []
+    percentile_98 = []
+    percentile_99 = []
+    percentile_995 = []
     for i in range(len(RP)):
         RL.append([])
         RL_max.append(
@@ -324,6 +339,13 @@ def diagnostic_plots(
     for i in range(len(RL)):
         percentile_95.append(np.percentile((RL[i]), 95))
         percentile_5.append(np.percentile((RL[i]), 5))
+
+        percentile_98.append(np.percentile((RL[i]), 98))
+        percentile_2.append(np.percentile((RL[i]), 2))
+
+        percentile_99.append(np.percentile((RL[i]), 99))
+        percentile_1.append(np.percentile((RL[i]), 1))
+
         percentile_995.append(np.percentile((RL[i]), 99.5))
         percentile_05.append(np.percentile((RL[i]), 0.5))
 
@@ -378,8 +400,8 @@ def diagnostic_plots(
             color="steelblue",
         )
         ax[0, 1].set_title("Quantile Plot", fontsize=14)
-        ax[0, 1].set_xlabel("Model (millimeters)", fontsize=14)
-        ax[0, 1].set_ylabel("Empirical (millimeters)", fontsize=14)
+        ax[0, 1].set_xlabel("Model [m]", fontsize=14)
+        ax[0, 1].set_ylabel("Empirical [m]", fontsize=14)
         ax[0, 1].set_xlim(ax[0, 1].set_ylim()[0], ax[0, 1].set_ylim()[1])
         ax[0, 1].annotate(
             "B", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
@@ -423,8 +445,8 @@ def diagnostic_plots(
         ax[1, 0].set_xticks(np.log10([1, 2, 5, 10, 20, 100, 200, 500]))
         ax[1, 0].set_xticklabels([1, 2, 5, 10, 20, 100, 200, 500])
         ax[1, 0].set_title("Return Level Plot", fontsize=14)
-        ax[1, 0].set_xlabel("Return Period (years)", fontsize=14)
-        ax[1, 0].set_ylabel("Return Level (millimeters)", fontsize=14)
+        ax[1, 0].set_xlabel("Return Period [years]", fontsize=14)
+        ax[1, 0].set_ylabel("Return Level [m]", fontsize=14)
         if ax[1, 0].set_ylim()[1] > 10000:
             ax[1, 0].set_ylim(0, 10000)
         ax[1, 0].annotate(
@@ -452,7 +474,7 @@ def diagnostic_plots(
         ax[1, 1].legend(loc="best", fontsize=10)
         ax[1, 1].set_yticklabels([])
         ax[1, 1].set_title("Density Plot", fontsize=14)
-        ax[1, 1].set_xlabel("Annual Max Sea Level (millimeters)", fontsize=14)
+        ax[1, 1].set_xlabel("Annual Max Sea Level [m]", fontsize=14)
         ax[1, 1].set_ylabel("Density", fontsize=14)
         ax[1, 1].set_xlim(ax[0, 1].set_xlim()[0], ax[0, 1].set_xlim()[1])
         ax[1, 1].annotate(
@@ -461,7 +483,7 @@ def diagnostic_plots(
 
         fig.savefig(output_dir + "/plots/diagnostic_plots.png")
 
-    return percentile_05, percentile_5, percentile_95, percentile_995
+    return percentile_05, percentile_1, percentile_2, percentile_5, percentile_95, percentile_98, percentile_99, percentile_995
 
 
 def output_parameters(mcmc_chains, burnin, lags, output_dir="output"):

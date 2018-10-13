@@ -2,7 +2,11 @@
 <!-- markdownlint-disable MD022 -->
 <!-- markdownlint-disable MD040 -->
 
-# SSPipeline v0.1.dev0 ![CI Build Status](https://img.shields.io/travis/MUSSLES/sspipeline/master.svg?style=flat&colorA=0a0a0a) [![Python 3.6](https://img.shields.io/badge/Python-3.6-0a0a0a.svg?style=flat&colorA=0a0a0a)](LICENSE) [![Code style: black](https://img.shields.io/badge/Code%20Style-black-0a0a0a.svg?style=flat&colorA=0a0a0a)](LICENSE)
+# SSPipeline v0.1.dev0 [![CI Build Status](https://img.shields.io/travis/MUSSLES/sspipeline/master.svg?style=flat&colorA=0a0a0a)](https://travis-ci.org) [![Python 3.6](https://img.shields.io/badge/Python-3.6-0a0a0a.svg?style=flat&colorA=0a0a0a)](https://python.org) [![Code style: black](https://img.shields.io/badge/Code%20Style-black-0a0a0a.svg?style=flat&colorA=0a0a0a)](https://github.com/ambv/black)
+
+<!-- TODO: Enter in! -->
+
+**Latest Update:**
 
 <details><summary>Table of Contents</summary>
 
