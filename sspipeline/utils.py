@@ -150,20 +150,20 @@ def read_and_clean(
 
     # plot the original dataset
     # FIXME: extremely slow when saving the figure!
-    # if plot:
-    #     timestamps = (
-    #         dfSL["day"].map(str)
-    #         + "/"
-    #         + dfSL["month"].map(str)
-    #         + "/"
-    #         + dfSL["year"].map(str)
-    #     )
-    #     fig, ax = plt.subplots(figsize=(12, 7))
-    #     ax.plot(timestamps, dfSL["sealevel"], color="#34495e")
-    #     ax.set_title("Original Sea Levels", fontsize=14)
-    #     ax.set_xlabel("Time [years]", fontsize=14)
-    #     ax.set_ylabel("Sea Level [m]", fontsize=14)
-    #     fig.savefig(output_dir + "/plots/original_data_set.png")
+    if plot:
+        timestamps = (
+            dfSL["day"].map(str)
+            + "/"
+            + dfSL["month"].map(str)
+            + "/"
+            + dfSL["year"].map(str)
+        )
+        fig, ax = plt.subplots(figsize=(12, 7))
+        ax.plot(timestamps, dfSL["sealevel"], color="#34495e")
+        ax.set_title("Original Sea Levels", fontsize=14)
+        ax.set_xlabel("Time [years]", fontsize=14)
+        ax.set_ylabel("Sea Level [m]", fontsize=14)
+        fig.savefig(output_dir + "plots/original_data_set.png")
 
     fill_in = dfSL.loc[dfSL["sealevel"] < -5, "sealevel"].mode()[0]
     logger = log(
@@ -198,7 +198,7 @@ def read_and_clean(
         ax.scatter(list(max_sl.keys()), list(max_sl.values()), color="#34495e")
         ax.set_xlabel("Time [years]", fontsize=14)
         ax.set_ylabel("Annual maximum sea level [m]", fontsize=14)
-        fig.savefig(output_dir + "/plots/cleaned_data.png")
+        fig.savefig(output_dir + "plots/cleaned_data.png")
 
     logger = log(
         logger,
@@ -218,7 +218,7 @@ def read_and_clean(
         )
         ax.set_xlabel("Annual Max Sea Level [m]", fontsize=14)
         ax.set_ylabel("Frequency", fontsize=14)
-        fig.savefig(output_dir + "/plots/annual_maximum.png")
+        fig.savefig(output_dir + "plots/annual_maximum.png")
 
     return data, logger
 

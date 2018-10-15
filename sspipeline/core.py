@@ -216,7 +216,7 @@ def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
         ax[i].set_xlabel("Iteration", fontsize=14)
         ax[i].set_ylabel(params[i] + " Trace [m]", fontsize=14)
         ax[i].legend(loc="best")
-    fig.savefig(output_dir + "/plots/history_plots.png")
+    fig.savefig(output_dir + "plots/history_plots.png")
 
 
 def final_params_pool(
@@ -258,7 +258,7 @@ def final_params_pool(
         ax[2].set_ylabel("Frequency")
         ax[2].grid(alpha=0.5)
         # output the figure
-        fig.savefig(output_dir + "/plots/params_pool.png")
+        fig.savefig(output_dir + "plots/params_pool.png")
     return params_pool
 
 
@@ -447,8 +447,8 @@ def diagnostic_plots(
         ax[1, 0].set_title("Return Level Plot", fontsize=14)
         ax[1, 0].set_xlabel("Return Period [years]", fontsize=14)
         ax[1, 0].set_ylabel("Return Level [m]", fontsize=14)
-        if ax[1, 0].set_ylim()[1] > 10000:
-            ax[1, 0].set_ylim(0, 10000)
+        if ax[1, 0].set_ylim()[1] > 10:
+            ax[1, 0].set_ylim(0, 10)
         ax[1, 0].annotate(
             "C", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
         )
@@ -481,7 +481,7 @@ def diagnostic_plots(
             "D", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
         )
 
-        fig.savefig(output_dir + "/plots/diagnostic_plots.png")
+        fig.savefig(output_dir + "plots/diagnostic_plots.png")
 
     return percentile_05, percentile_1, percentile_2, percentile_5, percentile_95, percentile_98, percentile_99, percentile_995
 
@@ -489,7 +489,7 @@ def diagnostic_plots(
 def output_parameters(mcmc_chains, burnin, lags, output_dir="output"):
     for i in range(len(mcmc_chains[0])):
         with open(
-            output_dir + "/parameters/parameter-" + str(i + 1) + ".txt", "w"
+            output_dir + "parameters/parameter-" + str(i + 1) + ".txt", "w"
         ) as f:
             for j in range(len(mcmc_chains)):
                 if j == 0:

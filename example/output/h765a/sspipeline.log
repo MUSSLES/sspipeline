@@ -1,16 +1,18 @@
-2018-10-13 17:22:06,052 the config file is located at configs/config_h765a.json
-2018-10-13 17:22:06,052 ==> CONFIG FILE PARAMETERS
-2018-10-13 17:22:06,053 ==> 	 acf_threshold : 0.05
-2018-10-13 17:22:06,053 ==> 	   adaption : 500
-2018-10-13 17:22:06,053 ==> 	       data : data/h765a.csv
-2018-10-13 17:22:06,053 ==> 	 gr_threshold : 1.1
-2018-10-13 17:22:06,053 ==> 	 iterations : 5000
-2018-10-13 17:22:06,053 ==> 	 output_dir : output/h765a/
-2018-10-13 17:22:06,053 ==> 	 percentage : 0.9
-2018-10-13 17:22:06,053 ==> 	       plot : True
-2018-10-13 17:22:06,054 ==> 	  sequences : 3
-2018-10-13 17:22:06,054 ==> 	 transition : [10, 2, 0.01]
-2018-10-13 17:22:06,054 ==> 	    verbose : True
-2018-10-13 17:22:06,658 the fill in value is -32.767
-2018-10-13 17:22:21,705 the percentage of years that have enough data to use is 89.19%
-2018-10-13 17:23:52,859 the acceptance rates for these Markov chains are: [0.026, 0.0166, 0.0126]
+2018-10-14 12:29:00,938 the config file is located at configs/config_h765a.json
+2018-10-14 12:29:00,938 ==> CONFIG FILE PARAMETERS
+2018-10-14 12:29:00,939 ==> 	 acf_threshold : 0.05
+2018-10-14 12:29:00,939 ==> 	   adaption : 500
+2018-10-14 12:29:00,939 ==> 	       data : data/h765a.csv
+2018-10-14 12:29:00,939 ==> 	 gr_threshold : 1.1
+2018-10-14 12:29:00,939 ==> 	 iterations : 5000
+2018-10-14 12:29:00,939 ==> 	 output_dir : output/h765a/
+2018-10-14 12:29:00,939 ==> 	 percentage : 0.9
+2018-10-14 12:29:00,939 ==> 	       plot : True
+2018-10-14 12:29:00,939 ==> 	  sequences : 3
+2018-10-14 12:29:00,939 ==> 	 transition : [10, 2, 0.01]
+2018-10-14 12:29:00,939 ==> 	    verbose : True
+2018-10-14 12:29:01,573 the fill in value is -32.767
+2018-10-14 12:29:15,994 the percentage of years that have enough data to use is 89.19%
+2018-10-14 12:30:48,206 the acceptance rates for these Markov chains are: [0.0188, 0.0048, 0.0184]
+2018-10-14 12:30:55,966 the parameters with max log-posterior score are: [0.5648957917523286, 0.13793770592468874, 0.7155173220699053]
+2018-10-14 12:30:59,795 All done!

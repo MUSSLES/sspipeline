@@ -179,7 +179,9 @@ def main(ctx, config):
             "99.5": percentile_995,
         }
     )
-    df = df.reindex([0, 3, 8, 48, 98, 498])
+    df = df.reindex([0, 3, 8, 18, 48, 98, 198, 498])
+    # print(df.index)
+    df.rename(index={0: 2, 3: 5, 8: 10, 18: 20, 48: 50, 98: 100, 198: 200, 498: 500}, inplace=True)
     df.to_csv(config_data["output_dir"] + "/return_levels.csv")
     # Output the parameters
     output_parameters(

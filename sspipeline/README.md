@@ -4,19 +4,19 @@
 
 # SSPipeline Source Code
 
-<details><summary><a href="__init__.py#L1">__init__.py</a></summary>
+<details><summary><a href="__init__.py#L1">__init__.py</a> (click to expand)</summary>
 
 This file is where Python goes whenever you want to run the pipeline. The pipeline wouldn't work without this!
 
 </details>
 
-<details><summary><a href="__version__.py#L1">__version__.py</a></summary>
+<details><summary><a href="__version__.py#L1">__version__.py</a> (click to expand)</summary>
 
 This file contains the version of the command line tool. Nothing too important!
 
 </details>
 
-<details><summary><a href="acf.py#L1">acf.py</a></summary>
+<details><summary><a href="acf.py#L1">acf.py</a> (click to expand)</summary>
 
 This file contains the following functions:
 
@@ -30,13 +30,13 @@ Obtains the lags for each parameter
 
 </details>
 
-<details><summary><a href="cli.py#L1">cli.py</a></summary>
+<details><summary><a href="cli.py#L1">cli.py</a> (click to expand)</summary>
 
 This file contains the function [`main`](cli.py#L62%23L170), which implements the pipeline's command line tool. It uses the [Click](http://click.pocoo.org/) Python package to do this.
 
 </details>
 
-<details><summary><a href="core.py#L1">core.py</a></summary>
+<details><summary><a href="core.py#L1">core.py</a> (click to expand)</summary>
 
 This file contains the following functions:
 
@@ -61,7 +61,7 @@ This file contains the following functions:
 - [`output_parameters`](core.py#L440%23L452)
   </details>
 
-<details><summary><a href="gelman_rubin.py#L1">gelman_rubin.py</a></summary>
+<details><summary><a href="gelman_rubin.py#L1">gelman_rubin.py</a> (click to expand)</summary>
 
 This file contains the following functions:
 
@@ -79,7 +79,7 @@ Obtains the maximum burnin for the chains
 
 </details>
 
-<details><summary><a href="gev_utils.py#L1">gev_utils.py</a></summary>
+<details><summary><a href="gev_utils.py#L1">gev_utils.py</a> (click to expand)</summary>
 
 This file contains the following functions:
 
@@ -97,7 +97,7 @@ In this function, we add the the log-prior and log-likelihood together to obtain
 
 </details>
 
-<details><summary><a href="utils.py#L1">utils.py</a></summary>
+<details><summary><a href="utils.py#L1">utils.py</a> (click to expand)</summary>
 
 This file contains the following functions:
 
