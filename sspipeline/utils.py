@@ -148,23 +148,6 @@ def read_and_clean(
     # convert sealevels from millimeters to meters
     dfSL["sealevel"] = dfSL["sealevel"].apply(lambda x: x / 1000)
 
-    # plot the original dataset
-    # FIXME: extremely slow when saving the figure!
-    if plot:
-        timestamps = (
-            dfSL["day"].map(str)
-            + "/"
-            + dfSL["month"].map(str)
-            + "/"
-            + dfSL["year"].map(str)
-        )
-        fig, ax = plt.subplots(figsize=(12, 7))
-        ax.plot(timestamps, dfSL["sealevel"], color="#34495e")
-        ax.set_title("Original Sea Levels", fontsize=14)
-        ax.set_xlabel("Time [years]", fontsize=14)
-        ax.set_ylabel("Sea Level [m]", fontsize=14)
-        fig.savefig(output_dir + "plots/original_data_set.png")
-
     fill_in = dfSL.loc[dfSL["sealevel"] < -5, "sealevel"].mode()[0]
     logger = log(
         logger, "the fill in value is {0}".format(float(fill_in)), verbose
