@@ -395,8 +395,8 @@ def diagnostic_plots(
 
         ax[0, 1].scatter(empirical, np.sort(data_meas), color="black")
         ax[0, 1].plot(
-            np.arange(0, max(data_meas)),
-            np.arange(0, max(data_meas)),
+            np.arange(0, int(round(np.max(data_meas), 0))+1),
+            np.arange(0, int(round(np.max(data_meas), 0))+1),
             color="steelblue",
         )
         ax[0, 1].set_title("Quantile Plot", fontsize=14)
@@ -411,7 +411,7 @@ def diagnostic_plots(
             np.log10(RP),
             RL_max,
             color="r",
-            label="max posterior score parameter sets",
+            label="Max Posterior Score Parameter Sets",
         )
         ax[1, 0].scatter(
             np.log10(
@@ -421,7 +421,7 @@ def diagnostic_plots(
                 ]
             ),
             np.sort(data_meas),
-            label="actual sorted observations",
+            label="Actual Sorted Observations",
             color="black",
             marker="X",
         )
@@ -430,7 +430,7 @@ def diagnostic_plots(
             y1=percentile_95,
             y2=percentile_5,
             alpha=0.3,
-            label="90% credible interval",
+            label="90% Credible Interval",
             facecolor="skyblue",
         )
         ax[1, 0].fill_between(
@@ -438,7 +438,7 @@ def diagnostic_plots(
             y1=percentile_995,
             y2=percentile_05,
             alpha=0.27,
-            label="99% credible interval",
+            label="99% Credible Interval",
             facecolor="skyblue",
         )
         ax[1, 0].legend(loc="upper left", fontsize=10)
@@ -456,9 +456,9 @@ def diagnostic_plots(
         ax[1, 1].hist(
             data_meas,
             bins=np.linspace(min(data_meas), max(data_meas)),
-            normed=True,
+            density=True,
             edgecolor="black",
-            label="Histogram for observations",
+            label="Histogram for Observations",
             color="white",
             alpha=0.4,
         )
@@ -469,7 +469,7 @@ def diagnostic_plots(
             "b+",
             ms=20,
             color="black",
-            label="observations",
+            label="Observations",
         )
         ax[1, 1].legend(loc="best", fontsize=10)
         ax[1, 1].set_yticklabels([])
