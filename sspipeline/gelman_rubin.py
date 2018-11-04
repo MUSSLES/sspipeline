@@ -23,7 +23,7 @@ __all__ = ["GR_result"]
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.style.use("seaborn")
+plt.style.use("ggplot")
 COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 

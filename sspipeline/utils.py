@@ -25,7 +25,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.style.use("seaborn")
+plt.style.use("ggplot")
 
 
 def check_params(params):

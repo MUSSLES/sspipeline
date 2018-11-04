@@ -23,7 +23,7 @@ __all__ = ["acf_result"]
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.style.use("seaborn")
+plt.style.use("ggplot")
 COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 

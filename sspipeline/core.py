@@ -33,7 +33,7 @@ from tqdm import tqdm
 
 from .utils import log
 
-plt.style.use("seaborn")
+plt.style.use("ggplot")
 COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 
@@ -193,9 +193,10 @@ def history_plots(mcmc_chains, true_params=None, output_dir="output"):
     fig.suptitle("History Plots", fontsize=14)
     # mu parameter
     for j in range(m):
-        ax[0].plot(
-            mcmc_chains[j][0], label="Sequence {0}".format(j + 1), color=COLORS[j % 3]
-        )
+        chain_0j = []
+        for k in range(len(mcmc_chains[j][0])):
+            chain_0j.append(mcmc_chains[j][0][k] / 1000)
+        ax[0].plot(chain_0j, label="Sequence {0}".format(j + 1), color=COLORS[j % 3])
     if true_params is not None:
         ax[0].plot(
             ax[0].get_xbound(),
@@ -210,9 +211,10 @@ def history_plots(mcmc_chains, true_params=None, output_dir="output"):
     ax[0].legend(loc="best")
     # sigma parameter
     for j in range(m):
-        ax[1].plot(
-            mcmc_chains[j][1], label="Sequence {0}".format(j + 1), color=COLORS[j % 3]
-        )
+        chain_1j = []
+        for k in range(len(mcmc_chains[j][1])):
+            chain_1j.append(mcmc_chains[j][1][k] / 1000)
+        ax[1].plot(chain_1j, label="Sequence {0}".format(j + 1), color=COLORS[j % 3])
     if true_params is not None:
         ax[1].plot(
             ax[1].get_xbound(),
