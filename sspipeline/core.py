@@ -71,9 +71,7 @@ def update_cov(X, m, Ct, Sd, Id, eps):
     return (cov + np.transpose(cov)) / 2, m1
 
 
-def random_move(
-    current_state, X, Ct, t, t0, stepsize, data_meas, logpost, m, S_d, I_d
-):
+def random_move(current_state, X, Ct, t, t0, stepsize, data_meas, logpost, m, S_d, I_d):
     """
     Proposal step of the Metropolis-Hastings algorithm. This is a multivariate
     normal random draw, given the current Markov chain state and the covariance
@@ -142,9 +140,7 @@ def adaptivemcmc(initial_state, n_iter, stepsize, data_meas, logpost, t0):
             current_value = nextValue
         else:
             p_accept = delta_obj
-            accept = np.random.choice(
-                [True, False], p=[p_accept, 1 - p_accept]
-            )
+            accept = np.random.choice([True, False], p=[p_accept, 1 - p_accept])
             if accept:
                 n_accept += 1
                 for i in range(d):
@@ -166,9 +162,7 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
     """
     np.seterr(divide="ignore", invalid="ignore")
     loc_est = np.median(data_meas)
-    scale_est = (
-        np.percentile(data_meas, 75) - np.percentile(data_meas, 25)
-    ) / 2
+    scale_est = (np.percentile(data_meas, 75) - np.percentile(data_meas, 25)) / 2
     shape_est = 0.01
     problems = []
     for i in range(m):
@@ -189,39 +183,69 @@ def runner(m, n_iter, data_meas, logpost, t=1000, stepsize=[10, 2, 0.01]):
     return mcmc_chains, ar, ls
 
 
-def history_plots(mcmc_chains, params, true_params=None, output_dir="output"):
+def history_plots(mcmc_chains, true_params=None, output_dir="output"):
     """
     Make history plots for the Markov chain output from the `adaptivemcmc`
     simulations.
     """
     m = len(mcmc_chains)
-    fig, ax = plt.subplots(nrows=1, ncols=len(params), figsize=(16, 6))
+    fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(16, 6))
     fig.suptitle("History Plots", fontsize=14)
-    for i in range(len(params)):
-        for j in range(m):
-            ax[i].plot(
-                mcmc_chains[j][i],
-                label="Sequence {0}".format(j + 1),
-                color=COLORS[j % 3],
-            )
-        if true_params is not None:
-            ax[i].plot(
-                ax[i].get_xbound(),
-                [true_params[i], true_params[i]],
-                color="black",
-                linestyle="dashed",
-                label=params[i] + " true value",
-                linewidth=2.5,
-            )
-        ax[i].set_xlabel("Iteration", fontsize=14)
-        ax[i].set_ylabel(params[i] + " Trace [m]", fontsize=14)
-        ax[i].legend(loc="best")
+    # mu parameter
+    for j in range(m):
+        ax[0].plot(
+            mcmc_chains[j][0], label="Sequence {0}".format(j + 1), color=COLORS[j % 3]
+        )
+    if true_params is not None:
+        ax[0].plot(
+            ax[0].get_xbound(),
+            [true_params[0], true_params[0]],
+            color="black",
+            linestyle="dashed",
+            label=r"$\mu$ true value",
+            linewidth=2.5,
+        )
+    ax[0].set_xlabel("Iteration", fontsize=14)
+    ax[0].set_ylabel(r"$\mu$ Trace [m]", fontsize=14)
+    ax[0].legend(loc="best")
+    # sigma parameter
+    for j in range(m):
+        ax[1].plot(
+            mcmc_chains[j][1], label="Sequence {0}".format(j + 1), color=COLORS[j % 3]
+        )
+    if true_params is not None:
+        ax[1].plot(
+            ax[1].get_xbound(),
+            [true_params[1], true_params[1]],
+            color="black",
+            linestyle="dashed",
+            label=r"$\mu$ true value",
+            linewidth=2.5,
+        )
+    ax[1].set_xlabel("Iteration", fontsize=14)
+    ax[1].set_ylabel(r"$\sigma$ Trace [m]", fontsize=14)
+    ax[1].legend(loc="best")
+    # xi parameter
+    for j in range(m):
+        ax[2].plot(
+            mcmc_chains[j][2], label="Sequence {0}".format(j + 1), color=COLORS[j % 3]
+        )
+    if true_params is not None:
+        ax[2].plot(
+            ax[2].get_xbound(),
+            [true_params[2], true_params[2]],
+            color="black",
+            linestyle="dashed",
+            label=r"$\mu$ true value",
+            linewidth=2.5,
+        )
+    ax[2].set_xlabel("Iteration", fontsize=14)
+    ax[2].set_ylabel(r"$\xi$ Trace", fontsize=14)
+    ax[2].legend(loc="best")
     fig.savefig(output_dir + "plots/history_plots.png")
 
 
-def final_params_pool(
-    mcmc_chains, burnin, lags, output_dir="output", plot=False
-):
+def final_params_pool(mcmc_chains, burnin, lags, output_dir="output", plot=False):
     """
     Take the raw `adaptivemcmc` output, and apply the burn-in (denoting when we
     have evidence that they have reached the stationary distribution) and the
@@ -243,17 +267,23 @@ def final_params_pool(
     if plot:
         fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(16, 6))
         # mu parameter
-        ax[0].hist(params_ana[0], color="#34495e", edgecolor="white")
+        params_ana_0 = []
+        for i in range(len(params_ana[0])):
+            params_ana_0.append(params_ana[0][i] / 1000)
+        ax[0].hist(params_ana_0, color="#34495e", edgecolor="white")
         ax[0].set_xlabel(r"$\mu$ [m]")
         ax[0].set_ylabel("Frequency")
         ax[0].grid(alpha=0.5)
         # sigma parameter
-        ax[1].hist(params_ana[0], color="#34495e", edgecolor="white")
+        params_ana_1 = []
+        for i in range(len(params_ana[1])):
+            params_ana_1.append(params_ana[1][i] / 1000)
+        ax[1].hist(params_ana_1, color="#34495e", edgecolor="white")
         ax[1].set_xlabel(r"$\sigma$ [m]")
         ax[1].set_ylabel("Frequency")
         ax[1].grid(alpha=0.5)
         # c parameter
-        ax[2].hist(params_ana[0], color="#34495e", edgecolor="white")
+        ax[2].hist(params_ana[2], color="#34495e", edgecolor="white")
         ax[2].set_xlabel(r"$\xi$")
         ax[2].set_ylabel("Frequency")
         ax[2].grid(alpha=0.5)
@@ -270,9 +300,7 @@ def max_ls_parameters(ls, mcmc_chains, logger, verbose):
     max_indices = []
     maxs = []
     for i in range(len(mcmc_chains)):
-        max_indices.append(
-            np.where(np.array(ls[i]) == np.array(ls[i]).max())[0][0]
-        )
+        max_indices.append(np.where(np.array(ls[i]) == np.array(ls[i]).max())[0][0])
         maxs.append(np.array(ls[i]).max())
     seqi = np.where(np.array(maxs) == np.array(maxs).max())[0][0]
     iterj = max_indices[seqi]
@@ -282,7 +310,13 @@ def max_ls_parameters(ls, mcmc_chains, logger, verbose):
         max_params.append(mcmc_chains[seqi][i][iterj])
     logger = log(
         logger,
-        "the parameters with max log-posterior score are: " + str(max_params),
+        "the parameters with max log-posterior score are: ["
+        + str(max_params[0] / 1000)
+        + ", "
+        + str(max_params[1] / 1000)
+        + ", "
+        + str(max_params[2])
+        + "]",
         verbose,
     )
     return max_params
@@ -306,6 +340,9 @@ def diagnostic_plots(
     D) density plot:  the estimated distribution of annual maximum sea levels,
        with the histogram of processed data points superimposed
     """
+    data = []
+    for i in range(len(data_meas)):
+        data.append(data_meas[i] / 1000)
     RP = np.arange(2, 501, 1)
     RL = []
     RL_max = []
@@ -323,8 +360,8 @@ def diagnostic_plots(
             stats.genextreme.ppf(
                 q=(1 - 1 / RP[i]),
                 c=-max_params[2],
-                loc=max_params[0],
-                scale=max_params[1],
+                loc=max_params[0] / 1000,
+                scale=max_params[1] / 1000,
             )
         )
         for j in range(len(params_analysis)):
@@ -332,8 +369,8 @@ def diagnostic_plots(
                 stats.genextreme.ppf(
                     q=(1 - 1 / RP[i]),
                     c=-params_analysis[j][2],
-                    loc=params_analysis[j][0],
-                    scale=params_analysis[j][1],
+                    loc=params_analysis[j][0] / 1000,
+                    scale=params_analysis[j][1] / 1000,
                 )
             )
     for i in range(len(RL)):
@@ -351,26 +388,26 @@ def diagnostic_plots(
 
     empirical = [
         stats.genextreme.ppf(
-            q=(i + 1) / (len(data_meas) + 1),
+            q=(i + 1) / (len(data) + 1),
             c=-max_params[2],
-            loc=max_params[0],
-            scale=max_params[1],
+            loc=max_params[0] / 1000,
+            scale=max_params[1] / 1000,
         )
-        for i in range(len(data_meas))
+        for i in range(len(data))
     ]
     cdf = [
         stats.genextreme.cdf(
-            x=np.sort(data_meas)[i],
+            x=np.sort(data)[i],
             c=-max_params[2],
-            loc=max_params[0],
-            scale=max_params[1],
+            loc=max_params[0] / 1000,
+            scale=max_params[1] / 1000,
         )
-        for i in range(len(data_meas))
+        for i in range(len(data))
     ]
-    x_range = np.arange(0, max(data_meas) + 1, 0.5)
+    x_range = np.arange(0, max(data) + 1, 0.5)
     y_range = [
         stats.genextreme.pdf(
-            x=xi, c=-max_params[2], loc=max_params[0], scale=max_params[1]
+            x=xi, c=-max_params[2], loc=max_params[0] / 1000, scale=max_params[1] / 1000
         )
         for xi in x_range
     ]
@@ -379,48 +416,37 @@ def diagnostic_plots(
         fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(18, 12))
 
         ax[0, 0].scatter(
-            cdf,
-            [(i + 1) / (len(data_meas) + 1) for i in range(len(data_meas))],
-            color="black",
+            cdf, [(i + 1) / (len(data) + 1) for i in range(len(data))], color="black"
         )
-        ax[0, 0].plot(
-            np.arange(0, 1, 0.01), np.arange(0, 1, 0.01), color="steelblue"
-        )
+        ax[0, 0].plot(np.arange(0, 1, 0.01), np.arange(0, 1, 0.01), color="steelblue")
         ax[0, 0].set_title("Probability Plot", fontsize=14)
         ax[0, 0].set_xlabel("Model", fontsize=14)
         ax[0, 0].set_ylabel("Empirical", fontsize=14)
-        ax[0, 0].annotate(
-            "A", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
-        )
+        ax[0, 0].annotate("A", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
 
-        ax[0, 1].scatter(empirical, np.sort(data_meas), color="black")
+        ax[0, 1].scatter(empirical, np.sort(data), color="black")
         ax[0, 1].plot(
-            np.arange(0, int(round(np.max(data_meas), 0))+1),
-            np.arange(0, int(round(np.max(data_meas), 0))+1),
+            np.arange(0, int(round(np.max(data), 0)) + 1),
+            np.arange(0, int(round(np.max(data), 0)) + 1),
             color="steelblue",
         )
         ax[0, 1].set_title("Quantile Plot", fontsize=14)
         ax[0, 1].set_xlabel("Model [m]", fontsize=14)
         ax[0, 1].set_ylabel("Empirical [m]", fontsize=14)
         ax[0, 1].set_xlim(ax[0, 1].set_ylim()[0], ax[0, 1].set_ylim()[1])
-        ax[0, 1].annotate(
-            "B", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
-        )
+        ax[0, 1].annotate("B", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
 
         ax[1, 0].plot(
-            np.log10(RP),
-            RL_max,
-            color="r",
-            label="Max Posterior Score Parameter Sets",
+            np.log10(RP), RL_max, color="r", label="Max Posterior Score Parameter Sets"
         )
         ax[1, 0].scatter(
             np.log10(
                 [
-                    (len(data_meas) + 1) / (len(data_meas) + 1 - k)
-                    for k in np.arange(1, len(data_meas) + 1, 1)
+                    (len(data) + 1) / (len(data) + 1 - k)
+                    for k in np.arange(1, len(data) + 1, 1)
                 ]
             ),
-            np.sort(data_meas),
+            np.sort(data),
             label="Actual Sorted Observations",
             color="black",
             marker="X",
@@ -449,13 +475,11 @@ def diagnostic_plots(
         ax[1, 0].set_ylabel("Return Level [m]", fontsize=14)
         if ax[1, 0].set_ylim()[1] > 10:
             ax[1, 0].set_ylim(0, 10)
-        ax[1, 0].annotate(
-            "C", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
-        )
+        ax[1, 0].annotate("C", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
 
         ax[1, 1].hist(
-            data_meas,
-            bins=np.linspace(min(data_meas), max(data_meas)),
+            data,
+            bins=np.linspace(min(data), max(data)),
             density=True,
             edgecolor="black",
             label="Histogram for Observations",
@@ -464,12 +488,7 @@ def diagnostic_plots(
         )
         ax[1, 1].plot(x_range, y_range, label="Best Model", color="black")
         ax[1, 1].plot(
-            data_meas,
-            np.zeros_like(data_meas),
-            "b+",
-            ms=20,
-            color="black",
-            label="Observations",
+            data, np.zeros_like(data), "b+", ms=20, color="black", label="Observations"
         )
         ax[1, 1].legend(loc="best", fontsize=10)
         ax[1, 1].set_yticklabels([])
@@ -477,20 +496,25 @@ def diagnostic_plots(
         ax[1, 1].set_xlabel("Annual Max Sea Level [m]", fontsize=14)
         ax[1, 1].set_ylabel("Density", fontsize=14)
         ax[1, 1].set_xlim(ax[0, 1].set_xlim()[0], ax[0, 1].set_xlim()[1])
-        ax[1, 1].annotate(
-            "D", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30
-        )
+        ax[1, 1].annotate("D", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
 
         fig.savefig(output_dir + "plots/diagnostic_plots.png")
 
-    return percentile_05, percentile_1, percentile_2, percentile_5, percentile_95, percentile_98, percentile_99, percentile_995
+    return (
+        percentile_05,
+        percentile_1,
+        percentile_2,
+        percentile_5,
+        percentile_95,
+        percentile_98,
+        percentile_99,
+        percentile_995,
+    )
 
 
 def output_parameters(mcmc_chains, burnin, lags, output_dir="output"):
     for i in range(len(mcmc_chains[0])):
-        with open(
-            output_dir + "parameters/parameter-" + str(i + 1) + ".txt", "w"
-        ) as f:
+        with open(output_dir + "parameters/parameter-" + str(i + 1) + ".txt", "w") as f:
             for j in range(len(mcmc_chains)):
                 if j == 0:
                     f.write("CHAIN " + str(j + 1) + "\n")

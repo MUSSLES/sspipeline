@@ -34,11 +34,10 @@ def GR_diag(parameter, threshold, interval=100, start=100):
     until the end of the parameter list.
     """
     end = len(parameter[0])
-    m = len(parameter)
     GR_result_out = []
     for n in range(start, end, interval):
         sequences = []
-        for i in range(m):
+        for i in range(3):
             sequences.append(parameter[i][:n])
         GR_result_out.append(psrf(sequences))
     burnin = 0
@@ -86,13 +85,14 @@ def psrf(sequences):
     n = len(sequences[0])
     U = np.mean(u)
     B, W = 0, 0
-    for i in range(m):
+    for i in range(3):
         B += (u[i] - U) ** 2
         W += s[i]
     B = (B * n) / (m - 1)
     W = W / m
     Var = (1 - (1 / n)) * W + (B / n)
     return np.sqrt(Var / W)
+
 
 def GR_result(
     mcmc_chains,
@@ -112,12 +112,12 @@ def GR_result(
     default; can be adjusted in the config file), the chains are considered to
     be burned-in/warmed-up, and converged to the posterior distribution.
     """
-    m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
+    d, n = len(mcmc_chains[0]), len(mcmc_chains[0][0])
     params_raw, GR_params, burnin_params = [], [], []
     start, interval, end = start, interval, n
     for i in range(d):
         params_raw.append([])
-        for j in range(m):
+        for j in range(3):
             params_raw[i].append(mcmc_chains[j][i])
     for i in range(d):
         GR, burnin = GR_diag(params_raw[i], threshold, interval, start)

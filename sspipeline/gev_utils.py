@@ -43,9 +43,7 @@ def loglikelihood(parameters, data):
     mu, sigma, shape = parameters
     s = 0
     for i in range(len(data)):
-        logpdf = stats.genextreme.logpdf(
-            x=data[i], loc=mu, scale=sigma, c=-shape
-        )
+        logpdf = stats.genextreme.logpdf(x=data[i], loc=mu, scale=sigma, c=-shape)
         if logpdf == -np.inf:
             return -np.inf
         s += logpdf

@@ -1,18 +1,18 @@
-2018-11-03 11:14:40,937 the config file is located at configs/config_h750a.json
-2018-11-03 11:14:40,937 ==> CONFIG FILE PARAMETERS
-2018-11-03 11:14:40,937 ==> 	 acf_threshold : 0.05
-2018-11-03 11:14:40,937 ==> 	   adaption : 300
-2018-11-03 11:14:40,937 ==> 	       data : data/h750a.csv
-2018-11-03 11:14:40,938 ==> 	 gr_threshold : 1.1
-2018-11-03 11:14:40,938 ==> 	 iterations : 3000
-2018-11-03 11:14:40,938 ==> 	 output_dir : output/h750a/
-2018-11-03 11:14:40,938 ==> 	 percentage : 0.9
-2018-11-03 11:14:40,938 ==> 	       plot : True
-2018-11-03 11:14:40,938 ==> 	  sequences : 3
-2018-11-03 11:14:40,938 ==> 	 transition : [10, 2, 0.01]
-2018-11-03 11:14:40,938 ==> 	    verbose : True
-2018-11-03 11:14:41,637 the fill in value is -32.767
-2018-11-03 11:15:12,548 the percentage of years that have enough data to use is 93.9%
-2018-11-03 11:16:57,368 the acceptance rates for these Markov chains are: [0.028, 0.024333333333333332, 0.019333333333333334]
-2018-11-03 11:17:00,705 the parameters with max log-posterior score are: [1.417711017171042, 2.742571399225838, 4.870357159875613]
-2018-11-03 11:17:02,098 All done!
+2018-11-04 14:33:43,758 the config file is located at configs/config_h750a.json
+2018-11-04 14:33:43,759 ==> CONFIG FILE PARAMETERS
+2018-11-04 14:33:43,759 ==> 	 acf_threshold : 0.05
+2018-11-04 14:33:43,759 ==> 	   adaption : 300
+2018-11-04 14:33:43,759 ==> 	       data : data/h750a.csv
+2018-11-04 14:33:43,759 ==> 	 gr_threshold : 1.1
+2018-11-04 14:33:43,759 ==> 	 iterations : 3000
+2018-11-04 14:33:43,760 ==> 	 output_dir : output/h750a/
+2018-11-04 14:33:43,760 ==> 	 percentage : 0.9
+2018-11-04 14:33:43,760 ==> 	       plot : True
+2018-11-04 14:33:43,760 ==> 	  sequences : 3
+2018-11-04 14:33:43,760 ==> 	 transition : [10, 2, 0.01]
+2018-11-04 14:33:43,760 ==> 	    verbose : True
+2018-11-04 14:33:44,280 the fill in value is -32.767
+2018-11-04 14:34:11,380 the percentage of years that have enough data to use is 93.9%
+2018-11-04 14:37:35,936 the acceptance rates for these Markov chains are: [0.306, 0.26766666666666666, 0.231]
+2018-11-04 14:37:37,547 the parameters with max log-posterior score are: [1.0299893097506845, 0.11426372249200452, 0.037958239548231326]
+2018-11-04 14:38:03,550 All done!

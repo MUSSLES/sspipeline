@@ -106,12 +106,7 @@ def check_params(params):
 
 
 def read_and_clean(
-    datafile,
-    percentage,
-    output_dir="output",
-    logger=None,
-    verbose=False,
-    plot=False,
+    datafile, percentage, output_dir="output", logger=None, verbose=False, plot=False
 ):
     """
     Reads & cleans the dataset
@@ -146,11 +141,12 @@ def read_and_clean(
     num_years = len(list(set(dfSL["year"])))
 
     # convert sealevels from millimeters to meters
-    dfSL["sealevel"] = dfSL["sealevel"].apply(lambda x: x / 1000)
+    # dfSL["sealevel"] = dfSL["sealevel"].apply(lambda x: x / 1000)
 
-    fill_in = dfSL.loc[dfSL["sealevel"] < -5, "sealevel"].mode()[0]
+    # fill_in = dfSL.loc[dfSL["sealevel"] < -5, "sealevel"].mode()[0]
+    fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()[0]
     logger = log(
-        logger, "the fill in value is {0}".format(float(fill_in)), verbose
+        logger, "the fill in value is {0}".format(float(fill_in) / 1000), verbose
     )
 
     dfSL["sealevel"].replace(fill_in, np.nan, inplace=True)
@@ -178,9 +174,12 @@ def read_and_clean(
 
     if plot:
         fig, ax = plt.subplots(figsize=(12, 7))
-        ax.scatter(list(max_sl.keys()), list(max_sl.values()), color="#34495e")
+        vals = []
+        for i in range(len(list(max_sl.values()))):
+            vals.append(list(max_sl.values())[i] / 1000)
+        ax.scatter(list(max_sl.keys()), vals, color="#34495e")
         ax.set_xlabel("Time [years]", fontsize=14)
-        ax.set_ylabel("Annual maximum sea level [m]", fontsize=14)
+        ax.set_ylabel("Annual Maximum Sea Level [m]", fontsize=14)
         fig.savefig(output_dir + "plots/cleaned_data.png")
 
     logger = log(
@@ -193,9 +192,12 @@ def read_and_clean(
 
     if plot:
         fig, ax = plt.subplots(figsize=(12, 7))
+        plot_data = []
+        for i in range(len(data)):
+            plot_data.append(data[i] / 1000)
         ax.hist(
-            x=data,
-            bins=np.linspace(min(data), max(data)),
+            x=plot_data,
+            bins=np.linspace(min(plot_data), max(plot_data)),
             color="#34495e",
             edgecolor="white",
         )
