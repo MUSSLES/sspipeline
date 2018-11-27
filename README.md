@@ -133,7 +133,7 @@ Thus, we can use all of the above parameters, and make a template configuration 
 ```
 {
   "data": "data/h750a.csv",
-  "output_dir": "output/h750a/",
+  "output_dir": "output/",
   "percentage": 0.9,
   "iterations": 3000,
   "sequences": 3,
@@ -171,6 +171,13 @@ sspipleine --config my_special_dir/another_one/my_weird_config_file.json
 Please make sure that your configuration file is always of type JSON.
 
 If everything is running smoothly, the pipeline default cases and gentle modifications thereof run in about 5-10 minutes on a modern laptop computer (for three sequences at 10,000 iterations each).
+
+## Caveats and known potential hurdles
+
+1.  If you Python packages/libraries are out-of-date, then it is recommended that you update them before
+running the sspipeline. Namely, the `hist` (histogram) method distinguishes between `normed` (deprecated) and
+`density` arguments to generate a density histogram, and this can cause problems (we use the `density`
+argument here, which might not work with older libraries).
 
 ## Citation
 
