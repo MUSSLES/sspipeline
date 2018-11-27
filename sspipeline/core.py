@@ -406,7 +406,7 @@ def diagnostic_plots(
         )
         for i in range(len(data))
     ]
-    x_range = np.arange(0, max(data) + 1, 0.5)
+    x_range = np.arange(0, max(data) + 1, 0.0005)
     y_range = [
         stats.genextreme.pdf(
             x=xi, c=-max_params[2], loc=max_params[0] / 1000, scale=max_params[1] / 1000
