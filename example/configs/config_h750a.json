@@ -1,12 +1,17 @@
 {
-  "verbose": 1,
   "data": "data/h750a.csv",
   "output_dir": "output/h750a/",
+  "percentage": 0.9,
   "iterations": 3000,
+  "sequences": 3,
+  "adaption": 300,
+  "acf_threshold": 0.05,
+  "gr_threshold": 1.1,
   "transition": [
     10,
     2,
     0.01
   ],
+  "verbose": 1,
   "plot": 1
 }

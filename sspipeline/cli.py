@@ -52,11 +52,7 @@ from .__version__ import __version__
 @click.option(
     "--config",
     type=click.Path(
-        exists=False,
-        file_okay=True,
-        dir_okay=False,
-        readable=True,
-        allow_dash=False,
+        exists=False, file_okay=True, dir_okay=False, readable=True, allow_dash=False
     ),
     default="config.json",
     show_default=1,
@@ -80,9 +76,7 @@ def main(ctx, config):
     logger.setLevel(logging.INFO)
     # Log where the configuration file is at
     logger = log(
-        logger,
-        "the config file is located at " + config,
-        config_data["verbose"],
+        logger, "the config file is located at " + config, config_data["verbose"]
     )
     # Put the config file into the log file
     logger.info("==> CONFIG FILE PARAMETERS")
@@ -108,11 +102,7 @@ def main(ctx, config):
     )
     # Plot the history plots for the chains
     if config_data["plot"]:
-        history_plots(
-            mcmc_chains=mcmc_chains,
-            params=[r"$\mu$", r"$\sigma$", r"$\xi$"],
-            output_dir=config_data["output_dir"],
-        )
+        history_plots(mcmc_chains=mcmc_chains, output_dir=config_data["output_dir"])
     # Log the acceptance rates
     logger = log(
         logger,
@@ -124,6 +114,7 @@ def main(ctx, config):
         mcmc_chains=mcmc_chains,
         params=[r"$\mu$", r"$\sigma$", r"$\xi$"],
         t=config_data["adaption"],
+        threshold=config_data["gr_threshold"],
         output_dir=config_data["output_dir"],
         plot=config_data["plot"],
     )
@@ -132,6 +123,7 @@ def main(ctx, config):
         mcmc_chains,
         [r"$\mu$", r"$\sigma$", r"$\xi$"],
         burnin,
+        config_data["acf_threshold"],
         config_data["output_dir"],
         config_data["plot"],
     )
@@ -140,19 +132,20 @@ def main(ctx, config):
         mcmc_chains=mcmc_chains,
         burnin=burnin,
         lags=lags,
-        params=[r"$\mu$", r"$\sigma$", r"$\xi$"],
         output_dir=config_data["output_dir"],
         plot=config_data["plot"],
     )
     # Find the maximum parameters
-    max_params = max_ls_parameters(
-        ls, mcmc_chains, logger, config_data["verbose"]
-    )
+    max_params = max_ls_parameters(ls, mcmc_chains, logger, config_data["verbose"])
     # Diagnostic Plots
     (
         percentile_05,
+        percentile_1,
+        percentile_2,
         percentile_5,
         percentile_95,
+        percentile_98,
+        percentile_99,
         percentile_995,
     ) = diagnostic_plots(
         data_meas,
@@ -164,13 +157,22 @@ def main(ctx, config):
     # Output return levels
     df = pd.DataFrame(
         data={
-            ".05%": percentile_05,
-            "5%": percentile_5,
-            "95%": percentile_95,
-            "99.5%": percentile_995,
+            ".5": percentile_05,
+            "1": percentile_1,
+            "2": percentile_2,
+            "5": percentile_5,
+            "95": percentile_95,
+            "98": percentile_98,
+            "99": percentile_99,
+            "99.5": percentile_995,
         }
     )
-    df = df.reindex([0, 3, 8, 48, 98, 498])
+    df = df.reindex([0, 3, 8, 18, 48, 98, 198, 498])
+    # print(df.index)
+    df.rename(
+        index={0: 2, 3: 5, 8: 10, 18: 20, 48: 50, 98: 100, 198: 200, 498: 500},
+        inplace=True,
+    )
     df.to_csv(config_data["output_dir"] + "/return_levels.csv")
     # Output the parameters
     output_parameters(

@@ -23,30 +23,29 @@ __all__ = ["GR_result"]
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.style.use("seaborn")
+plt.style.use("ggplot")
 COLORS = ["#34495e", "#95a5a6", "#a76c6e"]
 
 
-def GR_diag(parameter, interval=100, start=100):
+def GR_diag(parameter, threshold, interval=100, start=100):
     """
     Computes the potential scale reduction factor for MCMC output array
     `parameter`, starting with iteration `start` at intervals of `interval`
     until the end of the parameter list.
     """
     end = len(parameter[0])
-    m = len(parameter)
-    GR_result = []
+    GR_result_out = []
     for n in range(start, end, interval):
         sequences = []
-        for i in range(m):
+        for i in range(3):
             sequences.append(parameter[i][:n])
-        GR_result.append(psrf(sequences))
+        GR_result_out.append(psrf(sequences))
     burnin = 0
-    for i in range(len(GR_result)):
-        if max(GR_result[i:]) < 1.1:
+    for i in range(len(GR_result_out)):
+        if max(GR_result_out[i:]) < threshold:
             burnin = i + 1
             break
-    return GR_result, burnin * interval
+    return GR_result_out, burnin * interval
 
 
 def psrf(sequences):
@@ -86,7 +85,7 @@ def psrf(sequences):
     n = len(sequences[0])
     U = np.mean(u)
     B, W = 0, 0
-    for i in range(m):
+    for i in range(3):
         B += (u[i] - U) ** 2
         W += s[i]
     B = (B * n) / (m - 1)
@@ -99,6 +98,7 @@ def GR_result(
     mcmc_chains,
     params,
     t,
+    threshold,
     output_dir="output",
     plot=False,
     start=100,
@@ -112,15 +112,15 @@ def GR_result(
     default; can be adjusted in the config file), the chains are considered to
     be burned-in/warmed-up, and converged to the posterior distribution.
     """
-    m, d, n = len(mcmc_chains), len(mcmc_chains[0]), len(mcmc_chains[0][0])
+    d, n = len(mcmc_chains[0]), len(mcmc_chains[0][0])
     params_raw, GR_params, burnin_params = [], [], []
     start, interval, end = start, interval, n
     for i in range(d):
         params_raw.append([])
-        for j in range(m):
+        for j in range(3):
             params_raw[i].append(mcmc_chains[j][i])
     for i in range(d):
-        GR, burnin = GR_diag(params_raw[i], interval, start)
+        GR, burnin = GR_diag(params_raw[i], threshold, interval, start)
         GR_params.append(GR)
         burnin_params.append(burnin)
     burnin = max(max(burnin_params), t)

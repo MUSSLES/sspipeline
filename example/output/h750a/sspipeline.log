@@ -1,16 +1,18 @@
-2018-09-18 11:23:57,340 the config file is located at configs/config_h750a.json
-2018-09-18 11:23:57,341 ==> CONFIG FILE PARAMETERS
-2018-09-18 11:23:57,341 ==> 	   adaption : 300
-2018-09-18 11:23:57,341 ==> 	       data : data/h750a.csv
-2018-09-18 11:23:57,341 ==> 	 iterations : 3000
-2018-09-18 11:23:57,341 ==> 	 output_dir : output/h750a/
-2018-09-18 11:23:57,341 ==> 	 percentage : 0.9
-2018-09-18 11:23:57,341 ==> 	       plot : True
-2018-09-18 11:23:57,341 ==> 	  sequences : 3
-2018-09-18 11:23:57,341 ==> 	 transition : [10, 2, 0.01]
-2018-09-18 11:23:57,341 ==> 	    verbose : True
-2018-09-18 11:23:58,015 the fill in value is -32767.0
-2018-09-18 11:24:31,847 the percentage of years that have enough data to use is 93.9%
-2018-09-18 11:27:50,183 the acceptance rates for these Markov chains are: [0.19133333333333333, 0.25366666666666665, 0.23233333333333334]
-2018-09-18 11:27:51,739 the parameters with max log-posterior score are: [1027.9890082171191, 113.50963293820487, 0.03589795298898084]
-2018-09-18 11:28:29,461 All done!
+2018-11-04 15:13:43,681 the config file is located at configs/config_h750a.json
+2018-11-04 15:13:43,681 ==> CONFIG FILE PARAMETERS
+2018-11-04 15:13:43,681 ==> 	 acf_threshold : 0.05
+2018-11-04 15:13:43,681 ==> 	   adaption : 300
+2018-11-04 15:13:43,681 ==> 	       data : data/h750a.csv
+2018-11-04 15:13:43,681 ==> 	 gr_threshold : 1.1
+2018-11-04 15:13:43,681 ==> 	 iterations : 3000
+2018-11-04 15:13:43,681 ==> 	 output_dir : output/h750a/
+2018-11-04 15:13:43,681 ==> 	 percentage : 0.9
+2018-11-04 15:13:43,681 ==> 	       plot : True
+2018-11-04 15:13:43,682 ==> 	  sequences : 3
+2018-11-04 15:13:43,682 ==> 	 transition : [10, 2, 0.01]
+2018-11-04 15:13:43,682 ==> 	    verbose : True
+2018-11-04 15:13:44,305 the fill in value is -32.767
+2018-11-04 15:14:12,654 the percentage of years that have enough data to use is 93.9%
+2018-11-04 15:17:23,794 the acceptance rates for these Markov chains are: [0.214, 0.23066666666666666, 0.261]
+2018-11-04 15:17:25,018 the parameters with max log-posterior score are: [1.0279429640010787, 0.11329163910221093, 0.03139323237257946]
+2018-11-04 15:17:55,080 All done!
