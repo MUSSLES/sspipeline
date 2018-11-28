@@ -191,9 +191,9 @@ argument here, which might not work with older libraries).
 
 ## Citation
 
-If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. You can cite the project by using one of the following identifiers:
+If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. You can cite the project by using the following identifier:
 
-- [Earth ArXiv](https://eartharxiv.org/t6358), DOI: 10.31223/osf.io/t6358
+> [Earth ArXiv](https://eartharxiv.org/t6358) - DOI: 10.31223/osf.io/t6358
 
 ## License
 
