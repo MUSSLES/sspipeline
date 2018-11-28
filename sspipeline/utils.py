@@ -178,7 +178,7 @@ def read_and_clean(
         for i in range(len(list(max_sl.values()))):
             vals.append(list(max_sl.values())[i] / 1000)
         ax.scatter(list(max_sl.keys()), vals, color="#34495e")
-        ax.set_xlabel("Time [years]", fontsize=14)
+        ax.set_xlabel("Year", fontsize=14)
         ax.set_ylabel("Annual Maximum Sea Level [m]", fontsize=14)
         fig.savefig(output_dir + "plots/cleaned_data.png")
 
