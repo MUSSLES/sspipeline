@@ -117,13 +117,13 @@ cd ..
 Input tide gauge data sets to the pipeline must be hourly datasets set up in the format of the [University of Hawaii Sea Level Center (UHSLC)](https://uhslc.soest.hawaii.edu/data/?rq). You can either choose to download the hourly CSV version of your chosen data, or you can simply execute the following command in your terminal:
 
 ```
-curl -O https://uhslc.soest.hawaii.edu/data/csv/rqds/[region]/hourly/h[UH#][version].csv
+curl -O https://uhslc.soest.hawaii.edu/data/csv/rqds/[region]/hourly/h[UH#][version].csv > ./data/[local name].csv
 ```
 
-This command downloads the dataset to whatever directory you are run the command in, but that assumes that you filled in your datasets appropiate UH# and version correctly, which can be found on the website. Wherever you place this data set should match the relative path set for `data` in the config.json file below. For example, to grab the data for Wilmington, NC, this command is:
+This command downloads the dataset to whatever directory you are run the command in, but that assumes that you filled in your datasets appropiate UH# and version correctly, which can be found on the website. Wherever you place this data set should match the relative path set for `data` in the config.json file below. For example, to grab the data for Wilmington, NC, and place it in a file called wilmington.csv in the `data` directory, this command is:
 
 ```
-curl -0 https://uhslc.soest.hawaii.edu/data/csv/rqds/atlantic/hourly/h750a.csv
+curl -0 https://uhslc.soest.hawaii.edu/data/csv/rqds/atlantic/hourly/h750a.csv > ./data/wilmington.csv
 ```
 
 After you have downloaded your sea level dataset from UHSLC, you can start to fill out your pipeline configuration. Below, is a list of all the possible parameters that you can pass in to the pipeline, and whether or not they are optional:
@@ -144,12 +144,12 @@ Thus, we can use all of the above parameters, and make a template configuration 
 
 ```
 {
-  "data": "data/h750a.csv",
+  "data": "data/wilmington.csv",
   "output_dir": "output/",
   "percentage": 0.9,
-  "iterations": 3000,
-  "sequences": 3,
-  "adaption": 300,
+  "iterations": 5000,
+  "sequences": 4,
+  "adaption": 500,
   "acf_threshold": 0.05,
   "gr_threshold": 1.1,
   "transition": [
