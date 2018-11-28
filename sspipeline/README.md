@@ -89,7 +89,7 @@ This function implements the log-likelihood.
 
 - [`logprior`](gev_utils.py#L55%23L75)
 
-This function implements the prior distribution.
+This function implements the prior distribution. By default, we use relatively uninformative wide priors for all three GEV parameters. Specifically, uniform priors for the location and scale parameters between 0 and 10 meters, and a normal prior centered at 0 with standard deviation 1000 for the shape parameter.
 
 - [`logpost`](gev_utils.py#L78%23L112)
 
