@@ -65,12 +65,10 @@ def logprior(parameters):
     log_prior : float
     """
     mu, sigma, shape = parameters
-    mu_logpdf = stats.norm.logpdf(x=mu, loc=0, scale=1000)
+    mu_logpdf = stats.uniform.logpdf(x=mu, loc=0, scale=10000)
+    sigma_logpdf = stats.uniform.logpdf(x=sigma, loc=0, scale=10000)
     shape_logpdf = stats.norm.logpdf(x=shape, loc=0, scale=1000)
-    if sigma >= 10000 or sigma <= 0:
-        return -np.inf
-    else:
-        return mu_logpdf + np.log(1 / 10000) + shape_logpdf
+    return mu_logpdf + sigma_logpdf+ shape_logpdf
 
 
 def logpost(parameters, data):
