@@ -424,7 +424,7 @@ def diagnostic_plots(
         ax[0, 0].set_title("Probability Plot", fontsize=14)
         ax[0, 0].set_xlabel("Model", fontsize=14)
         ax[0, 0].set_ylabel("Empirical", fontsize=14)
-        ax[0, 0].annotate("A", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
+        ax[0, 0].annotate("$\mathbf{A}$", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=16)
 
         ax[0, 1].scatter(empirical, np.sort(data), color="black")
         ax[0, 1].plot(
@@ -436,7 +436,7 @@ def diagnostic_plots(
         ax[0, 1].set_xlabel("Model [m]", fontsize=14)
         ax[0, 1].set_ylabel("Empirical [m]", fontsize=14)
         ax[0, 1].set_xlim(ax[0, 1].set_ylim()[0], ax[0, 1].set_ylim()[1])
-        ax[0, 1].annotate("B", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
+        ax[0, 1].annotate("$\mathbf{B}$", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=16)
 
         ax[1, 0].plot(
             np.log10(RP), RL_max, color="r", label="Max Posterior Score Parameter Sets"
@@ -477,7 +477,7 @@ def diagnostic_plots(
         ax[1, 0].set_ylabel("Return Level [m]", fontsize=14)
         if ax[1, 0].set_ylim()[1] > 10:
             ax[1, 0].set_ylim(0, 10)
-        ax[1, 0].annotate("C", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
+        ax[1, 0].annotate("$\mathbf{C}$", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=16)
 
         ax[1, 1].hist(
             data,
@@ -498,7 +498,7 @@ def diagnostic_plots(
         ax[1, 1].set_xlabel("Annual Max Sea Level [m]", fontsize=14)
         ax[1, 1].set_ylabel("Density", fontsize=14)
         ax[1, 1].set_xlim(ax[0, 1].set_xlim()[0], ax[0, 1].set_xlim()[1])
-        ax[1, 1].annotate("D", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=30)
+        ax[1, 1].annotate("$\mathbf{D}$", xy=(0.0, 1.03), xycoords="axes fraction", fontsize=16)
 
         fig.savefig(output_dir + "plots/diagnostic_plots.png")
 
@@ -515,13 +515,17 @@ def diagnostic_plots(
 
 
 def output_parameters(mcmc_chains, burnin, lags, output_dir="output"):
+    '''
+    Can uncomment the f.write statements below in order to separate out which
+    parameters came from which chains.
+    '''
     for i in range(len(mcmc_chains[0])):
         with open(output_dir + "parameters/parameter-" + str(i + 1) + ".txt", "w") as f:
             for j in range(len(mcmc_chains)):
-                if j == 0:
-                    f.write("CHAIN " + str(j + 1) + "\n")
-                else:
-                    f.write("\n\nCHAIN " + str(j + 1) + "\n")
-                f.write("==========\n\n")
-                for k in range(burnin, len(mcmc_chains[j][i]), lags[i]):
+                #if j == 0:
+                #    f.write("CHAIN " + str(j + 1) + "\n")
+                #else:
+                #    f.write("\n\nCHAIN " + str(j + 1) + "\n")
+                #f.write("==========\n\n")
+                for k in range(burnin, len(mcmc_chains[j][i]), lags[j]):
                     f.write(str(mcmc_chains[j][i][k]) + "\n")
