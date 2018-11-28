@@ -193,7 +193,6 @@ argument here, which might not work with older libraries).
 
 If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. You can cite the project by using one of the following identifiers:
 
-- [ResearchGate]( https://www.researchgate.net/publication/328343461_SSPipeline_A_pipeline_for_estimating_and_characterizing_uncertainty_in_coastal_storm_surge_levels), DOI: 10.13140/RG.2.2.15279.79529
 - [Earth ArXiv](https://eartharxiv.org/t6358), DOI: 10.31223/osf.io/t6358
 
 ## License
