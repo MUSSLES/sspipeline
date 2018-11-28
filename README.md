@@ -4,8 +4,6 @@
 
 # SSPipeline v0.1.dev0 [![CI Build Status](https://img.shields.io/travis/MUSSLES/sspipeline/master.svg?style=flat&colorA=0a0a0a)](https://travis-ci.org/MUSSLES/sspipeline) [![Python 3.6](https://img.shields.io/badge/Python-3.6-0a0a0a.svg?style=flat&colorA=0a0a0a)](https://python.org) [![Code style: black](https://img.shields.io/badge/Code%20Style-black-0a0a0a.svg?style=flat&colorA=0a0a0a)](https://github.com/ambv/black)
 
-**Latest Update:** Submitted our manuscript to ArXiv.
-
 <details><summary>Table of Contents (click to expand)</summary>
 
 - [Motivation](#motivation)
@@ -117,13 +115,13 @@ cd ..
 Input tide gauge data sets to the pipeline must be hourly datasets set up in the format of the [University of Hawaii Sea Level Center (UHSLC)](https://uhslc.soest.hawaii.edu/data/?rq). You can either choose to download the hourly CSV version of your chosen data, or you can simply execute the following command in your terminal:
 
 ```
-curl -O https://uhslc.soest.hawaii.edu/data/csv/rqds/[region]/hourly/h[UH#][version].csv > ./data/[local name].csv
+curl -# https://uhslc.soest.hawaii.edu/data/csv/rqds/[region]/hourly/h[UH#][version].csv > ./data/[local name].csv
 ```
 
 This command downloads the dataset to whatever directory you are run the command in, but that assumes that you filled in your datasets appropiate UH# and version correctly, which can be found on the website. Wherever you place this data set should match the relative path set for `data` in the config.json file below. For example, to grab the data for Wilmington, NC, and place it in a file called wilmington.csv in the `data` directory, this command is:
 
 ```
-curl -0 https://uhslc.soest.hawaii.edu/data/csv/rqds/atlantic/hourly/h750a.csv > ./data/wilmington.csv
+curl -# https://uhslc.soest.hawaii.edu/data/csv/rqds/atlantic/hourly/h750a.csv > ./data/wilmington.csv
 ```
 
 After you have downloaded your sea level dataset from UHSLC, you can start to fill out your pipeline configuration. Below, is a list of all the possible parameters that you can pass in to the pipeline, and whether or not they are optional:
@@ -193,9 +191,7 @@ argument here, which might not work with older libraries).
 
 ## Citation
 
-If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. At the moment, we are currently planning on submitting a paper to the Journal of Open Source Software (JOSS), but until a specific publication is written about SSPipeline, please cite the GitHub URL: www.github.com/MUSSLES/sspipeline.
-
-You can check out a draft of the paper that we will be submitting to JOSS [here](doc/joss_paper/paper.pdf).
+If SSPipeline has enabled significant parts of an academic publication, please acknowledge that by citing the software. At the moment, you can site us by using our Earth ArXiv url: https://eartharxiv.org/t6358
 
 ## License
 
