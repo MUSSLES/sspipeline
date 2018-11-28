@@ -1,18 +1,18 @@
-2018-11-04 15:17:58,523 the config file is located at configs/config_h765a.json
-2018-11-04 15:17:58,524 ==> CONFIG FILE PARAMETERS
-2018-11-04 15:17:58,524 ==> 	 acf_threshold : 0.05
-2018-11-04 15:17:58,524 ==> 	   adaption : 500
-2018-11-04 15:17:58,524 ==> 	       data : data/h765a.csv
-2018-11-04 15:17:58,524 ==> 	 gr_threshold : 1.1
-2018-11-04 15:17:58,524 ==> 	 iterations : 5000
-2018-11-04 15:17:58,524 ==> 	 output_dir : output/h765a/
-2018-11-04 15:17:58,524 ==> 	 percentage : 0.9
-2018-11-04 15:17:58,525 ==> 	       plot : True
-2018-11-04 15:17:58,525 ==> 	  sequences : 3
-2018-11-04 15:17:58,525 ==> 	 transition : [10, 2, 0.01]
-2018-11-04 15:17:58,525 ==> 	    verbose : True
-2018-11-04 15:17:58,806 the fill in value is -32.767
-2018-11-04 15:18:11,477 the percentage of years that have enough data to use is 89.19%
-2018-11-04 15:20:48,064 the acceptance rates for these Markov chains are: [0.319, 0.2972, 0.2916]
-2018-11-04 15:20:49,715 the parameters with max log-posterior score are: [0.549494518187088, 0.11239518869515032, 0.5089052712778377]
-2018-11-04 15:21:47,622 All done!
+2018-11-27 21:56:03,132 the config file is located at configs/config_h765a.json
+2018-11-27 21:56:03,132 ==> CONFIG FILE PARAMETERS
+2018-11-27 21:56:03,132 ==> 	 acf_threshold : 0.05
+2018-11-27 21:56:03,132 ==> 	   adaption : 500
+2018-11-27 21:56:03,132 ==> 	       data : data/h765a.csv
+2018-11-27 21:56:03,132 ==> 	 gr_threshold : 1.1
+2018-11-27 21:56:03,132 ==> 	 iterations : 5000
+2018-11-27 21:56:03,133 ==> 	 output_dir : output/h765a/
+2018-11-27 21:56:03,133 ==> 	 percentage : 0.9
+2018-11-27 21:56:03,133 ==> 	       plot : True
+2018-11-27 21:56:03,133 ==> 	  sequences : 3
+2018-11-27 21:56:03,133 ==> 	 transition : [10, 2, 0.01]
+2018-11-27 21:56:03,133 ==> 	    verbose : True
+2018-11-27 21:56:03,316 the fill in value is -32.767
+2018-11-27 21:56:14,365 the percentage of years that have enough data to use is 89.19%
+2018-11-27 21:58:18,520 the acceptance rates for these Markov chains are: [0.3296, 0.3368, 0.3402]
+2018-11-27 21:58:20,106 the parameters with max log-posterior score are: [0.5510889438595343, 0.11148476763843335, 0.4910129815487953]
+2018-11-27 21:59:09,717 All done!
