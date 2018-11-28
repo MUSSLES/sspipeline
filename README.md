@@ -117,10 +117,14 @@ cd ..
 Input tide gauge data sets to the pipeline must be hourly datasets set up in the format of the [University of Hawaii Sea Level Center (UHSLC)](https://uhslc.soest.hawaii.edu/data/?rq). You can either choose to download the hourly CSV version of your chosen data, or you can simply execute the following command in your terminal:
 
 ```
-curl -O https://uhslc.soest.hawaii.edu/data/csv/rqds/pacific/hourly/h[UH#][version].csv
+curl -O https://uhslc.soest.hawaii.edu/data/csv/rqds/[region]/hourly/h[UH#][version].csv
 ```
 
-This command downloads the dataset to whatever directory you are run the command in, but that assumes that you filled in your datasets appropiate UH# and version correctly, which can be found on the website. Wherever you place this data set should match the relative path set for `data` in the config.json file below.
+This command downloads the dataset to whatever directory you are run the command in, but that assumes that you filled in your datasets appropiate UH# and version correctly, which can be found on the website. Wherever you place this data set should match the relative path set for `data` in the config.json file below. For example, to grab the data for Wilmington, NC, this command is:
+
+```
+curl -0 https://uhslc.soest.hawaii.edu/data/csv/rqds/atlantic/hourly/h750a.csv
+```
 
 After you have downloaded your sea level dataset from UHSLC, you can start to fill out your pipeline configuration. Below, is a list of all the possible parameters that you can pass in to the pipeline, and whether or not they are optional:
 
