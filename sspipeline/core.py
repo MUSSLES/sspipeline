@@ -520,7 +520,7 @@ def output_parameters(mcmc_chains, burnin, lags, output_dir="output"):
     parameters came from which chains.
     '''
     for i in range(len(mcmc_chains[0])):
-        with open(output_dir + "parameters/parameter-" + str(i + 1) + ".txt", "w") as f:
+        with open(output_dir + "/parameters/parameter-" + str(i + 1) + ".txt", "w") as f:
             for j in range(len(mcmc_chains)):
                 #if j == 0:
                 #    f.write("CHAIN " + str(j + 1) + "\n")
