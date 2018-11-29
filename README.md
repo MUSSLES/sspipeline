@@ -29,7 +29,7 @@ Effective management of coastal risks demands projections of flood hazards that 
 ### Important Notes
 
 - This project is in early stages of development and there will be bugs. Many methods must be used with care and could be improved significantly. The developers take no responsibility for inappropriate application of the code or incorrect conclusions drawn as a result of their application. Users must take responsibility for ensuring results obtained are sensible. We hope that by releasing the code at this stage the community can move forward more quickly together.
-- This project is **only** tested on Python 3.6! It can possibly work on other Python versions, but use at your own risk, and please let us know about any issues.
+- This project is tested using Python 2.7, 3.6, and 3.7. If there are any problems with other Python versions, please let us know!
 
 ## Directory Structure
 
