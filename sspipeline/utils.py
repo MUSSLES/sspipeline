@@ -140,10 +140,6 @@ def read_and_clean(
     )
     num_years = len(list(set(dfSL["year"])))
 
-    # convert sealevels from millimeters to meters
-    # dfSL["sealevel"] = dfSL["sealevel"].apply(lambda x: x / 1000)
-
-    # fill_in = dfSL.loc[dfSL["sealevel"] < -5, "sealevel"].mode()[0]
     fill_in = dfSL.loc[dfSL["sealevel"] < -5000, "sealevel"].mode()[0]
     logger = log(
         logger, "the fill in value is {0}".format(float(fill_in) / 1000), verbose

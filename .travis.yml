@@ -1,27 +1,14 @@
 language: python
 python:
+  - "2.7"
   - "3.6"
+  - "3.7"
 sudo: false
 cache: pip
 
-install:
-  - "pip install ."
+install: pip install .
 
-script:
-  - cd example; bash bootstrap.sh test; cd ..
-  - cd doc; make html; cd ..
-
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  local_dir: doc/_build/html
-  on:
-    branch: master
-
-matrix:
-  allow_failures:
-    - script: cd doc; make html; cd ..
+script: cd example; bash bootstrap.sh test; cd ..
 
 notifications:
     slack: wong-students:0G5vqABleFmfpzOiWkIPlc3j#travis
